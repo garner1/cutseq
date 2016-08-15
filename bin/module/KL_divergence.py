@@ -9,10 +9,10 @@ p1 = sys.argv[1]
 p2 = sys.argv[2]
 var = sys.argv[3]
 
-print p1
-
 data1 = loadtxt(str(p1))
 data2 = loadtxt(str(p2))
+
+print data1
 
 if count_nonzero(data1)*count_nonzero(data2) > 0:
     if var == 'sym': 

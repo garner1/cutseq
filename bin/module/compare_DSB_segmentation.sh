@@ -4,7 +4,7 @@ dsb1=$1			# this is the full path to the DSB data bed file *UMI_count*
 dsb2=$2			# this is the full path to the DSB data bed file *UMI_count*
 quality=$3		# filter out low quality reads
 resolution=$4		# resolution of the binned genome
-metric=$5			# can be {asym,norm_1,norm_2}
+metric=$5		# can be {asym,norm_1,norm_2}
 
 ~/SparkleShare/RESTSEQ/bin/module/DSB_segmentation.sh $dsb1 $quality $resolution & pid1=$!
 ~/SparkleShare/RESTSEQ/bin/module/DSB_segmentation.sh $dsb2 $quality $resolution & pid2=$!

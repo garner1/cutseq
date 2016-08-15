@@ -9,6 +9,8 @@ p1 = sys.argv[1]
 p2 = sys.argv[2]
 var = sys.argv[3]
 
+print p1
+
 data1 = loadtxt(str(p1))
 data2 = loadtxt(str(p2))
 
@@ -21,6 +23,5 @@ if count_nonzero(data1)*count_nonzero(data2) > 0:
         delta = data1*1.0/LA.norm(data1,1) - data2*1.0/LA.norm(data2,1) 
         print 'The norm-1 difference is: '+str( LA.norm(delta,1)  )
     if var == 'norm_2':
-        print sum(data1)
         print 'The cosine distance is: '+str( DIST.cosine(data1,data2)  )
 else: print 'nan'

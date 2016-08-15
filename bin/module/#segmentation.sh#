@@ -8,8 +8,6 @@ resolution=$2			# resolution of the binned genome
 
 
 #############################################################
-# prepare the mean descriptor
-if [ "$mean" == "xz30" ]; then
     cat ~/Work/dataset/restseq/xz30/outdata/*_*_*.bed | 
     LC_ALL=C sort -k1,1 -k2,2n | 
     LC_ALL=C uniq -c |

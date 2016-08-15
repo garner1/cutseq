@@ -10,7 +10,7 @@ resolution=$4		# resolution of the binned genome
 wait $pid1
 wait $pid2
 
-# "$dsb"__normed_segmented_q"$quality"_res"$resolution".bed
+join "$dsb1"__normed_segmented_q"$quality"_res"$resolution".bed "$dsb1"__normed_segmented_q"$quality"_res"$resolution".bed > joined.bed
 
 
 

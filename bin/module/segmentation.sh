@@ -9,4 +9,6 @@ resolution=$2			# resolution of the binned genome
 #############################################################
 #count the number of molecules in each bin
 bedtools intersect -a "$dsb"__A.bed -b "$dsb" -c > "$dsb"__raw_segmented.bed 
+norma=$(cat "$dsb"__raw_segmented.bed | datamash sum 4)
+echo $norma
 

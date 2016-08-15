@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-dsb=$1			# this is the local dataset to be compared with the mean dataset
+dsb=$1			# this is the full path to the DSB data bed file *UMI_count*
 resolution=$2			# resolution of the binned genome
 
 #create bed files representing the binned genome

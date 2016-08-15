@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 
-input=$1
-output=$2
+out=$1
+quality=$2
 
-echo "Filter out centromeres and telomeres"
+# echo "Filter out centromeres and telomeres"
+file=$out/q"$quality".bed
 ref=~/Work/pipelines/data/hg19-telomere-centromere-telomere.bed
-bedtools intersect -v -abam $input -b $ref > $output
-echo Done
+bedtools intersect -v -a $file -b $ref > $out/chr-loc-umi_q"$quality"
+# echo Done

@@ -14,28 +14,41 @@ echo "Process the fastq file ..."
 
 echo "Unzip the raw data file ..."
 
-if [ "$mode" == "SE" ]; then
-    gunzip -c $r1 > $in/r1.fq
-fi
-if [ "$mode" == "PE" ]; then
-    gunzip -c $r1 > $in/r1.fq & pid1=$!
-    gunzip -c $r2 | paste - - - - | LC_ALL=C sort --parallel=8 --temporary-directory=$HOME/tmp -k1,1 > $in/r2oneline.fq & pid2=$!
-    wait $pid1
-    wait $pid2
-fi
+# !!!!IF R1/2.FQ NOT ALREADY PRESENT!!!!
 
-cat $in/r1.fq | paste - - - - | LC_ALL=C sort --parallel=8 --temporary-directory=$HOME/tmp -k1,1 > $in/r1oneline.fq & pid1=$!
-cat $in/r1.fq | paste - - - - | LC_ALL=C sort --parallel=8 --temporary-directory=$HOME/tmp -k1,1 |
-cut -f1,2 | tr '\t@' '\n>'  > $in/r1.fa & pid2=$!
-wait $pid1
-wait $pid2
+# if [ "$mode" == "SE" ]; then
+#     gunzip -c $r1 > $in/r1.fq
+# fi
+# if [ "$mode" == "PE" ]; then
+#     gunzip -c $r1 > $in/r1.fq & pid1=$!
+#     gunzip -c $r2 | paste - - - - | LC_ALL=C sort --parallel=8 --temporary-directory=$HOME/tmp -k1,1 > $in/r2oneline.fq & pid2=$!
+#     wait $pid1
+#     wait $pid2
+# fi
+
+# cat $in/r1.fq | paste - - - - | LC_ALL=C sort --parallel=8 --temporary-directory=$HOME/tmp -k1,1 > $in/r1oneline.fq & pid1=$!
+# cat $in/r1.fq | paste - - - - | LC_ALL=C sort --parallel=8 --temporary-directory=$HOME/tmp -k1,1 |
+# cut -f1,2 | tr '\t@' '\n>'  > $in/r1.fa & pid2=$!
+# wait $pid1
+# wait $pid2
+
+################################################################################
+
+# !!!!IF R1/2.FQ ALREADY PRESENT!!!!
+cat $in/r1oneline.fq | cut -f1,2 | tr '\t@' '\n>'  > $in/r1.fa
 
 ################################################################################
 
 echo "Generate patfiles for each barcode ..."
 
+# !!!! IF NOT NC85 !!!!!
 cat $barcode_file | awk '{print "^ 8...8",substr($1,1,8)"[1,0,0]",substr($1,9,6)"[1,0,0]","1...1000","$" > "barcode_"substr($1,1,8)}'
-# cat $barcode_file | awk '{print "^",substr($1,1,8)"[1,0,0]",substr($1,9,6)"[1,0,0]","1...1000","$" > "barcode_"substr($1,1,8)}' #for NC85 with no UMI
+
+################################################################################
+
+# !!! ONLY FOR NC85 WITH NO UMI !!!!
+# cat $barcode_file | awk '{print "^",substr($1,1,8)"[1,0,0]",substr($1,9,6)"[1,0,0]","1...1000","$" > "barcode_"substr($1,1,8)}' 
+################################################################################
 
 echo "Split FA files to satisfy scan_for_match 100M lines limit ..."
 olddir=`echo $PWD`

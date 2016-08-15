@@ -6,12 +6,13 @@ import numpy as np
 
 filename = sys.argv[1]          # the file whose UMI need to be filtered
 mm_gap = int(sys.argv[2])       # UMI differing at most by this value are identified
-chromosome = sys.argv[3]        # which chromosome to consider
-outfile = open(sys.argv[4], 'wa') 
+outfile = open(sys.argv[3], 'wa') 
 
 with open(filename, 'rb') as f:
     reader = csv.reader(f)
     data = list(reader)
+
+# SELECT READS BASED ON CHROMOSOME
 
 count = len(data)
 ind1 = 0
@@ -19,7 +20,7 @@ ind1 = 0
 while ind1 < count:
     ind2 = ind1+1
     # CONTROLED LOOP OVER SECOND INDEX BASED ON COLOCALIZATION
-    while ind2 < count and data[ind2][1] == data[ind1][1]:
+    while ind2 < count and data[ind2][0] == data[ind1][0] and data[ind2][1] == data[ind1][1]:
         s1 = data[ind1][4]
         s2 = data[ind2][4]
         if len(s1) == len(s2):
@@ -43,6 +44,6 @@ while ind1 < count:
     ind1 += 1
 
 for item in data:
-    print>>outfile, [item[0],item[1],item[2],item[4],item[5],item[6]]
+    print>>outfile
 
-print 'Done with filtering UMIs in ', chromosome
+print 'Done with filtering UMIs'

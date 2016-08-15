@@ -10,7 +10,7 @@ chromosome = sys.argv[3]        # which chromosome to consider
 outfile = open(sys.argv[4], 'wa') 
 
 with open(filename, 'rb') as f:
-    reader = csv.reader(f)
+    reader = csv.reader(f,delimiter='\t')
     data = list(reader)
 
 count = len(data)
@@ -20,8 +20,8 @@ while ind1 < count:
     ind2 = ind1+1
     # CONTROLED LOOP OVER SECOND INDEX BASED ON COLOCALIZATION
     while ind2 < count and data[ind2][1] == data[ind1][1]:
-        s1 = data[ind1][4]
-        s2 = data[ind2][4]
+        s1 = data[ind1][6]
+        s2 = data[ind2][6]
         if len(s1) == len(s2):
             numb_mismatches = sum(c1!=c2 for c1,c2 in zip(s1,s2))
         else:
@@ -29,11 +29,11 @@ while ind1 < count:
         # CONTROL OVER UMI SIMILARITY
         if numb_mismatches <= mm_gap:
             # RICH GETS RICHER
-            if int(data[ind1][5]) >= int(data[ind2][5]):
-                data[ind1][5] = str(int(data[ind1][5])+int(data[ind2][5]))
+            if int(data[ind1][7]) >= int(data[ind2][7]):
+                data[ind1][7] = str(int(data[ind1][7])+int(data[ind2][7]))
                 del data[ind2]
             else:
-                data[ind2][5] = str(int(data[ind1][5])+int(data[ind2][5]))        
+                data[ind2][7] = str(int(data[ind1][7])+int(data[ind2][7]))        
                 del data[ind1]
                 ind2 = len(data)
                 ind1 = ind1 - 1
@@ -43,6 +43,6 @@ while ind1 < count:
     ind1 += 1
 
 for item in data:
-    print>>outfile, [item[0],item[1],item[2],item[4],item[5],item[6]]
+    print>>outfile, [item[0],item[1],item[2],item[3],item[4],item[5],item[6],item[7]]
 
 print 'Done with filtering UMIs in ', chromosome

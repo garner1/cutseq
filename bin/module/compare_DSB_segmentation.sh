@@ -12,7 +12,7 @@ wait $pid1
 wait $pid2
 
 temp_file_1=$(mktemp)
-bedtools unionbedg -i "$dsb1"__raw_segmented_q"$quality"_res"$resolution".bed "$dsb2"__raw_segmented_q"$quality"_res"$resolution".bed -header -names PROB1 PROB2 > ${temp_file_1}
+bedtools unionbedg -i "$dsb1"__raw_segmented_q"$quality"_res"$resolution".bed "$dsb2"__raw_segmented_q"$quality"_res"$resolution".bed -header -names COUNT1 COUNT2 > ${temp_file_1}
 # bedtools unionbedg -i "$dsb1"__normed_segmented_q"$quality"_res"$resolution".bed "$dsb2"__normed_segmented_q"$quality"_res"$resolution".bed -header -names PROB1 PROB2 > ${temp_file_1}
 
 temp_file_2=$(mktemp)

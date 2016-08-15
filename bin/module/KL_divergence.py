@@ -12,7 +12,7 @@ var = sys.argv[3]
 data1 = loadtxt(str(p1))
 data2 = loadtxt(str(p2))
 
-print data1[data>0]
+print data1[data1>0]
 
 if count_nonzero(data1)*count_nonzero(data2) > 0:
     if var == 'sym': 

@@ -10,7 +10,7 @@ resolution=$4		# resolution of the binned genome
 
 #############################################################
 #count the number of molecules in each bin
-bedtools intersect -wa -wb -a "$dsb"__A.bed -b $dsb1 $dsb2 -c | grep -v "chrM" | head
+bedtools intersect -wa -a "$dsb"__A.bed -b $dsb1 $dsb2 -c | grep -v "chrM" | head
 
 # > "$dsb"__raw_segmented_q"$quality"_res"$resolution".bed 
 

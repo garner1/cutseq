@@ -16,6 +16,7 @@ norma=$(cat "$dsb"__raw_segmented_q"$quality"_res"$resolution".bed | datamash su
 cat "$dsb"__raw_segmented_q"$quality"_res"$resolution".bed | awk -v norma="$norma" '{FS=OFS="\t"; print $1,$2,$3,$4/norma}'|head
 
 echo $norma
+rm "$dsb"__raw_segmented_q"$quality"_res"$resolution".bed
 
 
 

@@ -10,7 +10,7 @@ resolution=$4		# resolution of the binned genome
 wait $pid1
 wait $pid2
 
-bedtools unionbedg -i "$dsb1"__normed_segmented_q"$quality"_res"$resolution".bed -b "$dsb2"__normed_segmented_q"$quality"_res"$resolution".bed -header > joined.bed
+bedtools unionbedg -i "$dsb1"__normed_segmented_q"$quality"_res"$resolution".bed "$dsb2"__normed_segmented_q"$quality"_res"$resolution".bed -header > joined.bed
 
 head joined.bed
 

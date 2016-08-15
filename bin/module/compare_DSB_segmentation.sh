@@ -19,7 +19,7 @@ temp_file_2=$(mktemp)
 tail -n +2 ${temp_file_1} | cut -f4 > ${temp_file_2}
 
 temp_file_3=$(mktemp)
-tail -n +2 ${temp_file_1} | cut -f4 > ${temp_file_3}
+tail -n +2 ${temp_file_1} | cut -f5 > ${temp_file_3}
 
 head ${temp_file_2} ${temp_file_3}
 

@@ -12,8 +12,6 @@ var = sys.argv[3]
 data1 = loadtxt(str(p1))
 data2 = loadtxt(str(p2))
 
-print data1[data1>0]
-
 if count_nonzero(data1)*count_nonzero(data2) > 0:
     if var == 'sym': 
         print "The symmetrized KL divergence of "+str(p1)+" from the "+str(p2)+" is: "+ str(0.5*( stats.entropy(data1,data2)+stats.entropy(data2,data1) ))

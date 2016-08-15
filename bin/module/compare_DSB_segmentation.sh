@@ -6,7 +6,7 @@ quality=$3		# filter out low quality reads
 resolution=$4		# resolution of the binned genome
 
 #create bed files representing the binned genome
-~/SparkleShare/aux.scripts/make-windows.sh $resolution hg19 > "$dsb"__A.bed
+~/SparkleShare/aux.scripts/make-windows.sh "$resolution" hg19 > "$dsb"__A.bed
 
 #############################################################
 # #count the number of molecules in each bin

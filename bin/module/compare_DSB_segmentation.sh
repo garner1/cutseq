@@ -21,7 +21,7 @@ temp_file_3=$(mktemp)
 tail -n +2 ${temp_file_1} | cut -f5 > ${temp_file_3}
 
 python ~/SparkleShare/RESTSEQ/bin/module/KL_divergence.py ${temp_file_2} ${temp_file_3} "$metric"
-tail -n +2 ${temp_file_1} | head
+tail -n +2 ${temp_file_1} | cut -f4,5 | head
 
 rm -f ${temp_file_1} ${temp_file_2} ${temp_file_3} "$dsb1"__{raw,normed}_segmented_q"$quality"_res"$resolution".bed "$dsb2"__{raw,normed}_segmented_q"$quality"_res"$resolution".bed
 

@@ -1000,3 +1000,47 @@
 /home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__CGTGTTCA_q1.bed	/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__CGGATATC_q1.bed	nan	46
 /home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__CGTGTTCA_q1.bed	/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__CATCACGC_q1.bed	nan	173.5
 /home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__CGTGTTCA_q1.bed	/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__CTAACTCA_q1.bed	nan	4.5
+/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__CGTGTTCA_q1.bed	/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__CGTGTCGC_q1.bed	nan	992.5
+/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__CGTGTTCA_q1.bed	/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__CTAACCGC_q1.bed	nan	5
+/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__CGTGTTCA_q1.bed	/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__GAATCATC_q1.bed	1.0	23
+/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__CGTGTTCA_q1.bed	/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__GACACCGC_q1.bed	nan	4.5
+/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__CGTGTTCA_q1.bed	/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__GTCGTCGC_q1.bed	nan	
+/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__CGTGTTCA_q1.bed	/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__CTAACGAG_q1.bed	nan	9.5
+/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__CGTGTTCA_q1.bed	/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__GAATCCGA_q1.bed	1.0	4.5
+/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__CGTGTTCA_q1.bed	/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__TCACACGC_q1.bed	nan	
+/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__CGTGTTCA_q1.bed	/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__GACACGAG_q1.bed	1.0	16
+/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__CGTGTTCA_q1.bed	/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__TAGGTTCA_q1.bed	nan	
+/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__CGTGTTCA_q1.bed	/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__GACACTCA_q1.bed	1.0	194.5
+/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__CGTGTTCA_q1.bed	/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__GTCGTATC_q1.bed	nan	16.5
+/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__CGTGTTCA_q1.bed	/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__TCACATCA_q1.bed	nan	
+/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__CGTGTTCA_q1.bed	/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__GAATCTCG_q1.bed	0.995406847878	11191.5
+/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__CGTGTTCA_q1.bed	/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__GCTTGTCA_q1.bed	1.0	2
+/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__CGTGTTCA_q1.bed	/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__GTCGTGAA_q1.bed	1.0	731
+/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__CTAACCGC_q1.bed	/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__CATCAATC_q1.bed	nan	0.5
+/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__CGTGTTCA_q1.bed	/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__GTCGTTCC_q1.bed	1.0	16
+/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__CGTGTTCA_q1.bed	/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__TAGGTCGC_q1.bed	nan	0.5
+/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__CGTGTTCA_q1.bed	/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__TCACAGAG_q1.bed	nan	0.5
+/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__CGTGTTCA_q1.bed	/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__GCTTGGAG_q1.bed	0.997842098364	32374
+/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__CGTGTTCA_q1.bed	/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__TGATGTCC_q1.bed	nan	60
+/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__CGTGTTCA_q1.bed	/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__TAGGTGAG_q1.bed	1.0	5
+/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__CGTGTTCA_q1.bed	/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__TGATGCGC_q1.bed	nan	2713.5
+/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__CTAACCGC_q1.bed	/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__ACGACTCC_q1.bed	1.0	5
+/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__CGTGTTCA_q1.bed	/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__TGATGATC_q1.bed	nan	2000.5
+/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__CTAACCGC_q1.bed	/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__CGTGTTCA_q1.bed	nan	
+/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__CTAACCGC_q1.bed	/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__AGCCAGAG_q1.bed	nan	140.5
+/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__CTAACCGC_q1.bed	/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__AGCCATCA_q1.bed	1.0	485.5
+/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__CTAACCGC_q1.bed	/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__ATTCGATC_q1.bed	1.0	10.5
+/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__CGTGTTCA_q1.bed	/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__TCCGACGA_q1.bed	1.0	516.5
+/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__CTAACCGC_q1.bed	/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__ATGTGCGC_q1.bed	1.0	11
+/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__CTAACCGC_q1.bed	/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__CTAACCGC_q1.bed	nan	0
+/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__CTAACCGC_q1.bed	/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__ACGACCGC_q1.bed	1.0	22.5
+/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__CTAACCGC_q1.bed	/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__CATCATCC_q1.bed	1.0	4
+/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__CTAACCGC_q1.bed	/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__ACGACATC_q1.bed	1.0	4
+/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__CGTGTTCA_q1.bed	/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__TCCGAATC_q1.bed	1.0	450.5
+/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__CTAACCGC_q1.bed	/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__ACGACGAA_q1.bed	1.0	8
+/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__CTAACCGC_q1.bed	/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__ATGTGGAG_q1.bed	1.0	5.5
+/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__CTAACCGC_q1.bed	/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__CATCACGC_q1.bed	1.0	174
+/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__CGTGTTCA_q1.bed	/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__TGATGGAA_q1.bed	1.0	2
+/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__CTAACCGC_q1.bed	/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__CATCAGAA_q1.bed	1.0	2
+/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__CTAACCGC_q1.bed	/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__CGTGTCGC_q1.bed	0.993295984768	997.5
+/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__CTAACCGC_q1.bed	/home/garner1/Work/dataset/restseq/XZ2122_cutsite_dist_strand_qScore_UMI_count__CGGATATC_q1.bed	1.0	46.5

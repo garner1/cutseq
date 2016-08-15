@@ -21,6 +21,6 @@ if count_nonzero(data1)*count_nonzero(data2) > 0:
         delta = data1*1.0/LA.norm(data1,1) - data2*1.0/LA.norm(data2,1) 
         print 'The norm-1 difference is: '+str( LA.norm(delta,1)  )
     if var == 'norm_2':
-        print len(data1)
+        print sum(data1)
         print 'The cosine distance is: '+str( DIST.cosine(data1,data2)  )
 else: print 'nan'

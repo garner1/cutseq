@@ -9,8 +9,8 @@ resolution=$4		# resolution of the binned genome
 ~/SparkleShare/aux.scripts/make-windows.sh "$resolution" hg19 > "$dsb"__A.bed
 
 #############################################################
-# #count the number of molecules in each bin
-# bedtools intersect -wa -a "$dsb"__A.bed -b $dsb1 $dsb2 -c | grep -v "chrM" | head
+#count the number of molecules in each bin
+bedtools intersect -wa -a "$dsb"__A.bed -b $dsb1 $dsb2 -c | grep -v "chrM" | head
 
 # > "$dsb"__raw_segmented_q"$quality"_res"$resolution".bed 
 

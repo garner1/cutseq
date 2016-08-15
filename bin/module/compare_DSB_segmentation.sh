@@ -12,6 +12,8 @@ wait $pid2
 
 join "$dsb1"__normed_segmented_q"$quality"_res"$resolution".bed "$dsb1"__normed_segmented_q"$quality"_res"$resolution".bed > joined.bed
 
+head joined.bed
+
 
 
 

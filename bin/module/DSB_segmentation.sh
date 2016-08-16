@@ -13,13 +13,11 @@ temp_file_0=$(mktemp)
 cat "$dsb"| awk -v quality="$quality" '$6 >= quality' |
 bedtools intersect -a ${temp_file_0} -b stdin -c | grep -v "chrM" > "$dsb"__raw_segmented_q"$quality"_res"$resolution".bed 
 
-wc -l "$dsb"__raw_segmented_q"$quality"_res"$resolution".bed 
-
 # norma=$(cat "$dsb"__raw_segmented_q"$quality"_res"$resolution".bed | datamash sum 4)
 # cat "$dsb"__raw_segmented_q"$quality"_res"$resolution".bed | 
 # awk -v norma="$norma" '{FS=OFS="\t"; print $1,$2,$3,$4/norma}' > "$dsb"__normed_segmented_q"$quality"_res"$resolution".bed
 
-rm -f "$dsb"__raw_segmented_q"$quality"_res"$resolution".bed
+# rm -f "$dsb"__raw_segmented_q"$quality"_res"$resolution".bed
 
 
 

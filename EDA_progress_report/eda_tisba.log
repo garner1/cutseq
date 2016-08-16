@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.10.17)  16 JUN 2016 09:02
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.10.17)  16 AUG 2016 12:50
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -464,6 +464,22 @@ Overfull \hbox (1.34912pt too wide) in paragraph at lines 34--35
  [][] 
  []
 
+
+LaTeX Warning: Reference `fig:intra_tumor_heterog__q10_res100k' on page 1 undef
+ined on input line 39.
+
+<intra_tumor_heterog__q10_res100k.pdf, id=3, 361.35pt x 216.81pt>
+File: intra_tumor_heterog__q10_res100k.pdf Graphic file (type pdf)
+
+<use intra_tumor_heterog__q10_res100k.pdf>
+Package pdftex.def Info: intra_tumor_heterog__q10_res100k.pdf used on input lin
+e 43.
+(pdftex.def)             Requested size: 361.34912pt x 216.80946pt.
+
+Overfull \hbox (1.34912pt too wide) in paragraph at lines 43--44
+ [][] 
+ []
+
 [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2 <./distanceVSreads.pdf>
@@ -473,217 +489,217 @@ pdfTeX warning: pdflatex (file ./filter_noise.pdf): PDF inclusion: multiple pdf
 s with page group included in a single page
 >]
 Package epstopdf Info: Source file: <histo_xz131419202122.eps>
-(epstopdf)                    date: 2016-05-18 09:41:51
+(epstopdf)                    date: 2016-08-15 09:07:28
 (epstopdf)                    size: 8163 bytes
 (epstopdf)             Output file: <histo_xz131419202122-eps-converted-to.pdf>
 
-(epstopdf)                    date: 2016-05-18 09:42:07
+(epstopdf)                    date: 2016-08-15 09:07:28
 (epstopdf)                    size: 6992 bytes
 (epstopdf)             Command: <repstopdf --outfile=histo_xz131419202122-eps-c
 onverted-to.pdf histo_xz131419202122.eps>
-(epstopdf)             \includegraphics on input line 44.
+(epstopdf)             \includegraphics on input line 53.
 Package epstopdf Info: Output file is already uptodate.
- <histo_xz131419202122-eps-converted-to.pdf, id=34, 578.16pt x 434.62375pt>
+ <histo_xz131419202122-eps-converted-to.pdf, id=36, 578.16pt x 434.62375pt>
 File: histo_xz131419202122-eps-converted-to.pdf Graphic file (type pdf)
 
 <use histo_xz131419202122-eps-converted-to.pdf>
 Package pdftex.def Info: histo_xz131419202122-eps-converted-to.pdf used on inpu
-t line 44.
+t line 53.
 (pdftex.def)             Requested size: 289.07928pt x 217.31134pt.
 Package epstopdf Info: Source file: <histo_xz2324.eps>
-(epstopdf)                    date: 2016-05-18 09:43:17
+(epstopdf)                    date: 2016-08-15 09:07:28
 (epstopdf)                    size: 7278 bytes
 (epstopdf)             Output file: <histo_xz2324-eps-converted-to.pdf>
-(epstopdf)                    date: 2016-05-18 09:43:24
+(epstopdf)                    date: 2016-08-15 09:07:28
 (epstopdf)                    size: 6920 bytes
 (epstopdf)             Command: <repstopdf --outfile=histo_xz2324-eps-converted
 -to.pdf histo_xz2324.eps>
-(epstopdf)             \includegraphics on input line 51.
+(epstopdf)             \includegraphics on input line 60.
 Package epstopdf Info: Output file is already uptodate.
 
-<histo_xz2324-eps-converted-to.pdf, id=35, 578.16pt x 434.62375pt>
+<histo_xz2324-eps-converted-to.pdf, id=37, 578.16pt x 434.62375pt>
 File: histo_xz2324-eps-converted-to.pdf Graphic file (type pdf)
 
 <use histo_xz2324-eps-converted-to.pdf>
-Package pdftex.def Info: histo_xz2324-eps-converted-to.pdf used on input line 5
-1.
+Package pdftex.def Info: histo_xz2324-eps-converted-to.pdf used on input line 6
+0.
 (pdftex.def)             Requested size: 289.07928pt x 217.31134pt.
 Package epstopdf Info: Source file: <histo_xz2324VSxz30.eps>
-(epstopdf)                    date: 2016-05-18 12:14:55
+(epstopdf)                    date: 2016-08-15 09:07:28
 (epstopdf)                    size: 7702 bytes
 (epstopdf)             Output file: <histo_xz2324VSxz30-eps-converted-to.pdf>
-(epstopdf)                    date: 2016-05-18 12:14:59
+(epstopdf)                    date: 2016-08-15 09:07:28
 (epstopdf)                    size: 7060 bytes
 (epstopdf)             Command: <repstopdf --outfile=histo_xz2324VSxz30-eps-con
 verted-to.pdf histo_xz2324VSxz30.eps>
-(epstopdf)             \includegraphics on input line 62.
+(epstopdf)             \includegraphics on input line 71.
 Package epstopdf Info: Output file is already uptodate.
 
-<histo_xz2324VSxz30-eps-converted-to.pdf, id=36, 578.16pt x 434.62375pt>
+<histo_xz2324VSxz30-eps-converted-to.pdf, id=38, 578.16pt x 434.62375pt>
 File: histo_xz2324VSxz30-eps-converted-to.pdf Graphic file (type pdf)
 
 <use histo_xz2324VSxz30-eps-converted-to.pdf>
 Package pdftex.def Info: histo_xz2324VSxz30-eps-converted-to.pdf used on input 
-line 62.
+line 71.
 (pdftex.def)             Requested size: 289.07928pt x 217.31134pt.
- [3 <./histo_xz131419202122-eps-converted-to.pdf>]
+ [3 <./intra_tumor_heterog__q10_res100k.pdf>] [4 <./histo_xz131419202122-eps-co
+nverted-to.pdf> <./histo_xz2324-eps-converted-to.pdf>]
 Package epstopdf Info: Source file: <distro_of_cutsites_around_TSS.eps>
-(epstopdf)                    date: 2016-05-19 10:27:24
+(epstopdf)                    date: 2016-08-15 09:07:28
 (epstopdf)                    size: 14262 bytes
 (epstopdf)             Output file: <distro_of_cutsites_around_TSS-eps-converte
 d-to.pdf>
-(epstopdf)                    date: 2016-05-19 10:41:32
+(epstopdf)                    date: 2016-08-15 09:07:28
 (epstopdf)                    size: 8120 bytes
 (epstopdf)             Command: <repstopdf --outfile=distro_of_cutsites_around_
 TSS-eps-converted-to.pdf distro_of_cutsites_around_TSS.eps>
-(epstopdf)             \includegraphics on input line 76.
+(epstopdf)             \includegraphics on input line 85.
 Package epstopdf Info: Output file is already uptodate.
 
-<distro_of_cutsites_around_TSS-eps-converted-to.pdf, id=45, 578.16pt x 434.6237
+<distro_of_cutsites_around_TSS-eps-converted-to.pdf, id=63, 578.16pt x 434.6237
 5pt>
 File: distro_of_cutsites_around_TSS-eps-converted-to.pdf Graphic file (type pdf
 )
  <use distro_of_cutsites_around_TSS-eps-converted-to.pdf>
 Package pdftex.def Info: distro_of_cutsites_around_TSS-eps-converted-to.pdf use
-d on input line 76.
+d on input line 85.
 (pdftex.def)             Requested size: 289.07928pt x 217.31134pt.
 
-<distance_tss_noise.pdf, id=46, 361.35pt x 216.81pt>
+<distance_tss_noise.pdf, id=64, 361.35pt x 216.81pt>
 File: distance_tss_noise.pdf Graphic file (type pdf)
 
 <use distance_tss_noise.pdf>
-Package pdftex.def Info: distance_tss_noise.pdf used on input line 83.
+Package pdftex.def Info: distance_tss_noise.pdf used on input line 92.
 (pdftex.def)             Requested size: 361.34912pt x 216.80946pt.
 
-Overfull \hbox (1.34912pt too wide) in paragraph at lines 83--84
+Overfull \hbox (1.34912pt too wide) in paragraph at lines 92--93
  [][] 
  []
 
-[4 <./histo_xz2324-eps-converted-to.pdf>] [5 <./histo_xz2324VSxz30-eps-converte
-d-to.pdf> <./distro_of_cutsites_around_TSS-eps-converted-to.pdf>]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 101.
+[5 <./histo_xz2324VSxz30-eps-converted-to.pdf>] [6 <./distro_of_cutsites_around
+_TSS-eps-converted-to.pdf> <./distance_tss_noise.pdf>]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 110.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 101.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 110.
 
-Underfull \hbox (badness 10000) in paragraph at lines 99--115
+Underfull \hbox (badness 10000) in paragraph at lines 108--124
 
  []
 
-[6 <./distance_tss_noise.pdf>]
 Package epstopdf Info: Source file: <18neg.eps>
-(epstopdf)                    date: 2016-05-20 13:03:35
+(epstopdf)                    date: 2016-08-15 09:07:28
 (epstopdf)                    size: 45666 bytes
 (epstopdf)             Output file: <18neg-eps-converted-to.pdf>
-(epstopdf)                    date: 2016-05-20 13:10:26
+(epstopdf)                    date: 2016-08-15 09:07:28
 (epstopdf)                    size: 15916 bytes
 (epstopdf)             Command: <repstopdf --outfile=18neg-eps-converted-to.pdf
  18neg.eps>
-(epstopdf)             \includegraphics on input line 124.
+(epstopdf)             \includegraphics on input line 133.
 Package epstopdf Info: Output file is already uptodate.
-
-<18neg-eps-converted-to.pdf, id=79, 578.16pt x 397.485pt>
+<18neg-eps-converted-to.pdf, id=89, 578.16pt x 397.485pt>
 File: 18neg-eps-converted-to.pdf Graphic file (type pdf)
 
 <use 18neg-eps-converted-to.pdf>
-Package pdftex.def Info: 18neg-eps-converted-to.pdf used on input line 124.
+Package pdftex.def Info: 18neg-eps-converted-to.pdf used on input line 133.
 (pdftex.def)             Requested size: 180.0pt x 123.74673pt.
 Package epstopdf Info: Source file: <18pos.eps>
-(epstopdf)                    date: 2016-05-20 13:05:27
+(epstopdf)                    date: 2016-08-15 09:07:28
 (epstopdf)                    size: 44045 bytes
 (epstopdf)             Output file: <18pos-eps-converted-to.pdf>
-(epstopdf)                    date: 2016-05-20 13:10:26
+(epstopdf)                    date: 2016-08-15 09:07:28
 (epstopdf)                    size: 17072 bytes
 (epstopdf)             Command: <repstopdf --outfile=18pos-eps-converted-to.pdf
  18pos.eps>
-(epstopdf)             \includegraphics on input line 125.
+(epstopdf)             \includegraphics on input line 134.
 Package epstopdf Info: Output file is already uptodate.
 
-<18pos-eps-converted-to.pdf, id=80, 578.16pt x 397.485pt>
+<18pos-eps-converted-to.pdf, id=90, 578.16pt x 397.485pt>
 File: 18pos-eps-converted-to.pdf Graphic file (type pdf)
 
 <use 18pos-eps-converted-to.pdf>
-Package pdftex.def Info: 18pos-eps-converted-to.pdf used on input line 125.
+Package pdftex.def Info: 18pos-eps-converted-to.pdf used on input line 134.
 (pdftex.def)             Requested size: 180.0pt x 123.74673pt.
 Package epstopdf Info: Source file: <23_24.eps>
-(epstopdf)                    date: 2016-05-20 13:02:41
+(epstopdf)                    date: 2016-08-15 09:07:28
 (epstopdf)                    size: 46539 bytes
 (epstopdf)             Output file: <23_24-eps-converted-to.pdf>
-(epstopdf)                    date: 2016-05-20 13:10:26
+(epstopdf)                    date: 2016-08-15 09:07:28
 (epstopdf)                    size: 16062 bytes
 (epstopdf)             Command: <repstopdf --outfile=23_24-eps-converted-to.pdf
  23_24.eps>
-(epstopdf)             \includegraphics on input line 126.
+(epstopdf)             \includegraphics on input line 135.
 Package epstopdf Info: Output file is already uptodate.
 
-<23_24-eps-converted-to.pdf, id=81, 578.16pt x 397.485pt>
+<23_24-eps-converted-to.pdf, id=91, 578.16pt x 397.485pt>
 File: 23_24-eps-converted-to.pdf Graphic file (type pdf)
 
 <use 23_24-eps-converted-to.pdf>
-Package pdftex.def Info: 23_24-eps-converted-to.pdf used on input line 126.
+Package pdftex.def Info: 23_24-eps-converted-to.pdf used on input line 135.
 (pdftex.def)             Requested size: 180.0pt x 123.74673pt.
 Package epstopdf Info: Source file: <30.eps>
-(epstopdf)                    date: 2016-05-20 13:00:49
+(epstopdf)                    date: 2016-08-15 09:07:28
 (epstopdf)                    size: 47643 bytes
 (epstopdf)             Output file: <30-eps-converted-to.pdf>
-(epstopdf)                    date: 2016-05-20 13:10:26
+(epstopdf)                    date: 2016-08-15 09:07:28
 (epstopdf)                    size: 16075 bytes
 (epstopdf)             Command: <repstopdf --outfile=30-eps-converted-to.pdf 30
 .eps>
-(epstopdf)             \includegraphics on input line 127.
+(epstopdf)             \includegraphics on input line 136.
 Package epstopdf Info: Output file is already uptodate.
 
-<30-eps-converted-to.pdf, id=82, 578.16pt x 397.485pt>
+<30-eps-converted-to.pdf, id=92, 578.16pt x 397.485pt>
 File: 30-eps-converted-to.pdf Graphic file (type pdf)
 
 <use 30-eps-converted-to.pdf>
-Package pdftex.def Info: 30-eps-converted-to.pdf used on input line 127.
+Package pdftex.def Info: 30-eps-converted-to.pdf used on input line 136.
 (pdftex.def)             Requested size: 180.0pt x 123.74673pt.
 
-Overfull \hbox (18.0pt too wide) in paragraph at lines 123--129
+Overfull \hbox (18.0pt too wide) in paragraph at lines 132--138
  [][] 
  []
 
-[7 <./18neg-eps-converted-to.pdf> <./18pos-eps-converted-to.pdf> <./23_24-eps-c
-onverted-to.pdf> <./30-eps-converted-to.pdf>]
-Overfull \hbox (4.29066pt too wide) in paragraph at lines 192--195
+[7]
+Overfull \hbox (4.29066pt too wide) in paragraph at lines 201--204
 \OT1/cmr/m/n/10.95 use-ful reads. While us-ing UMI-barcode[1,0,0]-cutsite[2,0,0
 ]-genomic we might
  []
 
-[8] <nc74_skbr3.pdf, id=193, 361.35pt x 216.81pt>
+[8 <./18neg-eps-converted-to.pdf> <./18pos-eps-converted-to.pdf> <./23_24-eps-c
+onverted-to.pdf> <./30-eps-converted-to.pdf>]
+<nc74_skbr3.pdf, id=203, 361.35pt x 216.81pt>
 File: nc74_skbr3.pdf Graphic file (type pdf)
  <use nc74_skbr3.pdf>
-Package pdftex.def Info: nc74_skbr3.pdf used on input line 213.
+Package pdftex.def Info: nc74_skbr3.pdf used on input line 222.
 (pdftex.def)             Requested size: 180.0pt x 108.00111pt.
 
-<nc59_nc25.pdf, id=194, 361.35pt x 216.81pt>
+<nc59_nc25.pdf, id=204, 361.35pt x 216.81pt>
 File: nc59_nc25.pdf Graphic file (type pdf)
  <use nc59_nc25.pdf>
-Package pdftex.def Info: nc59_nc25.pdf used on input line 214.
+Package pdftex.def Info: nc59_nc25.pdf used on input line 223.
 (pdftex.def)             Requested size: 180.0pt x 108.00111pt.
 
-<nc100_nc101.pdf, id=195, 361.35pt x 216.81pt>
+<nc100_nc101.pdf, id=205, 361.35pt x 216.81pt>
 File: nc100_nc101.pdf Graphic file (type pdf)
  <use nc100_nc101.pdf>
-Package pdftex.def Info: nc100_nc101.pdf used on input line 215.
+Package pdftex.def Info: nc100_nc101.pdf used on input line 224.
 (pdftex.def)             Requested size: 180.0pt x 108.00111pt.
 
-<nc104_nc105.pdf, id=196, 361.35pt x 216.81pt>
+<nc104_nc105.pdf, id=206, 361.35pt x 216.81pt>
 File: nc104_nc105.pdf Graphic file (type pdf)
  <use nc104_nc105.pdf>
-Package pdftex.def Info: nc104_nc105.pdf used on input line 216.
+Package pdftex.def Info: nc104_nc105.pdf used on input line 225.
 (pdftex.def)             Requested size: 180.0pt x 108.00111pt.
 
-Overfull \hbox (18.0pt too wide) in paragraph at lines 212--218
+Overfull \hbox (18.0pt too wide) in paragraph at lines 221--227
  [][] 
  []
 
-[9 <./nc74_skbr3.pdf> <./nc59_nc25.pdf
+[9] [10 <./nc74_skbr3.pdf> <./nc59_nc25.pdf
 
 pdfTeX warning: pdflatex (file ./nc59_nc25.pdf): PDF inclusion: multiple pdfs w
 ith page group included in a single page
@@ -695,27 +711,35 @@ pdfTeX warning: pdflatex (file ./nc100_nc101.pdf): PDF inclusion: multiple pdfs
 
 pdfTeX warning: pdflatex (file ./nc104_nc105.pdf): PDF inclusion: multiple pdfs
  with page group included in a single page
->] (./eda_tisba.aux) ) 
+>] (./eda_tisba.aux)
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ ) 
 Here is how much of TeX's memory you used:
- 3734 strings out of 494985
- 54523 string characters out of 6180355
- 111469 words of memory out of 5000000
- 6886 multiletter control sequences out of 15000+600000
- 12743 words of font info for 50 fonts, out of 8000000 for 9000
+ 3742 strings out of 494985
+ 54784 string characters out of 6180355
+ 112469 words of memory out of 5000000
+ 6892 multiletter control sequences out of 15000+600000
+ 13051 words of font info for 51 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
  38i,11n,38p,1164b,352s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/c
-mmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.p
-fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share
-/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on eda_tisba.pdf (9 pages, 242299 bytes).
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texl
+ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmsy10.pfb>
+Output written on eda_tisba.pdf (10 pages, 294669 bytes).
 PDF statistics:
- 257 PDF objects out of 1000 (max. 8388607)
- 116 compressed objects within 2 object streams
+ 273 PDF objects out of 1000 (max. 8388607)
+ 127 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 76 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 81 words of extra memory for PDF output out of 10000 (max. 10000000)
 

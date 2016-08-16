@@ -36,6 +36,15 @@ As can be seen in Fig.\ref{Fig:dist_count}, XZ19-20 and XZ21-22 behaves similarl
 \label{Fig:filter_noise}
 \end{figure}
 
+In Fig.\ref{fig:intra_tumor_heterog__q10_res100k} we plot the same quantities but looking at all datasets together.
+
+\begin{figure}[hbtp]
+\centering
+\includegraphics[scale=1]{intra_tumor_heterog__q10_res100k.pdf}
+\caption{Cosine distance versus number of reads.}
+\label{fig:intra_tumor_heterog__q10_res100k}
+\end{figure}
+
 \section{ITH index}
 We can also provide a summary of ITH with a single number. One way to do this is to consider the descriptor-vectors of  different spatial regions as instances of some high-dimensional probability distribution. The average descriptor-vector will provide the summary description obtained averaging over different spatial locations. The fluctuation of the distances between the mean vector and the vectors from each individual region is an indication of the heterogeneity of the high-dimensional probability distribution: this can define our index of ITH with possible candidates like the standard deviation or the Shannon entropy. For the moment we use the standard deviation. Fig.\ref{fig:histo_small} and Fig.\ref{fig:histo_big} show the result of this analysis for the small and large datasets that we have. The large dataset -- XZ23-24 -- has lower ITH and possible explanations are: at the resolution (related to the number of cells coming from a single region) of XZ23-24 we do not distinguish any more between different spatial locations; stroma cells are the predominant component in each region, and they all look the same. 
 		

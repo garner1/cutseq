@@ -32,7 +32,7 @@ python ~/SparkleShare/RESTSEQ/bin/module/KL_divergence.py ${temp_file_2} ${temp_
 tail -n +2 ${temp_file_1} | datamash sum 4 sum 5 | awk '{OFS="\t"; print $1,$2,($1+$2)/2}'
 
 
-rm -f ${temp_file_1} ${temp_file_2} ${temp_file_3} ${temp_copy_1} "$temp_copy_1"__{raw,normed}_segmented_q"$quality"_res"$resolution".bed "$temp_copy_2"__{raw,normed}_segmented_q"$quality"_res"$resolution".bed
+rm -f ${temp_file_1} ${temp_file_2} ${temp_file_3} ${temp_copy_1} ${temp_copy_2} "$temp_copy_1"__{raw,normed}_segmented_q"$quality"_res"$resolution".bed "$temp_copy_2"__{raw,normed}_segmented_q"$quality"_res"$resolution".bed
 
 
 

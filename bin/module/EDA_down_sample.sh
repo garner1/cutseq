@@ -9,4 +9,4 @@ size=$2				# size of the random sample
 # done
 
 
-parallel "temp_{}=$(mktemp);cat $temp_{} | awk '\$6>=10' | shuf -n $size -o {}__$(echo $in|tr '/' '_') -"  ::: $(seq 2)
+parallel "temp_{}=$(mktemp);cat '$temp_{}' | awk '\$6>=10' | shuf -n $size -o {}__$(echo $in|tr '/' '_') -"  ::: $(seq 2)

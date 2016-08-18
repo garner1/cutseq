@@ -1271,3 +1271,5 @@
 /home/garner1/Work/dataset/restseq/xz23_24/XZ2324_cutsite_dist_strand_qScore_UMI_count__GAATCCGA_q1.bed	/home/garner1/Work/dataset/restseq/xz23_24/XZ2324_cutsite_dist_strand_qScore_UMI_count__TGATGCGC_q1.bed	0.973314635167	25	72427	36226
 /home/garner1/Work/dataset/restseq/xz23_24/XZ2324_cutsite_dist_strand_qScore_UMI_count__GAATCCGA_q1.bed	/home/garner1/Work/dataset/restseq/xz23_24/XZ2324_cutsite_dist_strand_qScore_UMI_count__TGATGGAA_q1.bed	1.0	25	4	14.5
 /home/garner1/Work/dataset/restseq/xz23_24/XZ2324_cutsite_dist_strand_qScore_UMI_count__GAATCCGA_q1.bed	/home/garner1/Work/dataset/restseq/xz23_24/XZ2324_cutsite_dist_strand_qScore_UMI_count__TGATGTCC_q1.bed	1.0	25	351	188
+/home/garner1/Work/dataset/restseq/xz23_24/XZ2324_cutsite_dist_strand_qScore_UMI_count__GAATCTCG_q1.bed	/home/garner1/Work/dataset/restseq/xz23_24/XZ2324_cutsite_dist_strand_qScore_UMI_count__AGCCAGAG_q1.bed	0.0919952552726	257908	193543	225726
+/home/garner1/Work/dataset/restseq/xz23_24/XZ2324_cutsite_dist_strand_qScore_UMI_count__GAATCTCG_q1.bed	/home/garner1/Work/dataset/restseq/xz23_24/XZ2324_cutsite_dist_strand_qScore_UMI_count__ACGACGAA_q1.bed	0.988479266418	257908	4	128956

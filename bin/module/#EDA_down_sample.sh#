@@ -9,4 +9,4 @@ for ind in $(seq 2);do
 done
 
 temp1=$(mktemp)
-
+parallel cat $in | awk '\$6>=10' | shuf -n $size -o "$ind"__$(echo "$in"|tr '/' '_') -

@@ -4,5 +4,5 @@ in=$1				# input bed file
 size=$2				# size of the random sample
 
 for ind in $(seq 10);do
-    out=rnd_
+    out=$(echo $in|tr '/' '_')
     shuf -n $size -o $out $in

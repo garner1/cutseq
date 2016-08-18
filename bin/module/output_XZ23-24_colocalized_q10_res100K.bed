@@ -1,0 +1,4 @@
+/home/garner1/Work/dataset/restseq/XZ23/outdata/cutsite_dist_strand_qScore_UMI_count__ACGACGAA_q1.bed	/home/garner1/Work/dataset/restseq/XZ24/outdata/cutsite_dist_strand_qScore_UMI_count__ACGACGAA_q1.bed	nan	0	4	2
+/home/garner1/Work/dataset/restseq/XZ23/outdata/cutsite_dist_strand_qScore_UMI_count__ACGACATC_q1.bed	/home/garner1/Work/dataset/restseq/XZ24/outdata/cutsite_dist_strand_qScore_UMI_count__ACGACATC_q1.bed	1.0	1	1	1
+/home/garner1/Work/dataset/restseq/XZ23/outdata/cutsite_dist_strand_qScore_UMI_count__CGTGTTCA_q1.bed	/home/garner1/Work/dataset/restseq/XZ24/outdata/cutsite_dist_strand_qScore_UMI_count__CGTGTTCA_q1.bed	1.0	171	136	153.5
+/home/garner1/Work/dataset/restseq/XZ23/outdata/cutsite_dist_strand_qScore_UMI_count__ATGTGGAG_q1.bed	/home/garner1/Work/dataset/restseq/XZ24/outdata/cutsite_dist_strand_qScore_UMI_count__ATGTGGAG_q1.bed	1.0	2	2	2

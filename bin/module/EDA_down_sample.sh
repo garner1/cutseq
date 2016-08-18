@@ -5,5 +5,5 @@ size=$2				# size of the random sample
 
 for ind in $(seq 2);do
     out="$ind"__$(echo "$in"|tr '/' '_')
-    shuf -n $size -o $out $in
+    cat $in | awk '$6>=10' | shuf -n $size -o $out -
 done

@@ -3,4 +3,6 @@
 in=$1				# input bed file
 size=$2				# size of the random sample
 
-shuf -n $size -o $out $in
+for ind in $(seq 10);do
+    out=rnd_
+    shuf -n $size -o $out $in

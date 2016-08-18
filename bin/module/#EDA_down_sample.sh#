@@ -8,5 +8,5 @@ for ind in $(seq 2);do
     cat $in | awk '$6>=10' | shuf -n $size -o $out -
 done
 
-temp1=$(mktemp)
-parallel "cat $in | awk '\$6>=10' | shuf -n $size -o {}__$(echo "$in"|tr '/' '_') -"
+
+parallel "cat $in | awk '\$6>=10' | shuf -n $size -o {}__$(echo $in|tr '/' '_') -" 

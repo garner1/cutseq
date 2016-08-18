@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+in=$1				# input bed file
+size=$2				# size of the random sample
+
+shuf -n $size -o $out $in

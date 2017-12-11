@@ -31,12 +31,11 @@ echo
 echo Processing $experiment
 ################################################################################
 
-# ~/Work/pipelines/restseq/binDev/module/quality_control.sh $r1 $numbproc $out
+~/Work/pipelines/restseq/binDev/module/quality_control.sh $r1 $numbproc $out
 
 ################################################################################
 
 # USE EITHER prepare_files.sh OR parallel_scan.sh (in case of multiple barcodes)
-
 ~/Work/pipelines/restseq/binDev/module/parallel_scan.sh $in $mode $barcode_file $r1 $r2
 
 ################################################################################
@@ -69,11 +68,9 @@ do
 	    samtools view -h -Sb "$out"/"$barcode".sam > "$out"/"$barcode".bam # only keep first mate in pair
 	fi
     	$PWD/module/umi_joining.sh $in $aux $barcode "$out"/"$barcode".bam "$out"/q"$quality"_withUMI.bam
-    	$PWD/module/filter.centromere-telomere.sh "$out"/q"$quality"_withUMI.bam "$out"/chr-loc-umi_q"$quality".bam
-    	$PWD/module/filter.blacklist.sh "$out"/chr-loc-umi_q"$quality".bam
 
     	echo "Filter UMIs ..."
-	bedtools bamtobed -i "$out"/chr-loc-umi_q"$quality".bam | sort --parallel=8 --temporary-directory=$HOME/tmp -k1,1 -k2,2n > "$aux"/myfile_"$barcode" # convert bam2bed
+	bedtools bamtobed -i "$out"/q"$quality"_withUMI.bam | sort --parallel=8 --temporary-directory=$HOME/tmp -k1,1 -k2,2n > "$aux"/myfile_"$barcode" # convert bam2bed
 	if [ -s "$aux"/myfile_"$barcode" ]; then # check if file is not empty
 	    bedtools closest -a "$aux"/myfile_"$barcode" -b ~/Work/pipelines/data/"$cutsite".bed -d | 
 	    LC_ALL=C sort --parallel=8 --temporary-directory=$HOME/tmp -k4,4 | sed 's/\/1//' > "$aux"/output_"$barcode" # find the closest cutsite 
@@ -100,61 +97,3 @@ done
 
 rm -fr "$in"/barcode_* "$out"/*.{sam,bam} "$aux"/* 	# !!!clean outdata and auxdata directories!!!!
  
-#################################################################
-
-# ./module/change_name.sh "$experiment"
-
-#################################################################
-
-# echo "Create the data files for downstream analysis ..."
-# ./module/create_data_matrix.sh "$experiment" "$resolution"
-
-#################################################################
-# count the reads per windos=10Mb
-# to be parallelized over bedfiles
-# ~/Work/pipelines/aux.scripts/coverage.sh $window $bedfile 
-
-# ./module/GC-normalization.sh "$experiment"
-####################################################################
-	# if [ "$mode" == "PE" ]
-	# then
-	#     # Sort by read name
-	#     samtools sort -n "$out"/chr-loc-umi_q"$quality".bam "$out"/reads.sorted
-	#     # Update/fix SAM flags
-	#     samtools fixmate "$out"/reads.sorted.bam "$out"/reads.fixed.bam
-	#     # Sort by coordinates
-	#     samtools sort "$out"/reads.fixed.bam "$out"/reads.fixed.sorted
-	#     # # convert all reads, or...
-	#     # bedtools bamtobed -i reads.fixed.sorted.bam -bedpe > reads.bedpe
-	#     # # ...convert properly-paired reads
-	#     # samtools view -bf 0x2 reads.fixed.sorted.bam | bedtools bamtobed -i stdin -bedpe > reads.bedpe
-	#     samtools view -bf 0x2 "$out"/reads.fixed.sorted.bam | bedtools bamtobed -i stdin -bedpe -mate1 | sort --parallel=8 --temporary-directory=$HOME/tmp -k1,1 -k2,2n > "$aux"/myfile_"$barcode" # convert bam2bed
-	#     if [ -s "$aux"/myfile_"$barcode" ]; then # check if file is not empty
-	# 	bedtools closest -a "$aux"/myfile_"$barcode" -b ~/Work/pipelines/data/"$cutsite".bed -d | 
-	# 	sort --parallel=8 --temporary-directory=$HOME/tmp -k7,7 > "$aux"/output_"$barcode" # find the closest cutsite 
-		
-	# 	rm -f "$aux"/myfile_"$barcode"
-		
-	# 	samtools view -f 65 "$out"/chr-loc-umi_q"$quality".bam | sort --parallel=8 --temporary-directory=$HOME/tmp -k1,1 | # select first mate of pairs
-	# 	join -1 1 -2 7 - "$aux"/output_"$barcode"| # join WRT to read ID
-	# 	tr " " "\t" | awk '{FS=OFS="\t";print $(NF-3),$(NF-2),$(NF-1),$NF,$(NF-5),$(NF-6),$(NF-13),$1,$3,$4,$8}' > "$out"/cutsite_dist_strandMate1_qScore_UMI_ID_startMate1_startMate2__"$barcode"_q"$quality".bed
-		
-	# 	cut -f-7 "$out"/cutsite_dist_strandMate1_qScore_UMI_ID_startMate1_startMate2__"$barcode"_q"$quality".bed | 
-	# 	datamash -s -g 1,2,3,4,5,6,7 count 1,2,3,4,5,6,7 > "$out"/cutsite_dist_strandMate1_qScore_UMI_count__"$barcode"_q"$quality".bed
-
-	# 	rm -f "$aux"/output_"$barcode"
-	# 	rm chr*
-
-	# 	cat "$out"/cutsite_dist_strandMate1_qScore_UMI_count__"$barcode"_q"$quality".bed| grep -v "^\." |
-	# 	awk '{print >> $1; close($1)}' -  # split file according to chromosome
-
-    	# 	chr_list=$(cut -f1 "$out"/cutsite_dist_strandMate1_qScore_UMI_count__"$barcode"_q"$quality".bed|grep -v "_\|^\."|LC_ALL=C sort -u)
-    	# 	parallel "python $PWD/module/umi_filtering.py $PWD/{} $umi_missmatch {} {}_out.bed" ::: $(echo $chr_list)
-    	# 	cat chr*_out.bed | tr -d "," | tr -d "'" | tr -d "[" | tr -d "]" | tr " " "\t" | grep -v "_" | 
-	# 	sort --parallel=8 --temporary-directory=$HOME/tmp -k1.4n -k2,2n > "$out"/cutsite_dist_strandMate1_qScore_UMI_count__"$barcode"_q"$quality".bed
-	# 	rm -f chr*
-    	#     fi
-	# fi
-
-	# if [ "$mode" == "SE" ]
-	# then

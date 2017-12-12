@@ -29,11 +29,11 @@ while ind1 < count:
         # CONTROL OVER UMI SIMILARITY
         if numb_mismatches <= mm_gap:
             # RICH GETS RICHER
-            if int(data[ind1][7]) >= int(data[ind2][7]):
-                data[ind1][7] = str(int(data[ind1][7])+int(data[ind2][7]))
+            if int(data[ind1][6]) >= int(data[ind2][6]):
+                data[ind1][6] = str(int(data[ind1][6])+int(data[ind2][6]))
                 del data[ind2]
             else:
-                data[ind2][7] = str(int(data[ind1][7])+int(data[ind2][7]))        
+                data[ind2][6] = str(int(data[ind1][6])+int(data[ind2][6]))        
                 del data[ind1]
                 ind2 = len(data)
                 ind1 = ind1 - 1
@@ -43,6 +43,6 @@ while ind1 < count:
     ind1 += 1
 
 for item in data:
-    print>>outfile, [item[0],item[1],item[2],item[3],item[4],item[5],item[6],item[7]]
+    print>>outfile, [item[0],item[1],item[2],item[3],item[4],item[5],item[6]]
 
 print 'Done with filtering UMIs in ', chromosome

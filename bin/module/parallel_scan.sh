@@ -2,11 +2,12 @@
 
 # FILTER READS ALLOWING FOR 1 MISMATCH IN BARCODE AND 1 MISMATCH IN CUTSITE, WHILE THE UMI LENGTH MIGHT BE SET
 
-in=$1
-mode=$2
-barcode_file=$3
-r1=$4
-r2=$5
+cutsite=$1
+in=$2
+mode=$3
+barcode_file=$4
+r1=$5
+r2=$6
 
 echo "Process the fastq file ..."
 
@@ -16,35 +17,27 @@ echo "Unzip the raw data file ..."
 
 # !!!!IF R1/2.FQ NOT ALREADY PRESENT!!!!
 
-# if [ "$mode" == "SE" ]; then
-#     gunzip -c $r1 > $in/r1.fq
-# fi
-# if [ "$mode" == "PE" ]; then
-#     gunzip -c $r1 > $in/r1.fq & pid1=$!
-#     gunzip -c $r2 | paste - - - - | LC_ALL=C sort --parallel=8 --temporary-directory=$HOME/tmp -k1,1 > $in/r2oneline.fq & pid2=$!
-#     wait $pid1
-#     wait $pid2
-# fi
+if [ "$mode" == "SE" ]; then
+    gunzip -c $r1 > $in/r1.fq
+fi
+if [ "$mode" == "PE" ]; then
+    gunzip -c $r1 > $in/r1.fq & pid1=$!
+    gunzip -c $r2 | paste - - - - | LC_ALL=C sort --parallel=8 --temporary-directory=$HOME/tmp -k1,1 > $in/r2oneline.fq & pid2=$!
+    wait $pid1
+    wait $pid2
+fi
 
-# cat $in/r1.fq | paste - - - - | LC_ALL=C sort --parallel=8 --temporary-directory=$HOME/tmp -k1,1 > $in/r1oneline.fq & pid1=$!
-# cat $in/r1.fq | paste - - - - | LC_ALL=C sort --parallel=8 --temporary-directory=$HOME/tmp -k1,1 |
-# cut -f1,2 | tr '\t@' '\n>'  > $in/r1.fa & pid2=$!
-# wait $pid1
-# wait $pid2
-
-################################################################################
-
-# !!!!IF R1/2.FQ ALREADY PRESENT!!!!
-cat $in/r1oneline.fq | cut -f1,2 | tr '\t@' '\n>'  > $in/r1.fa
+cat $in/r1.fq | paste - - - - | LC_ALL=C sort --parallel=8 --temporary-directory=$HOME/tmp -k1,1 > $in/r1oneline.fq & pid1=$!
+cat $in/r1.fq | paste - - - - | LC_ALL=C sort --parallel=8 --temporary-directory=$HOME/tmp -k1,1 |cut -f1,2 | tr '\t@' '\n>'  > $in/r1.fa & pid2=$!
+wait $pid1
+wait $pid2
 
 ################################################################################
 
 echo "Generate patfiles for each barcode ..."
 
-# !!!! IF NOT NC85 !!!!!
-cat $barcode_file | awk '{print "^ 8...8",substr($1,1,8)"[1,0,0]",substr($1,9,6)"[1,0,0]","1...1000","$" > "barcode_"substr($1,1,8)}'
-
-################################################################################
+len=`echo $cutsite|awk '{print length}'`
+cat $barcode_file | awk -v len="$len" '{print "^ 8...8",substr($1,1,8)"[1,0,0]",substr($1,9,len)"[1,0,0]","1...1000","$" > "barcode_"substr($1,1,8)}'
 
 # !!! ONLY FOR NC85 WITH NO UMI !!!!
 # cat $barcode_file | awk '{print "^",substr($1,1,8)"[1,0,0]",substr($1,9,6)"[1,0,0]","1...1000","$" > "barcode_"substr($1,1,8)}' 

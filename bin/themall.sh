@@ -1,84 +1,143 @@
 #!/usr/bin/env bash
 
-EXP=XZ68
-genome=hg19
-mode=SE
-cutsite=AAGCTT
-umi_threshold=1
-fastq=/media/bicroserver_2-seq/BICRO56/FASTQ/"$EXP"*/"$EXP"_R1.fastq.gz
-bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $umi_threshold $fastq
 
-EXP=XZ69
-genome=hg19
-mode=SE
-cutsite=AAGCTT
-umi_threshold=1
-fastq=/media/bicroserver_2-seq/BICRO56/FASTQ/"$EXP"*/"$EXP"_R1.fastq.gz
-bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $umi_threshold $fastq
 
-EXP=XZ70
-genome=hg19
-mode=SE
-cutsite=AAGCTT
-umi_threshold=1
-fastq=/media/bicroserver_2-seq/BICRO56/FASTQ/"$EXP"*/"$EXP"_R1.fastq.gz
-bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $umi_threshold $fastq
-
-EXP=XZ71
-genome=hg19
-mode=SE
-cutsite=AAGCTT
-umi_threshold=1
-fastq=/media/bicroserver_2-seq/BICRO56/FASTQ/"$EXP"*/"$EXP"_R1.fastq.gz
-bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $umi_threshold $fastq
-
-EXP=XZ72
-genome=hg19
-mode=SE
-cutsite=AAGCTT
-umi_threshold=1
-fastq=/media/bicroserver_2-seq/BICRO56/FASTQ/"$EXP"*/"$EXP"_R1.fastq.gz
-bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $umi_threshold $fastq
-
-EXP=XZ74
+EXP=XZ82
 genome=hg19
 mode=SE
 cutsite=CATG
 umi_threshold=1
-fastq=/media/bicroserver_2-seq/BICRO56/FASTQ/"$EXP"*/"$EXP"_R1.fastq.gz
+fastq=/media/bicroserver_2-seq/BICRO57/FASTQ/"$EXP"*/"$EXP".fastq.gz
 bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $umi_threshold $fastq
 
-EXP=XZ75
+EXP=XZ83
 genome=hg19
 mode=SE
 cutsite=CATG
 umi_threshold=1
-fastq=/media/bicroserver_2-seq/BICRO56/FASTQ/"$EXP"*/"$EXP"_R1.fastq.gz
+fastq=/media/bicroserver_2-seq/BICRO57/FASTQ/"$EXP"*/"$EXP".fastq.gz
 bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $umi_threshold $fastq
 
-EXP=XZ76
+EXP=XZ85
 genome=hg19
 mode=SE
 cutsite=CATG
 umi_threshold=1
-fastq=/media/bicroserver_2-seq/BICRO56/FASTQ/"$EXP"*/"$EXP"_R1.fastq.gz
+fastq=/media/bicroserver_2-seq/BICRO57/FASTQ/"$EXP"*/"$EXP".fastq.gz
 bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $umi_threshold $fastq
 
-EXP=XZ77
+EXP=XZ86
 genome=hg19
 mode=SE
 cutsite=CATG
 umi_threshold=1
-fastq=/media/bicroserver_2-seq/BICRO56/FASTQ/"$EXP"*/"$EXP"_R1.fastq.gz
+fastq=/media/bicroserver_2-seq/BICRO57/FASTQ/"$EXP"*/"$EXP".fastq.gz
 bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $umi_threshold $fastq
 
-EXP=XZ78
+EXP=XZ88
 genome=hg19
 mode=SE
 cutsite=CATG
 umi_threshold=1
-fastq=/media/bicroserver_2-seq/BICRO56/FASTQ/"$EXP"*/"$EXP"_R1.fastq.gz
+fastq=/media/bicroserver_2-seq/BICRO57/FASTQ/"$EXP"*/"$EXP".fastq.gz
 bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $umi_threshold $fastq
+
+EXP=XZ89
+genome=hg19
+mode=SE
+cutsite=CATG
+umi_threshold=1
+fastq=/media/bicroserver_2-seq/BICRO57/FASTQ/"$EXP"*/"$EXP".fastq.gz
+bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $umi_threshold $fastq
+
+EXP=XZ90
+genome=hg19
+mode=SE
+cutsite=CATG
+umi_threshold=1
+fastq=/media/bicroserver_2-seq/BICRO57/FASTQ/"$EXP"*/"$EXP".fastq.gz
+bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $umi_threshold $fastq
+
+###########################################################################
+# EXP=XZ68
+# genome=hg19
+# mode=SE
+# cutsite=AAGCTT
+# umi_threshold=1
+# fastq=/media/bicroserver_2-seq/BICRO56/FASTQ/"$EXP"*/"$EXP"_R1.fastq.gz
+# bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $umi_threshold $fastq
+
+# EXP=XZ69
+# genome=hg19
+# mode=SE
+# cutsite=AAGCTT
+# umi_threshold=1
+# fastq=/media/bicroserver_2-seq/BICRO56/FASTQ/"$EXP"*/"$EXP"_R1.fastq.gz
+# bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $umi_threshold $fastq
+
+# EXP=XZ70
+# genome=hg19
+# mode=SE
+# cutsite=AAGCTT
+# umi_threshold=1
+# fastq=/media/bicroserver_2-seq/BICRO56/FASTQ/"$EXP"*/"$EXP"_R1.fastq.gz
+# bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $umi_threshold $fastq
+
+# EXP=XZ71
+# genome=hg19
+# mode=SE
+# cutsite=AAGCTT
+# umi_threshold=1
+# fastq=/media/bicroserver_2-seq/BICRO56/FASTQ/"$EXP"*/"$EXP"_R1.fastq.gz
+# bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $umi_threshold $fastq
+
+# EXP=XZ72
+# genome=hg19
+# mode=SE
+# cutsite=AAGCTT
+# umi_threshold=1
+# fastq=/media/bicroserver_2-seq/BICRO56/FASTQ/"$EXP"*/"$EXP"_R1.fastq.gz
+# bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $umi_threshold $fastq
+
+# EXP=XZ74
+# genome=hg19
+# mode=SE
+# cutsite=CATG
+# umi_threshold=1
+# fastq=/media/bicroserver_2-seq/BICRO56/FASTQ/"$EXP"*/"$EXP"_R1.fastq.gz
+# bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $umi_threshold $fastq
+
+# EXP=XZ75
+# genome=hg19
+# mode=SE
+# cutsite=CATG
+# umi_threshold=1
+# fastq=/media/bicroserver_2-seq/BICRO56/FASTQ/"$EXP"*/"$EXP"_R1.fastq.gz
+# bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $umi_threshold $fastq
+
+# EXP=XZ76
+# genome=hg19
+# mode=SE
+# cutsite=CATG
+# umi_threshold=1
+# fastq=/media/bicroserver_2-seq/BICRO56/FASTQ/"$EXP"*/"$EXP"_R1.fastq.gz
+# bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $umi_threshold $fastq
+
+# EXP=XZ77
+# genome=hg19
+# mode=SE
+# cutsite=CATG
+# umi_threshold=1
+# fastq=/media/bicroserver_2-seq/BICRO56/FASTQ/"$EXP"*/"$EXP"_R1.fastq.gz
+# bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $umi_threshold $fastq
+
+# EXP=XZ78
+# genome=hg19
+# mode=SE
+# cutsite=CATG
+# umi_threshold=1
+# fastq=/media/bicroserver_2-seq/BICRO56/FASTQ/"$EXP"*/"$EXP"_R1.fastq.gz
+# bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $umi_threshold $fastq
 
 ########################################################################################
 # pattern=/home/garner1/Work/pipelines/restseq/pattern
@@ -424,53 +483,53 @@ bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $umi_
 # wait $pid3
 # wait $pid4
 
-exp=NC88;
-MODE=PE; CUTSITE=AAGCTT; 
-./main.sh "$exp" hg19 1 10000000 "$MODE" ~/Work/pipelines/restseq/pattern/barcode-cutsite_"$exp" "$CUTSITE" 2;
-cat "$data"/"$exp"/outdata/cutsite_dist_strand_qScore_UMI_ID_start__*_q1.bed | awk '$4 == 0 && $5 == "+"' | wc -l > "$data"/"$exp"/outdata/enzyme_specificity__eq0_R.dat & pid1=$!
-cat "$data"/"$exp"/outdata/cutsite_dist_strand_qScore_UMI_ID_start__*_q1.bed | awk '$4 != 0 && $5 == "+"' | wc -l > "$data"/"$exp"/outdata/enzyme_specificity__neq0_R.dat & pid2=$!
-cat "$data"/"$exp"/outdata/cutsite_dist_strand_qScore_UMI_ID_start__*_q1.bed | awk '$4 == 0 && $5 == "-"' | wc -l > "$data"/"$exp"/outdata/enzyme_specificity__eq0_L.dat & pid3=$!
-cat "$data"/"$exp"/outdata/cutsite_dist_strand_qScore_UMI_ID_start__*_q1.bed | awk '$4 != 0 && $5 == "-"' | wc -l > "$data"/"$exp"/outdata/enzyme_specificity__neq0_L.dat & pid4=$!
-wait $pid1
-wait $pid2
-wait $pid3
-wait $pid4
+# exp=NC88;
+# MODE=PE; CUTSITE=AAGCTT; 
+# ./main.sh "$exp" hg19 1 10000000 "$MODE" ~/Work/pipelines/restseq/pattern/barcode-cutsite_"$exp" "$CUTSITE" 2;
+# cat "$data"/"$exp"/outdata/cutsite_dist_strand_qScore_UMI_ID_start__*_q1.bed | awk '$4 == 0 && $5 == "+"' | wc -l > "$data"/"$exp"/outdata/enzyme_specificity__eq0_R.dat & pid1=$!
+# cat "$data"/"$exp"/outdata/cutsite_dist_strand_qScore_UMI_ID_start__*_q1.bed | awk '$4 != 0 && $5 == "+"' | wc -l > "$data"/"$exp"/outdata/enzyme_specificity__neq0_R.dat & pid2=$!
+# cat "$data"/"$exp"/outdata/cutsite_dist_strand_qScore_UMI_ID_start__*_q1.bed | awk '$4 == 0 && $5 == "-"' | wc -l > "$data"/"$exp"/outdata/enzyme_specificity__eq0_L.dat & pid3=$!
+# cat "$data"/"$exp"/outdata/cutsite_dist_strand_qScore_UMI_ID_start__*_q1.bed | awk '$4 != 0 && $5 == "-"' | wc -l > "$data"/"$exp"/outdata/enzyme_specificity__neq0_L.dat & pid4=$!
+# wait $pid1
+# wait $pid2
+# wait $pid3
+# wait $pid4
 
-exp=NC89;
-MODE=PE; CUTSITE=AAGCTT; 
-./main.sh "$exp" hg19 1 10000000 "$MODE" ~/Work/pipelines/restseq/pattern/barcode-cutsite_"$exp" "$CUTSITE" 2;
-cat "$data"/"$exp"/outdata/cutsite_dist_strand_qScore_UMI_ID_start__*_q1.bed | awk '$4 == 0 && $5 == "+"' | wc -l > "$data"/"$exp"/outdata/enzyme_specificity__eq0_R.dat & pid1=$!
-cat "$data"/"$exp"/outdata/cutsite_dist_strand_qScore_UMI_ID_start__*_q1.bed | awk '$4 != 0 && $5 == "+"' | wc -l > "$data"/"$exp"/outdata/enzyme_specificity__neq0_R.dat & pid2=$!
-cat "$data"/"$exp"/outdata/cutsite_dist_strand_qScore_UMI_ID_start__*_q1.bed | awk '$4 == 0 && $5 == "-"' | wc -l > "$data"/"$exp"/outdata/enzyme_specificity__eq0_L.dat & pid3=$!
-cat "$data"/"$exp"/outdata/cutsite_dist_strand_qScore_UMI_ID_start__*_q1.bed | awk '$4 != 0 && $5 == "-"' | wc -l > "$data"/"$exp"/outdata/enzyme_specificity__neq0_L.dat & pid4=$!
-wait $pid1
-wait $pid2
-wait $pid3
-wait $pid4
+# exp=NC89;
+# MODE=PE; CUTSITE=AAGCTT; 
+# ./main.sh "$exp" hg19 1 10000000 "$MODE" ~/Work/pipelines/restseq/pattern/barcode-cutsite_"$exp" "$CUTSITE" 2;
+# cat "$data"/"$exp"/outdata/cutsite_dist_strand_qScore_UMI_ID_start__*_q1.bed | awk '$4 == 0 && $5 == "+"' | wc -l > "$data"/"$exp"/outdata/enzyme_specificity__eq0_R.dat & pid1=$!
+# cat "$data"/"$exp"/outdata/cutsite_dist_strand_qScore_UMI_ID_start__*_q1.bed | awk '$4 != 0 && $5 == "+"' | wc -l > "$data"/"$exp"/outdata/enzyme_specificity__neq0_R.dat & pid2=$!
+# cat "$data"/"$exp"/outdata/cutsite_dist_strand_qScore_UMI_ID_start__*_q1.bed | awk '$4 == 0 && $5 == "-"' | wc -l > "$data"/"$exp"/outdata/enzyme_specificity__eq0_L.dat & pid3=$!
+# cat "$data"/"$exp"/outdata/cutsite_dist_strand_qScore_UMI_ID_start__*_q1.bed | awk '$4 != 0 && $5 == "-"' | wc -l > "$data"/"$exp"/outdata/enzyme_specificity__neq0_L.dat & pid4=$!
+# wait $pid1
+# wait $pid2
+# wait $pid3
+# wait $pid4
 
-exp=NC101;
-MODE=PE; CUTSITE=AAGCTT; 
-./main.sh "$exp" hg19 1 10000000 "$MODE" ~/Work/pipelines/restseq/pattern/barcode-cutsite_"$exp" "$CUTSITE" 2;
-cat "$data"/"$exp"/outdata/cutsite_dist_strand_qScore_UMI_ID_start__*_q1.bed | awk '$4 == 0 && $5 == "+"' | wc -l > "$data"/"$exp"/outdata/enzyme_specificity__eq0_R.dat & pid1=$!
-cat "$data"/"$exp"/outdata/cutsite_dist_strand_qScore_UMI_ID_start__*_q1.bed | awk '$4 != 0 && $5 == "+"' | wc -l > "$data"/"$exp"/outdata/enzyme_specificity__neq0_R.dat & pid2=$!
-cat "$data"/"$exp"/outdata/cutsite_dist_strand_qScore_UMI_ID_start__*_q1.bed | awk '$4 == 0 && $5 == "-"' | wc -l > "$data"/"$exp"/outdata/enzyme_specificity__eq0_L.dat & pid3=$!
-cat "$data"/"$exp"/outdata/cutsite_dist_strand_qScore_UMI_ID_start__*_q1.bed | awk '$4 != 0 && $5 == "-"' | wc -l > "$data"/"$exp"/outdata/enzyme_specificity__neq0_L.dat & pid4=$!
-wait $pid1
-wait $pid2
-wait $pid3
-wait $pid4
+# exp=NC101;
+# MODE=PE; CUTSITE=AAGCTT; 
+# ./main.sh "$exp" hg19 1 10000000 "$MODE" ~/Work/pipelines/restseq/pattern/barcode-cutsite_"$exp" "$CUTSITE" 2;
+# cat "$data"/"$exp"/outdata/cutsite_dist_strand_qScore_UMI_ID_start__*_q1.bed | awk '$4 == 0 && $5 == "+"' | wc -l > "$data"/"$exp"/outdata/enzyme_specificity__eq0_R.dat & pid1=$!
+# cat "$data"/"$exp"/outdata/cutsite_dist_strand_qScore_UMI_ID_start__*_q1.bed | awk '$4 != 0 && $5 == "+"' | wc -l > "$data"/"$exp"/outdata/enzyme_specificity__neq0_R.dat & pid2=$!
+# cat "$data"/"$exp"/outdata/cutsite_dist_strand_qScore_UMI_ID_start__*_q1.bed | awk '$4 == 0 && $5 == "-"' | wc -l > "$data"/"$exp"/outdata/enzyme_specificity__eq0_L.dat & pid3=$!
+# cat "$data"/"$exp"/outdata/cutsite_dist_strand_qScore_UMI_ID_start__*_q1.bed | awk '$4 != 0 && $5 == "-"' | wc -l > "$data"/"$exp"/outdata/enzyme_specificity__neq0_L.dat & pid4=$!
+# wait $pid1
+# wait $pid2
+# wait $pid3
+# wait $pid4
 
-exp=NC105;
-MODE=PE; CUTSITE=AAGCTT; 
-./main.sh "$exp" hg19 1 10000000 "$MODE" ~/Work/pipelines/restseq/pattern/barcode-cutsite_"$exp" "$CUTSITE" 2;
-cat "$data"/"$exp"/outdata/cutsite_dist_strand_qScore_UMI_ID_start__*_q1.bed | awk '$4 == 0 && $5 == "+"' | wc -l > "$data"/"$exp"/outdata/enzyme_specificity__eq0_R.dat & pid1=$!
-cat "$data"/"$exp"/outdata/cutsite_dist_strand_qScore_UMI_ID_start__*_q1.bed | awk '$4 != 0 && $5 == "+"' | wc -l > "$data"/"$exp"/outdata/enzyme_specificity__neq0_R.dat & pid2=$!
-cat "$data"/"$exp"/outdata/cutsite_dist_strand_qScore_UMI_ID_start__*_q1.bed | awk '$4 == 0 && $5 == "-"' | wc -l > "$data"/"$exp"/outdata/enzyme_specificity__eq0_L.dat & pid3=$!
-cat "$data"/"$exp"/outdata/cutsite_dist_strand_qScore_UMI_ID_start__*_q1.bed | awk '$4 != 0 && $5 == "-"' | wc -l > "$data"/"$exp"/outdata/enzyme_specificity__neq0_L.dat & pid4=$!
-wait $pid1
-wait $pid2
-wait $pid3
-wait $pid4
+# exp=NC105;
+# MODE=PE; CUTSITE=AAGCTT; 
+# ./main.sh "$exp" hg19 1 10000000 "$MODE" ~/Work/pipelines/restseq/pattern/barcode-cutsite_"$exp" "$CUTSITE" 2;
+# cat "$data"/"$exp"/outdata/cutsite_dist_strand_qScore_UMI_ID_start__*_q1.bed | awk '$4 == 0 && $5 == "+"' | wc -l > "$data"/"$exp"/outdata/enzyme_specificity__eq0_R.dat & pid1=$!
+# cat "$data"/"$exp"/outdata/cutsite_dist_strand_qScore_UMI_ID_start__*_q1.bed | awk '$4 != 0 && $5 == "+"' | wc -l > "$data"/"$exp"/outdata/enzyme_specificity__neq0_R.dat & pid2=$!
+# cat "$data"/"$exp"/outdata/cutsite_dist_strand_qScore_UMI_ID_start__*_q1.bed | awk '$4 == 0 && $5 == "-"' | wc -l > "$data"/"$exp"/outdata/enzyme_specificity__eq0_L.dat & pid3=$!
+# cat "$data"/"$exp"/outdata/cutsite_dist_strand_qScore_UMI_ID_start__*_q1.bed | awk '$4 != 0 && $5 == "-"' | wc -l > "$data"/"$exp"/outdata/enzyme_specificity__neq0_L.dat & pid4=$!
+# wait $pid1
+# wait $pid2
+# wait $pid3
+# wait $pid4
 
 
 

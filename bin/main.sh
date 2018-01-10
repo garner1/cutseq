@@ -78,18 +78,19 @@ do
 	    datamash -s -g 1,2,3,4,5 count 1,2,3,4,5 | cut -f-6 > "$out"/read_strand_UMI_PCRcount__"$barcode".bed
 
 	    rm -f chr*
-	    cat "$out"/read_strand_qScore_UMI_PCRcount__"$barcode".bed | grep -v "^\." |
-	    awk '{print >> $1; close($1)}' -  # split file according to chromosome
+	    cat "$out"/read_strand_UMI_PCRcount__"$barcode".bed | grep -v "^\." | awk '{print >> $1; close($1)}' -  # split file according to chromosome
 
-    	    chr_list=$(cut -f1 "$out"/read_strand_qScore_UMI_PCRcount__"$barcode".bed|grep -v "_\|^\."|LC_ALL=C sort -u)
+    	    chr_list=$(cut -f1 "$out"/read_strand_UMI_PCRcount__"$barcode".bed | grep -v "_\|^\." | LC_ALL=C sort -u)
 	    parallel "python $PWD/module/umi_filtering.py $PWD/{} $umi_missmatch {} {}_out.bed" ::: $(echo $chr_list)
     	    cat chr*_out.bed | tr -d "," | tr -d "'" | tr -d "[" | tr -d "]" | tr " " "\t" | grep -v "_" | 
-	    LC_ALL=C sort --parallel=8 --temporary-directory=$HOME/tmp -k1.4n -k2,2n > "$out"/read_strand_qScore_UMI_CELLcount__"$barcode".bed
+	    LC_ALL=C sort --parallel=8 --temporary-directory=$HOME/tmp -k1.4n -k2,2n > "$out"/read_strand_UMI_PCRcount__"$barcode".bed
 	    rm -f chr*
+
+	    cat "$out"/read_strand_UMI_PCRcount__"$barcode".bed | datamash -s -g 1,2,3,4 count 1,2,3,4 | cut -f-5 > "$out"/read_strand_CELLcount__"$barcode".bed
 	    
 	    samfile="$out"/"$barcode".sam
-	    uniqueReads="$out"/read_strand_qScore_UMI_PCRcount__"$barcode".bed
-	    uniqueLocations="$out"/read_strand_qScore_UMI_CELLcount__"$barcode".bed
+	    uniqueReads="$out"/read_strand_UMI_PCRcount__"$barcode".bed
+	    uniqueLocations="$out"/read_strand_UMI_CELLcount__"$barcode".bed
 	    bash ./module/make_summary.sh $datadir $experiment $barcode $samfile $uniqueReads $uniqueLocations 
     	fi
     fi

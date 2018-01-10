@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-
-
 EXP=XZ82
 genome=hg19
 mode=SE

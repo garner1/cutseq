@@ -15,7 +15,7 @@ umi_missmatch=$6     # threshold on the UMI mismatch for filtering
 r1=$7		     # ~/Work/dataset/XZ14_ACAGTG_L001_R1_001.fastq.gz
 r2=$8	     # ~/Work/dataset/XZ14_ACAGTG_L001_R2_001.fastq.gz
 numbproc=32
-
+quality=30			# filter out read with mapping quality less than this
 ################################################################################
 
 # PREPARE DIRECTORY STRUCTURE
@@ -59,11 +59,11 @@ do
     if [ $count -ne 0 ]; then 
 	if [ "$mode" == "PE" ]
 	then
-	    samtools view -h -f 0x0040 "$out"/"$barcode".sam > "$out"/"$barcode".bam # only keep first mate in pair
+	    samtools view -h -f 0x0040 -q $quality "$out"/"$barcode".sam > "$out"/"$barcode".bam # only keep first mate in pair
 	fi
 	if [ "$mode" == "SE" ]
 	then
-	    samtools view -h -Sb "$out"/"$barcode".sam > "$out"/"$barcode".bam # only keep first mate in pair
+	    samtools view -h -Sb -q $quality "$out"/"$barcode".sam > "$out"/"$barcode".bam # only keep first mate in pair
 	fi
     	$PWD/module/umi_joining.sh $in $aux $barcode "$out"/"$barcode".bam "$out"/withUMI.bam
 
@@ -90,11 +90,10 @@ do
 	    LC_ALL=C sort --parallel=8 --temporary-directory=$HOME/tmp -k1.4n -k2,2n > "$out"/read_strand_qScore_UMI_CELLcount__"$barcode".bed
 	    rm -f chr*
 	    
-	    fastq="$in"/barcode_"$barcode".fq
 	    samfile="$out"/"$barcode".sam
 	    uniqueReads="$out"/read_strand_qScore_UMI_PCRcount__"$barcode".bed
 	    uniqueLocations="$out"/read_strand_qScore_UMI_CELLcount__"$barcode".bed
-	    bash ./module/make_summary.sh $datadir $experiment $barcode $fastq $samfile $uniqueReads $uniqueLocations 
+	    bash ./module/make_summary.sh $datadir $experiment $barcode $samfile $uniqueReads $uniqueLocations 
     	fi
     fi
 done

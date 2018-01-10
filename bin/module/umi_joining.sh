@@ -17,7 +17,6 @@ LC_ALL=C sort --parallel=8 --temporary-directory=$HOME/tmp -k1,1 |awk '{print $1
 wait $pid1
 wait $pid2
 
-LC_ALL=C join $aux/id.sam $aux/id.umi | tr " " "\t" | cat header.sam - |
-samtools view -bS - > $output
+LC_ALL=C join $aux/id.sam $aux/id.umi | tr " " "\t" | cat header.sam - | samtools view -bS - > $output
 
 rm -f header.sam

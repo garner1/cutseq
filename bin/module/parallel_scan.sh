@@ -13,24 +13,24 @@ echo "Process the fastq file ..."
 
 ################################################################################
 
-# echo "Unzip the raw data file ..."
+echo "Unzip the raw data file ..."
 
-# # !!!!IF R1/2.FQ NOT ALREADY PRESENT!!!!
+# !!!!IF R1/2.FQ NOT ALREADY PRESENT!!!!
 
-# if [ "$mode" == "SE" ]; then
-#     gunzip -c $r1 > $in/r1.fq
-# fi
-# if [ "$mode" == "PE" ]; then
-#     gunzip -c $r1 > $in/r1.fq & pid1=$!
-#     gunzip -c $r2 | paste - - - - | LC_ALL=C sort --parallel=8 --temporary-directory=$HOME/tmp -k1,1 > $in/r2oneline.fq & pid2=$!
-#     wait $pid1
-#     wait $pid2
-# fi
+if [ "$mode" == "SE" ]; then
+    gunzip -c $r1 > $in/r1.fq
+fi
+if [ "$mode" == "PE" ]; then
+    gunzip -c $r1 > $in/r1.fq & pid1=$!
+    gunzip -c $r2 | paste - - - - | LC_ALL=C sort --parallel=8 --temporary-directory=$HOME/tmp -k1,1 > $in/r2oneline.fq & pid2=$!
+    wait $pid1
+    wait $pid2
+fi
 
-# cat $in/r1.fq | paste - - - - | LC_ALL=C sort --parallel=8 --temporary-directory=$HOME/tmp -k1,1 > $in/r1oneline.fq & pid1=$!
-# cat $in/r1.fq | paste - - - - | LC_ALL=C sort --parallel=8 --temporary-directory=$HOME/tmp -k1,1 |cut -f1,2 | tr '\t@' '\n>'  > $in/r1.fa & pid2=$!
-# wait $pid1
-# wait $pid2
+cat $in/r1.fq | paste - - - - | LC_ALL=C sort --parallel=8 --temporary-directory=$HOME/tmp -k1,1 > $in/r1oneline.fq & pid1=$!
+cat $in/r1.fq | paste - - - - | LC_ALL=C sort --parallel=8 --temporary-directory=$HOME/tmp -k1,1 |cut -f1,2 | tr '\t@' '\n>'  > $in/r1.fa & pid2=$!
+wait $pid1
+wait $pid2
 
 ################################################################################
 

@@ -74,8 +74,8 @@ do
 	    LC_ALL=C join -1 1 -2 4 - "$aux"/output_"$barcode"| # join WRT to read ID
 	    tr " " "\t" | awk '{FS=OFS="\t";print $(NF-8),$(NF-7)+1,$(NF-6)+1,$(NF-4),$(NF-5),$(NF-9),$1,$(NF-3),$(NF-2),$(NF-1),$NF}' > "$out"/read_strand_qScore_UMI_ID_cutsite_dist__"$barcode".bed
 	    
-	    cut -f-7 "$out"/read_strand_qScore_UMI_ID_cutsite_dist__"$barcode".bed | 
-	    datamash -s -g 1,2,3,4,5,6 count 1,2,3,4,5,6 | cut -f-7 > "$out"/read_strand_qScore_UMI_PCRcount__"$barcode".bed
+	    cut -f-4,6 "$out"/read_strand_qScore_UMI_ID_cutsite_dist__"$barcode".bed | 
+	    datamash -s -g 1,2,3,4,5 count 1,2,3,4,5 | cut -f-6 > "$out"/read_strand_UMI_PCRcount__"$barcode".bed
 
 	    rm -f chr*
 	    cat "$out"/read_strand_qScore_UMI_PCRcount__"$barcode".bed | grep -v "^\." |

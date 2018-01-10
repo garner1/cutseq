@@ -90,7 +90,7 @@ do
 	    
 	    samfile="$out"/"$barcode".sam
 	    uniqueReads="$out"/read_strand_UMI_PCRcount__"$barcode".bed
-	    uniqueLocations="$out"/read_strand_UMI_CELLcount__"$barcode".bed
+	    uniqueLocations="$out"/read_strand_CELLcount__"$barcode".bed
 	    bash ./module/make_summary.sh $datadir $experiment $barcode $samfile $uniqueReads $uniqueLocations 
     	fi
     fi

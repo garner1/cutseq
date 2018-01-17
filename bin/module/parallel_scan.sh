@@ -13,34 +13,26 @@ echo "Process the fastq file ..."
 
 ################################################################################
 
-# echo "Unzip the raw data file ..."
+echo "Unzip the raw data file ..."
 
-# # !!!!IF R1/2.FQ NOT ALREADY PRESENT!!!!
+# !!!!IF R1/2.FQ NOT ALREADY PRESENT!!!!
 
-# if [ "$mode" == "SE" ]; then
-#     gunzip -c $r1 > $in/r1.fq
-# fi
-# if [ "$mode" == "PE" ]; then
-#     gunzip -c $r1 > $in/r1.fq & pid1=$!
-#     gunzip -c $r2 | paste - - - - | LC_ALL=C sort --parallel=8 --temporary-directory=$HOME/tmp -k1,1 > $in/r2oneline.fq & pid2=$!
-#     wait $pid1
-#     wait $pid2
-# fi
-
-# cat $in/r1.fq | paste - - - - | LC_ALL=C sort --parallel=8 --temporary-directory=$HOME/tmp -k1,1 > $in/r1oneline.fq & pid1=$!
-# cat $in/r1.fq | paste - - - - | LC_ALL=C sort --parallel=8 --temporary-directory=$HOME/tmp -k1,1 |cut -f1,2 | tr '\t@' '\n>'  > $in/r1.fa & pid2=$!
-# wait $pid1
-# wait $pid2
+if [ "$mode" == "SE" ]; then
+    umi_tools extract --stdin="$r1" --bc-pattern=NNNNNNNNXXXXXXXX --log=processed.log --stdout "$in"/processed.fastq.gz # Ns represent the random part of the barcode and Xs the fixed part
+    gunzip -c "$in"/processed.fastq.gz > "$in"/r1.fq
+    cat $in/r1.fq | paste - - - - | LC_ALL=C sort --parallel=8 --temporary-directory=$HOME/tmp -k1,1 > $in/r1oneline.fq & pid1=$!
+    cat $in/r1.fq | paste - - - - | cut -f 1,2 | sed 's/^@/>/' | tr "\t" "\n" > $in/r1.fa & pid2=$!
+    wait $pid1
+    wait $pid2
+fi
 
 ################################################################################
 
 echo "Generate patfiles for each barcode ..."
 
 len=`echo $cutsite|awk '{print length}'`
-cat $barcode_file | awk -v len="$len" '{print "^ 8...8",substr($1,1,8)"[1,0,0]",substr($1,9,len)"[1,0,0]","1...1000","$" > "barcode_"substr($1,1,8)}'
+cat $barcode_file | awk -v len="$len" '{print "^ ",substr($1,1,8)"[1,0,0]",substr($1,9,len)"[1,0,0]","1...1000","$" > "barcode_"substr($1,1,8)}'
 
-# !!! ONLY FOR NC85 WITH NO UMI !!!!
-# cat $barcode_file | awk '{print "^",substr($1,1,8)"[1,0,0]",substr($1,9,6)"[1,0,0]","1...1000","$" > "barcode_"substr($1,1,8)}' 
 ################################################################################
 
 echo "Split FA files to satisfy scan_for_match 100M lines limit ..."
@@ -57,10 +49,8 @@ done
 rm -f barcode_* $in/xa?
 
 echo "Generate the barcoded FQ files ..."
-parallel -k "cat {}|paste - -|awk '{print \$1\$(NF-1)\$NF}'|tr ']>' '\n@'|cut -d':' -f-7|paste - - > {.}.fa-1line" ::: \
-$(ls $in/barcode_*.fa)
-parallel -k "LC_ALL=C join {} $in/r1oneline.fq|awk '{print \$1,\$2,\$5,substr(\$NF,length(\$NF)-length(\$2),length(\$2))}'|tr ' ' '\n' > {.}.fq" ::: \
-$(ls $in/barcode_*.fa-1line)
+parallel -k "cat {}|paste - -|awk '{print \$1\$(NF-1)\$NF}'|tr ']>' '\n@'|cut -d':' -f-7|paste - - | LC_ALL=C sort --parallel=8 --temporary-directory=$HOME/tmp -k1,1 > {.}.fa-1line" ::: $(ls $in/barcode_*.fa)
+parallel -k "LC_ALL=C join {} $in/r1oneline.fq|awk '{print \$1,\$2,\$5,substr(\$NF,length(\$NF)-length(\$2),length(\$2))}'|tr ' ' '\n' > {.}.fq" ::: $(ls $in/barcode_*.fa-1line)
 if [ "$mode" == "PE" ];then
     parallel -k "cat {} | paste - - - -|LC_ALL=C sort --parallel=8 --temporary-directory=$HOME/tmp -k1,1 |LC_ALL=C join - "$in"/r2oneline.fq | cut -d' ' -f1,6- | tr ' ' '\n' > {.}-r2.fq" ::: `ls "$in"/barcode_*[A-Z].fq` 
 fi

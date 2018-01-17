@@ -1,60 +1,68 @@
 #!/usr/bin/env bash
 
-EXP=XZ82
+EXP=test
 genome=hg19
 mode=SE
 cutsite=CATG
 umi_threshold=1
-fastq=/media/bicroserver_2-seq/BICRO57/FASTQ/"$EXP"*/"$EXP".fastq.gz
-bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $umi_threshold $fastq
+fastq=/home/garner1/Work/dataset/reduced_sequencing/test.fastq.gz
+bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_XZ82 $cutsite $umi_threshold $fastq
+################################################################################
+# EXP=XZ82
+# genome=hg19
+# mode=SE
+# cutsite=CATG
+# umi_threshold=1
+# fastq=/media/bicroserver_2-seq/BICRO57/FASTQ/"$EXP"*/"$EXP".fastq.gz
+# bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $umi_threshold $fastq
 
-EXP=XZ83
-genome=hg19
-mode=SE
-cutsite=CATG
-umi_threshold=1
-fastq=/media/bicroserver_2-seq/BICRO57/FASTQ/"$EXP"*/"$EXP".fastq.gz
-bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $umi_threshold $fastq
+# EXP=XZ83
+# genome=hg19
+# mode=SE
+# cutsite=CATG
+# umi_threshold=1
+# fastq=/media/bicroserver_2-seq/BICRO57/FASTQ/"$EXP"*/"$EXP".fastq.gz
+# bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $umi_threshold $fastq
 
-EXP=XZ85
-genome=hg19
-mode=SE
-cutsite=CATG
-umi_threshold=1
-fastq=/media/bicroserver_2-seq/BICRO57/FASTQ/"$EXP"*/"$EXP".fastq.gz
-bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $umi_threshold $fastq
+# EXP=XZ85
+# genome=hg19
+# mode=SE
+# cutsite=CATG
+# umi_threshold=1
+# fastq=/media/bicroserver_2-seq/BICRO57/FASTQ/"$EXP"*/"$EXP".fastq.gz
+# bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $umi_threshold $fastq
 
-EXP=XZ86
-genome=hg19
-mode=SE
-cutsite=CATG
-umi_threshold=1
-fastq=/media/bicroserver_2-seq/BICRO57/FASTQ/"$EXP"*/"$EXP".fastq.gz
-bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $umi_threshold $fastq
+# EXP=XZ86
+# genome=hg19
+# mode=SE
+# cutsite=CATG
+# umi_threshold=1
+# fastq=/media/bicroserver_2-seq/BICRO57/FASTQ/"$EXP"*/"$EXP".fastq.gz
+# bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $umi_threshold $fastq
 
-EXP=XZ88
-genome=hg19
-mode=SE
-cutsite=CATG
-umi_threshold=1
-fastq=/media/bicroserver_2-seq/BICRO57/FASTQ/"$EXP"*/"$EXP".fastq.gz
-bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $umi_threshold $fastq
+# EXP=XZ88
+# genome=hg19
+# mode=SE
+# cutsite=CATG
+# umi_threshold=1
+# fastq=/media/bicroserver_2-seq/BICRO57/FASTQ/"$EXP"*/"$EXP".fastq.gz
+# bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $umi_threshold $fastq
 
-EXP=XZ89
-genome=hg19
-mode=SE
-cutsite=CATG
-umi_threshold=1
-fastq=/media/bicroserver_2-seq/BICRO57/FASTQ/"$EXP"*/"$EXP".fastq.gz
-bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $umi_threshold $fastq
+# EXP=XZ89
+# genome=hg19
+# mode=SE
+# cutsite=CATG
+# umi_threshold=1
+# fastq=/media/bicroserver_2-seq/BICRO57/FASTQ/"$EXP"*/"$EXP".fastq.gz
+# bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $umi_threshold $fastq
 
-EXP=XZ90
-genome=hg19
-mode=SE
-cutsite=CATG
-umi_threshold=1
-fastq=/media/bicroserver_2-seq/BICRO57/FASTQ/"$EXP"*/"$EXP".fastq.gz
-bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $umi_threshold $fastq
+# EXP=XZ90
+# genome=hg19
+# mode=SE
+# cutsite=CATG
+# umi_threshold=1
+# fastq=/media/bicroserver_2-seq/BICRO57/FASTQ/"$EXP"*/"$EXP".fastq.gz
+# bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $umi_threshold $fastq
 
 ###########################################################################
 # EXP=XZ68

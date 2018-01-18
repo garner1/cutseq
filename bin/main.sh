@@ -55,39 +55,28 @@ do
 
     count=$(samtools view -S "$out"/"$barcode".sam | head -1 | wc -l)
     if [ $count -ne 0 ]; then 
-	# if [ "$mode" == "PE" ]
-	# then
-	#     samtools view -h -f 0x0040 -q $quality "$out"/"$barcode".sam > "$out"/"$barcode".bam # only keep first mate in pair and filter wrt quality
-	# fi
 	# if [ "$mode" == "SE" ]
 	# then
 	#     samtools view -h -Sb -q $quality "$out"/"$barcode".sam > "$out"/"$barcode".bam # only keep first mate in pair and filter wrt quality
 	#     samtools sort "$out"/"$barcode".bam -o "$out"/"$barcode".sorted.bam
 	#     samtools index "$out"/"$barcode".sorted.bam
 	# fi
-	# umi_tools dedup -I "$out"/"$barcode".sorted.bam -S "$out"/deduplicated.bam --edit-distance-threshold 2 -L "$out"/group.log
+
+	umi_tools dedup -I "$out"/"$barcode".sorted.bam -S "$out"/deduplicated.bam --edit-distance-threshold 2 -L "$out"/group.log # first dedup of reads not at cutsite
 
     	echo "Filter UMIs ..."
 	bedtools bamtobed -i "$out"/deduplicated.bam | sort --parallel=8 --temporary-directory=$HOME/tmp -k1,1 -k2,2n > "$aux"/myfile_"$barcode" # convert bam2bed sorted wrt to chr and start
 	if [ -s "$aux"/myfile_"$barcode" ]; then # check if file is not empty
-	    bedtools closest -a "$aux"/myfile_"$barcode" -b ~/Work/pipelines/data/"$cutsite".bed -d > $out/loc-tag-qscore-strand-cutsite-dist.bed
-	    
-	    # | LC_ALL=C sort --parallel=8 --temporary-directory=$HOME/tmp -k4,4 | sed 's/\/1//' > "$aux"/output_"$barcode" # find the closest cutsite 	    	    
-	    # samtools view "$out"/withUMI.bam | LC_ALL=C sort --parallel=8 --temporary-directory=$HOME/tmp -k1,1 | # select first mate of pairs
-	    # LC_ALL=C join -1 1 -2 4 - "$aux"/output_"$barcode"| # join WRT to read ID
-	    # tr " " "\t" | awk '{FS=OFS="\t";print $(NF-8),$(NF-7)+1,$(NF-6)+1,$(NF-4),$(NF-5),$(NF-9),$1,$(NF-3),$(NF-2),$(NF-1),$NF}' > "$out"/read_strand_qScore_UMI_ID_cutsite_dist__"$barcode".bed
-	    
-	    # cut -f-4,6 "$out"/read_strand_qScore_UMI_ID_cutsite_dist__"$barcode".bed | 
-	    # datamash -s -g 1,2,3,4,5 count 1,2,3,4,5 | cut -f-6 > "$out"/read_strand_UMI_PCRcount__"$barcode".bed
+	    bedtools closest -a "$aux"/myfile_"$barcode" -b ~/Work/pipelines/data/"$cutsite".bed -d | awk '$10==0' > $aux/loc-tag-qscore-strand-cutsite-dist.bed # group reads at cutsites
 
-	    # rm -f chr*
-	    # cat "$out"/read_strand_UMI_PCRcount__"$barcode".bed | grep -v "^\." | awk '{print >> $1; close($1)}' -  # split file according to chromosome
+	    bedtools bedtobam -i $aux/loc-tag-qscore-strand-cutsite-dist.bed -g $HOME/igv/genomes/$genome.bedtools.genome > $aux/temporary.bam # crate bam file from bed at cutsites
+	    samtools index "$aux"/temporary.bam # index bam file
 
-    	    # chr_list=$(cut -f1 "$out"/read_strand_UMI_PCRcount__"$barcode".bed | grep -v "_\|^\." | LC_ALL=C sort -u)
-	    # parallel "python $PWD/module/umi_filtering.py $PWD/{} $umi_missmatch {} {}_out.bed" ::: $(echo $chr_list)
-    	    # cat chr*_out.bed | tr -d "," | tr -d "'" | tr -d "[" | tr -d "]" | tr " " "\t" | grep -v "_" | 
-	    # LC_ALL=C sort --parallel=8 --temporary-directory=$HOME/tmp -k1.4n -k2,2n > "$out"/read_strand_UMI_PCRcount__"$barcode".bed
-	    # rm -f chr*
+	    umi_tools dedup -I "$aux"/temporary.bam -S "$aux"/temporary.deduplicated.bam --edit-distance-threshold 2 -L "$aux"/group.log # deduplicate the bam file with reads grouped at cutsites
+	    samtools view "$aux"/temporary.deduplicated.bam | cut -f1 | LC_ALL=C sort -u > $aux/tag2keep # list of tags of reads to keep
+	    LC_ALL=C sort -k4,4 -o $aux/loc-tag-qscore-strand-cutsite-dist.bed $aux/loc-tag-qscore-strand-cutsite-dist.bed
+	    LC_ALL=C join -1 1 -2 4 $aux/tag2keep $aux/loc-tag-qscore-strand-cutsite-dist.bed | tr ' ' '\t' | cut -f-6 | LC_ALL=C sort -u > $out/tag-loc-qscore-strand.bed 
+	    # IN THE LAST FILE THE SAME TAG COULD HAVE DIFFERENT LOCATIONS BECAUSE THE ALIGNMENT IS NOT UNIQUE
 
 	    # cat "$out"/read_strand_UMI_PCRcount__"$barcode".bed | datamash -s -g 1,2,3,4 count 1,2,3,4 | cut -f-5 > "$out"/read_strand_CELLcount__"$barcode".bed
 	    

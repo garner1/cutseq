@@ -63,7 +63,7 @@ do
     	echo "Filter UMIs ..."
 	bedtools bamtobed -i "$aux"/deduplicated.bam | sort --parallel=8 --temporary-directory=$HOME/tmp -k1,1 -k2,2n > "$aux"/myfile_"$barcode" # convert bam2bed sorted wrt to chr and start
 	if [ -s "$aux"/myfile_"$barcode" ]; then # check if file is not empty
-	    bedtools closest -a "$aux"/myfile_"$barcode" -b ~/Work/pipelines/data/"$cutsite".bed -d | awk '$10==0' > $aux/loc-tag-qscore-strand-cutsite-dist.bed # group reads at cutsites
+	    bedtools closest -a "$aux"/myfile_"$barcode" -b ~/Work/pipelines/data/"$cutsite".bed -d | awk '$10==0' > $aux/loc-tag-qscore-strand-cutsite-dist.bed # group reads at cutsites and filter only those s.t. the cutsite is included inside the mapped region
 
 	    bedtools bedtobam -i $aux/loc-tag-qscore-strand-cutsite-dist.bed -g $HOME/igv/genomes/$genome.bedtools.genome > $aux/temporary.bam # create bam file from bed at cutsites
 	    samtools index "$aux"/temporary.bam # index bam file

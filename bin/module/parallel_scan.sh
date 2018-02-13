@@ -15,9 +15,7 @@ echo "Process the fastq file ..."
 
 echo "Unzip the raw data file ..."
 
-# !!!!IF R1/2.FQ NOT ALREADY PRESENT!!!!
-
-if [ "$mode" == "SE" ]; then
+if [ ! -f "$in"/processed.fastq.gz ]; then
     umi_tools extract --stdin="$r1" --bc-pattern=NNNNNNNNXXXXXXXX --log=processed.log --stdout "$in"/processed.fastq.gz # Ns represent the random part of the barcode and Xs the fixed part
     gunzip -c "$in"/processed.fastq.gz > "$in"/r1.fq
     cat $in/r1.fq | paste - - - - | LC_ALL=C sort --parallel=8 --temporary-directory=$HOME/tmp -k1,1 > $in/r1oneline.fq & pid1=$!
@@ -31,7 +29,7 @@ fi
 echo "Generate patfiles for each barcode ..."
 
 len=`echo $cutsite|awk '{print length}'`
-cat $barcode_file | awk -v len="$len" '{print "^ ",substr($1,1,8)"[1,0,0]",substr($1,9,len)"[1,0,0]","1...1000","$" > "barcode_"substr($1,1,8)}'
+cat $barcode_file | awk -v len="$len" '{print "^ ",substr($1,1,8)"[1,0,0]",substr($1,9,len)"[1,0,0]","1...1000","$" > "barcode_"substr($1,1,8)}' # IT IS BETTER TO WRITE FINAL BC IN DATA DIR
 
 ################################################################################
 
@@ -44,7 +42,7 @@ cd $olddir
 echo "Scan for barcodes ..."
 rm -f $in/barcode_*.fa
 for file in $(ls $in/xa?); do
-    parallel "cat $file |tr '\t' '\n' | LC_ALL=C scan_for_matches {} - >> $in/{}.fa" ::: $(ls barcode_*)
+    parallel "cat $file |tr '\t' '\n' | LC_ALL=C scan_for_matches {} - >> $in/{}.fa" ::: $(ls barcode_*) # note that the parallel writing is wrt barcodes, one chunck at the time, so no problem in overwriting
 done
 rm -f barcode_* $in/xa?
 

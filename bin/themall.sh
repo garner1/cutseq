@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
 
-EXP=test
-genome=hg19
-mode=SE
-cutsite=CATG
-umi_threshold=1
-fastq=/home/garner1/Work/dataset/reduced_sequencing/test.fastq.gz
-bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_XZ82 $cutsite $umi_threshold $fastq
+# EXP=test
+# genome=hg19
+# mode=SE
+# cutsite=CATG
+# umi_threshold=1
+# fastq=/home/garner1/Work/dataset/reduced_sequencing/test.fastq.gz
+# bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_XZ82 $cutsite $umi_threshold $fastq
+
 ################################################################################
 # EXP=XZ82
 # genome=hg19
@@ -87,7 +88,7 @@ bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_XZ82 $cutsite $umi_th
 # cutsite=AAGCTT
 # umi_threshold=1
 # fastq=/media/bicroserver_2-seq/BICRO56/FASTQ/"$EXP"*/"$EXP"_R1.fastq.gz
-# bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $umi_threshold $fastq
+# bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $umi_threshold $fastq & pid1=$!
 
 # EXP=XZ71
 # genome=hg19
@@ -95,7 +96,7 @@ bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_XZ82 $cutsite $umi_th
 # cutsite=AAGCTT
 # umi_threshold=1
 # fastq=/media/bicroserver_2-seq/BICRO56/FASTQ/"$EXP"*/"$EXP"_R1.fastq.gz
-# bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $umi_threshold $fastq
+# bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $umi_threshold $fastq & pid2=$!
 
 # EXP=XZ72
 # genome=hg19
@@ -103,7 +104,7 @@ bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_XZ82 $cutsite $umi_th
 # cutsite=AAGCTT
 # umi_threshold=1
 # fastq=/media/bicroserver_2-seq/BICRO56/FASTQ/"$EXP"*/"$EXP"_R1.fastq.gz
-# bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $umi_threshold $fastq
+# bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $umi_threshold $fastq & pid3=$! 
 
 # EXP=XZ74
 # genome=hg19
@@ -111,7 +112,12 @@ bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_XZ82 $cutsite $umi_th
 # cutsite=CATG
 # umi_threshold=1
 # fastq=/media/bicroserver_2-seq/BICRO56/FASTQ/"$EXP"*/"$EXP"_R1.fastq.gz
-# bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $umi_threshold $fastq
+# bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $umi_threshold $fastq & pid4=$!
+
+# wait $pid1
+# wait $pid2
+# wait $pid3
+# wait $pid4
 
 # EXP=XZ75
 # genome=hg19
@@ -119,7 +125,7 @@ bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_XZ82 $cutsite $umi_th
 # cutsite=CATG
 # umi_threshold=1
 # fastq=/media/bicroserver_2-seq/BICRO56/FASTQ/"$EXP"*/"$EXP"_R1.fastq.gz
-# bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $umi_threshold $fastq
+# bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $umi_threshold $fastq & pid1=$!
 
 # EXP=XZ76
 # genome=hg19
@@ -127,7 +133,7 @@ bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_XZ82 $cutsite $umi_th
 # cutsite=CATG
 # umi_threshold=1
 # fastq=/media/bicroserver_2-seq/BICRO56/FASTQ/"$EXP"*/"$EXP"_R1.fastq.gz
-# bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $umi_threshold $fastq
+# bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $umi_threshold $fastq & pid2=$!
 
 # EXP=XZ77
 # genome=hg19
@@ -135,7 +141,7 @@ bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_XZ82 $cutsite $umi_th
 # cutsite=CATG
 # umi_threshold=1
 # fastq=/media/bicroserver_2-seq/BICRO56/FASTQ/"$EXP"*/"$EXP"_R1.fastq.gz
-# bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $umi_threshold $fastq
+# bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $umi_threshold $fastq & pid3=$!
 
 # EXP=XZ78
 # genome=hg19
@@ -143,7 +149,12 @@ bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_XZ82 $cutsite $umi_th
 # cutsite=CATG
 # umi_threshold=1
 # fastq=/media/bicroserver_2-seq/BICRO56/FASTQ/"$EXP"*/"$EXP"_R1.fastq.gz
-# bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $umi_threshold $fastq
+# bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $umi_threshold $fastq & pid4=$!
+
+# wait $pid1
+# wait $pid2
+# wait $pid3
+# wait $pid4
 
 ########################################################################################
 # pattern=/home/garner1/Work/pipelines/restseq/pattern

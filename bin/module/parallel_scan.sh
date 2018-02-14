@@ -44,7 +44,7 @@ rm -f $in/barcode_*.fa
 for file in $(ls $in/xa?); do
     parallel "cat $file |tr '\t' '\n' | LC_ALL=C scan_for_matches {} - >> $in/{}.fa" ::: $(ls barcode_*) # note that the parallel writing is wrt barcodes, one chunck at the time, so no problem in overwriting
 done
-rm -f barcode_* $in/xa?
+rm -f $in/xa?
 
 echo "Generate the barcoded FQ files ..."
 parallel -k "cat {}|paste - -|awk '{print \$1\$(NF-1)\$NF}'|tr ']>' '\n@'|cut -d':' -f-7|paste - - | LC_ALL=C sort --parallel=8 --temporary-directory=$HOME/tmp -k1,1 > {.}.fa-1line" ::: $(ls $in/barcode_*.fa)

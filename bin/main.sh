@@ -26,7 +26,7 @@ echo
 echo Processing $experiment
 ################################################################################
 
-# ~/Work/pipelines/restseq/binDev/module/quality_control.sh $r1 $numbproc $out
+bash ./module/quality_control.sh $r1 $numbproc $out
 
 ################################################################################
 
@@ -80,6 +80,8 @@ do
     	fi
     fi
 done
+
+rm barcode_*
 
 # rm -fr "$in"/barcode_* "$out"/*.{sam,bam} "$aux"/* 	# !!!clean outdata and auxdata directories!!!!
 

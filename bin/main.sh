@@ -26,7 +26,7 @@ echo
 echo Processing $experiment
 ################################################################################
 
-bash ./module/quality_control.sh $r1 $numbproc $out
+# bash ./module/quality_control.sh $r1 $numbproc $out
 
 ################################################################################
 
@@ -59,12 +59,14 @@ do
 	fi
 
 	umi_tools dedup -I "$aux"/"$barcode".sorted.bam -S "$aux"/deduplicated.bam --edit-distance-threshold 2 -L "$aux"/group.log # first dedup of reads not at cutsite
+	mv "$aux"/"$barcode".sorted.bam "$out"/"$barcode".sorted.bam
 
     	echo "Filter UMIs ..."
 	bedtools bamtobed -i "$aux"/deduplicated.bam | sort --parallel=8 --temporary-directory=$HOME/tmp -k1,1 -k2,2n > "$aux"/myfile_"$barcode" # convert bam2bed sorted wrt to chr and start
 	if [ -s "$aux"/myfile_"$barcode" ]; then # check if file is not empty
 	    bedtools closest -a "$aux"/myfile_"$barcode" -b ~/Work/pipelines/data/"$cutsite".bed -d | # find the closest cutsite
 	    awk '$10==0' |  awk '{if (($6=="-" && $9-$3==0) || ($6=="+" && $8-$2==1)) print}' > $aux/loc-tag-qscore-strand-cutsite-dist.bed # group reads at cutsites and filter only those s.t. the cutsite is included inside the mapped region
+	    mv "$aux"/myfile_"$barcode" "$out"/myfile_"$barcode"
 	    mv $aux/loc-tag-qscore-strand-cutsite-dist.bed $aux/oldloc-tag-qscore-strand-cutsite-dist.bed
 	    cat $aux/oldloc-tag-qscore-strand-cutsite-dist.bed | awk '{OFS="\t";$2=$8;$3=$9;print $0 }' > $aux/loc-tag-qscore-strand-cutsite-dist.bed
 

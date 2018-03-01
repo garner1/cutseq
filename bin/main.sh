@@ -4,13 +4,12 @@
 # clear
 # DEFINING VARIABLES
 experiment=$1	     # XZ82
-genome=$2	     # hg19
+genome=$2	     # Homo
 mode=$3		     # PE or SE
 barcode_file=$4	     # ~/Work/pipelines/restseq/pattern/barcode-cutsite_18
 cutsite=$5	     # the restriction cutsite
-umi_missmatch=$6     # threshold on the UMI mismatch for filtering
-r1=$7		     # full path to r1 fastq.gz file
-r2=$8	             # full path to r2 fastq.gz file
+r1=$6		     # full path to r1 fastq.gz file
+r2=$7	             # full path to r2 fastq.gz file
 numbproc=32
 quality=30	     # filter out read with mapping quality less than this
 ################################################################################
@@ -20,7 +19,7 @@ datadir=$HOME/Work/dataset/reduced_sequencing && mkdir -p $datadir/$experiment
 in="$datadir"/"$experiment"/indata && mkdir -p $in
 out="$datadir"/"$experiment"/outdata && mkdir -p $out
 aux="$datadir"/"$experiment"/auxdata && mkdir -p $aux
-refgen=$HOME/igv/genomes/$genome.fasta # full path to reference genome
+refgen=$HOME/Work/genomes/$genome*.fa.gz # full path to reference genome
 
 echo
 echo Processing $experiment
@@ -70,7 +69,7 @@ do
 	    mv $aux/loc-tag-qscore-strand-cutsite-dist.bed $aux/oldloc-tag-qscore-strand-cutsite-dist.bed
 	    cat $aux/oldloc-tag-qscore-strand-cutsite-dist.bed | awk '{OFS="\t";$2=$8;$3=$9;print $0 }' > $aux/loc-tag-qscore-strand-cutsite-dist.bed
 
-	    bedtools bedtobam -i $aux/loc-tag-qscore-strand-cutsite-dist.bed -g $HOME/igv/genomes/$genome.bedtools.genome > $aux/temporary.bam # create bam file from bed at cutsites
+	    bedtools bedtobam -i $aux/loc-tag-qscore-strand-cutsite-dist.bed -g $HOME/Work/genomes/$genome.bedtools.genome > $aux/temporary.bam # create bam file from bed at cutsites
 	    samtools sort "$aux"/temporary.bam -o "$aux"/temporary.bam
 	    samtools index "$aux"/temporary.bam # index bam file
 
@@ -84,11 +83,11 @@ do
 done
 
 rm barcode_*
+##############################################################
+# # rm -fr "$in"/barcode_* "$out"/*.{sam,bam} "$aux"/* 	# !!!clean outdata and auxdata directories!!!!
 
-# rm -fr "$in"/barcode_* "$out"/*.{sam,bam} "$aux"/* 	# !!!clean outdata and auxdata directories!!!!
-
-# samfile="$out"/"$barcode".sam
-# uniqueReads="$out"/read_strand_UMI_PCRcount__"$barcode".bed
-# uniqueLocations="$out"/read_strand_CELLcount__"$barcode".bed
-# bash ./module/make_summary.sh $datadir $experiment $barcode $samfile $uniqueReads $uniqueLocations 
+# # samfile="$out"/"$barcode".sam
+# # uniqueReads="$out"/read_strand_UMI_PCRcount__"$barcode".bed
+# # uniqueLocations="$out"/read_strand_CELLcount__"$barcode".bed
+# # bash ./module/make_summary.sh $datadir $experiment $barcode $samfile $uniqueReads $uniqueLocations 
  

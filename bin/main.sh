@@ -82,7 +82,6 @@ do
     fi
 done
 
-rm barcode_*
 ##############################################################
 # # rm -fr "$in"/barcode_* "$out"/*.{sam,bam} "$aux"/* 	# !!!clean outdata and auxdata directories!!!!
 

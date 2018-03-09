@@ -9,3 +9,5 @@ parallel "umi_tools dedup -I temporary_{}.bam -S {}_merged.deduplicated.bam --ed
 parallel "umi_tools dedup -I temporary_{}.bam -S {}_merged.deduplicated.bam --edit-distance-threshold 2 -L {}_group.log" ::: 76
 parallel "umi_tools dedup -I temporary_{}.bam -S {}_merged.deduplicated.bam --edit-distance-threshold 2 -L {}_group.log" ::: 77
 parallel "umi_tools dedup -I temporary_{}.bam -S {}_merged.deduplicated.bam --edit-distance-threshold 2 -L {}_group.log" ::: 78
+
+parallel "bedtools bamtobed -i {}_merged.deduplicated.bam > XZ{}_merged.bed" ::: 74 75 76 77 78

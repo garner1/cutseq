@@ -4,7 +4,7 @@
 # clear
 # DEFINING VARIABLES
 experiment=$1	     # XZ82
-genome=$2	     # Homo
+genome=$2	     # human
 mode=$3		     # PE or SE
 barcode_file=$4	     # ~/Work/pipelines/restseq/pattern/barcode-cutsite_18
 cutsite=$5	     # the restriction cutsite
@@ -19,7 +19,7 @@ datadir=$HOME/Work/dataset/reduced_sequencing && mkdir -p $datadir/$experiment
 in="$datadir"/"$experiment"/indata && mkdir -p $in
 out="$datadir"/"$experiment"/outdata && mkdir -p $out
 aux="$datadir"/"$experiment"/auxdata && mkdir -p $aux
-refgen=$HOME/Work/genomes/$genome*.fa.gz # full path to reference genome
+refgen=~/Work/genomes/Homo_sapiens.GRCh37.dna.primary_assembly.fa/GRCh37.fa # full path to reference genome
 
 echo
 echo Processing $experiment

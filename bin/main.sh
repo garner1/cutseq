@@ -23,6 +23,7 @@ refgen=$HOME/Work/genomes/$genome*.fa.gz # full path to reference genome
 
 echo
 echo Processing $experiment
+
 ################################################################################
 
 # bash ./module/quality_control.sh $r1 $numbproc $out
@@ -67,9 +68,9 @@ do
 	    awk '$10==0' |  awk '{if (($6=="-" && $9-$3==0) || ($6=="+" && $8-$2==1)) print}' > $aux/loc-tag-qscore-strand-cutsite-dist.bed # group reads at cutsites and filter only those s.t. the cutsite is included inside the mapped region
 	    mv "$aux"/myfile_"$barcode" "$out"/myfile_"$barcode"
 	    mv $aux/loc-tag-qscore-strand-cutsite-dist.bed $aux/oldloc-tag-qscore-strand-cutsite-dist.bed
-	    cat $aux/oldloc-tag-qscore-strand-cutsite-dist.bed | awk '{OFS="\t";$2=$8;$3=$9;print $0 }' > $aux/loc-tag-qscore-strand-cutsite-dist.bed
+	    cat $aux/oldloc-tag-qscore-strand-cutsite-dist.bed | awk '{OFS="\t";$1="chr"$1;$2=$8;$3=$9;print $0 }' > $aux/loc-tag-qscore-strand-cutsite-dist.bed
 
-	    bedtools bedtobam -i $aux/loc-tag-qscore-strand-cutsite-dist.bed -g $HOME/Work/genomes/$genome.bedtools.genome > $aux/temporary.bam # create bam file from bed at cutsites
+	    bedtools bedtobam -i $aux/loc-tag-qscore-strand-cutsite-dist.bed -g $HOME/Work/genomes/"$genome".bedtools.genome > $aux/temporary.bam # create bam file from bed at cutsites
 	    samtools sort "$aux"/temporary.bam -o "$aux"/temporary.bam
 	    samtools index "$aux"/temporary.bam # index bam file
 

@@ -23,7 +23,7 @@ refgen=~/Work/genomes/Homo_sapiens.GRCh37.dna.primary_assembly.fa/GRCh37.fa # fu
 
 echo
 echo Processing $experiment
-
+rm -f barcode_*
 ################################################################################
 
 # bash ./module/quality_control.sh $r1 $numbproc $out
@@ -82,6 +82,7 @@ do
     	fi
     fi
 done
+rm -f barcode_*
 
 ##############################################################
 # # rm -fr "$in"/barcode_* "$out"/*.{sam,bam} "$aux"/* 	# !!!clean outdata and auxdata directories!!!!

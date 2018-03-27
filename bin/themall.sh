@@ -1,39 +1,39 @@
 #!/usr/bin/env bash
 
-EXP=XZ68
-genome=human
-mode=SE
-cutsite=AAGCTT
-fastq=/media/bicroserver_2-seq/BICRO56/FASTQ/"$EXP"*/"$EXP"_R1.fastq.gz
-bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $fastq
+# EXP=XZ68
+# genome=human
+# mode=SE
+# cutsite=AAGCTT
+# fastq=/media/bicroserver_2-seq/BICRO56/FASTQ/"$EXP"*/"$EXP"_R1.fastq.gz
+# bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $fastq
 
-EXP=XZ69
-genome=human
-mode=SE
-cutsite=AAGCTT
-fastq=/media/bicroserver_2-seq/BICRO56/FASTQ/"$EXP"*/"$EXP"_R1.fastq.gz
-bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $fastq
+# EXP=XZ69
+# genome=human
+# mode=SE
+# cutsite=AAGCTT
+# fastq=/media/bicroserver_2-seq/BICRO56/FASTQ/"$EXP"*/"$EXP"_R1.fastq.gz
+# bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $fastq
 
-EXP=XZ70
-genome=human
-mode=SE
-cutsite=AAGCTT
-fastq=/media/bicroserver_2-seq/BICRO56/FASTQ/"$EXP"*/"$EXP"_R1.fastq.gz
-bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $fastq
+# EXP=XZ70
+# genome=human
+# mode=SE
+# cutsite=AAGCTT
+# fastq=/media/bicroserver_2-seq/BICRO56/FASTQ/"$EXP"*/"$EXP"_R1.fastq.gz
+# bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $fastq
 
-EXP=XZ71
-genome=human
-mode=SE
-cutsite=AAGCTT
-fastq=/media/bicroserver_2-seq/BICRO56/FASTQ/"$EXP"*/"$EXP"_R1.fastq.gz
-bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $fastq
+# EXP=XZ71
+# genome=human
+# mode=SE
+# cutsite=AAGCTT
+# fastq=/media/bicroserver_2-seq/BICRO56/FASTQ/"$EXP"*/"$EXP"_R1.fastq.gz
+# bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $fastq
 
-EXP=XZ72
-genome=human
-mode=SE
-cutsite=AAGCTT
-fastq=/media/bicroserver_2-seq/BICRO56/FASTQ/"$EXP"*/"$EXP"_R1.fastq.gz
-bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $fastq
+# EXP=XZ72
+# genome=human
+# mode=SE
+# cutsite=AAGCTT
+# fastq=/media/bicroserver_2-seq/BICRO56/FASTQ/"$EXP"*/"$EXP"_R1.fastq.gz
+# bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $fastq
 
 # EXP=XZ64
 # genome=human
@@ -42,40 +42,40 @@ bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $fast
 # fastq=/media/bicroserver_2-seq/BICRO50/FASTQ/XZ64_S2_LALL_R1_001.fastq.gz
 # bash main.sh $EXP $genome $mode ../pattern/TOBEDONE! $cutsite $fastq 
 
-EXP=XZ74
-genome=human
-mode=SE
-cutsite=CATG
-fastq=/home/garner1/Work/dataset/reduced_sequencing/"$EXP".fastq.gz
-bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $fastq
+# EXP=XZ74
+# genome=human
+# mode=SE
+# cutsite=CATG
+# fastq=/home/garner1/Work/dataset/reduced_sequencing/"$EXP".fastq.gz
+# bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $fastq
 
-EXP=XZ75
-genome=human
-mode=SE
-cutsite=CATG
-fastq=/home/garner1/Work/dataset/reduced_sequencing/"$EXP".fastq.gz
-bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $fastq
+# EXP=XZ75
+# genome=human
+# mode=SE
+# cutsite=CATG
+# fastq=/home/garner1/Work/dataset/reduced_sequencing/"$EXP".fastq.gz
+# bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $fastq
 
-EXP=XZ76
-genome=human
-mode=SE
-cutsite=CATG
-fastq=/home/garner1/Work/dataset/reduced_sequencing/"$EXP".fastq.gz
-bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $fastq
+# EXP=XZ76
+# genome=human
+# mode=SE
+# cutsite=CATG
+# fastq=/home/garner1/Work/dataset/reduced_sequencing/"$EXP".fastq.gz
+# bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $fastq
 
-EXP=XZ77
-genome=human
-mode=SE
-cutsite=CATG
-fastq=/home/garner1/Work/dataset/reduced_sequencing/"$EXP".fastq.gz
-bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $fastq
+# EXP=XZ77
+# genome=human
+# mode=SE
+# cutsite=CATG
+# fastq=/home/garner1/Work/dataset/reduced_sequencing/"$EXP".fastq.gz
+# bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $fastq
 
-EXP=XZ78
-genome=human
-mode=SE
-cutsite=CATG
-fastq=/home/garner1/Work/dataset/reduced_sequencing/"$EXP".fastq.gz
-bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $fastq 
+# EXP=XZ78
+# genome=human
+# mode=SE
+# cutsite=CATG
+# fastq=/home/garner1/Work/dataset/reduced_sequencing/"$EXP".fastq.gz
+# bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $fastq 
 
 EXP=XZ33
 genome=human
@@ -88,43 +88,50 @@ EXP=XZ37
 genome=human
 mode=SE
 cutsite=AAGCTT
-fastq=/media/bicroserver-seq/BICRO36/fastq/"$EXP".fastq.gz
-bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $fastq
-
-EXP=XZ31
-genome=human
-mode=SE
-cutsite=AAGCTT
 fastq=/home/garner1/Work/dataset/reduced_sequencing/"$EXP".fastq.gz
-bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $fastq
+time bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $fastq
 
-EXP=XZ38
-genome=human
-mode=SE
-cutsite=AAGCTT
-fastq=/media/bicroserver_2-seq/BICRO50/FASTQ/XZ38_S2_LALL_R1_001.fastq.gz
-bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $fastq
+# EXP=XZ31
+# genome=human
+# mode=SE
+# cutsite=AAGCTT
+# fastq=/home/garner1/Work/dataset/reduced_sequencing/"$EXP".fastq.gz
+# bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $fastq
 
-EXP=XZ43
-genome=human
-mode=SE
-cutsite=AAGCTT
-fastq=/media/bicroserver-seq/BICRO43/fastq/XZ43_S1_R1_001.fastq.gz
-bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $fastq
+# EXP=XZ38
+# genome=human
+# mode=SE
+# cutsite=AAGCTT
+# fastq=/media/bicroserver_2-seq/BICRO50/FASTQ/XZ38_S2_LALL_R1_001.fastq.gz
+# bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $fastq
 
-EXP=XZ45
-genome=human
-mode=SE
-cutsite=AAGCTT
-fastq=/home/garner1/Work/dataset/reduced_sequencing/"$EXP".fastq.gz
-bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $fastq
+# EXP=XZ43
+# genome=human
+# mode=SE
+# cutsite=AAGCTT
+# fastq=/media/bicroserver-seq/BICRO43/fastq/XZ43_S1_R1_001.fastq.gz
+# bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $fastq
 
-EXP=XZ63
-genome=human
-mode=SE
-cutsite=AAGCTT
-fastq=/media/bicroserver_2-seq/BICRO48/FASTQ/XZ63_S2_LALL_R1_001.fastq.gz
-bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $fastq 
+# EXP=XZ45
+# genome=human
+# mode=SE
+# cutsite=AAGCTT
+# fastq=/home/garner1/Work/dataset/reduced_sequencing/"$EXP".fastq.gz
+# bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $fastq
+
+# EXP=XZ63
+# genome=human
+# mode=SE
+# cutsite=AAGCTT
+# fastq=/media/bicroserver_2-seq/BICRO48/FASTQ/XZ63_S2_LALL_R1_001.fastq.gz
+# bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $fastq 
+
+# EXP=XZ64
+# genome=human
+# mode=SE
+# cutsite=CATG
+# fastq=/media/bicroserver_2-seq/BICRO50/FASTQ/XZ64_S2_LALL_R1_001.fastq.gz
+# bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $fastq 
 
 ##############################################
 # EXP=XZ31

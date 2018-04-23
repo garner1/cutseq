@@ -62,7 +62,6 @@ do
 	mv "$aux"/"$barcode".sorted.bam "$out"/"$barcode".sorted.bam
 
     	echo "Filter UMIs ..."
-	# bedtools bamtobed -i "$aux"/deduplicated.bam | sort --parallel=8 --temporary-directory=$HOME/tmp -k1,1 -k2,2n > "$aux"/myfile_"$barcode" # convert bam2bed sorted wrt to chr and start
 	bam2bed < "$aux"/deduplicated.bam | cut -f-17 > "$out"/myfile_"$barcode" # convert bam2bed sorted wrt to chr and start
 	if [ -s "$out"/myfile_"$barcode" ]; then # check if file is not empty
 	    bedtools closest -a "$out"/myfile_"$barcode" -b ~/Work/pipelines/data/"$cutsite".bed -d | # find the closest cutsite

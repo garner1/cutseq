@@ -1,5 +1,14 @@
 #!/usr/bin/env bash
 
+
+EXP=test
+genome=human
+mode=SE
+cutsite=CATG
+fastq=/home/garner1/Work/dataset/reduced_sequencing/test.fastq.gz
+bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_XZ114 $cutsite $fastq
+
+###################################################
 # EXP=XZ68
 # genome=human
 # mode=SE
@@ -98,12 +107,12 @@
 # fastq=/home/garner1/Work/dataset/reduced_sequencing/"$EXP".fastq.gz
 # bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $fastq
 
-EXP=XZ38
-genome=human
-mode=SE
-cutsite=AAGCTT
-fastq=/home/garner1/Work/dataset/reduced_sequencing/"$EXP".fastq.gz
-bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $fastq
+# EXP=XZ38
+# genome=human
+# mode=SE
+# cutsite=AAGCTT
+# fastq=/home/garner1/Work/dataset/reduced_sequencing/"$EXP".fastq.gz
+# bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_"$EXP" $cutsite $fastq
 
 # EXP=XZ43
 # genome=human

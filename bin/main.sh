@@ -62,33 +62,22 @@ do
 	mv "$aux"/"$barcode".sorted.bam "$out"/"$barcode".sorted.bam
 
     	echo "Filter UMIs ..."
-	bedtools bamtobed -i "$aux"/deduplicated.bam | sort --parallel=8 --temporary-directory=$HOME/tmp -k1,1 -k2,2n > "$aux"/myfile_"$barcode" # convert bam2bed sorted wrt to chr and start
-	if [ -s "$aux"/myfile_"$barcode" ]; then # check if file is not empty
-	    bedtools closest -a "$aux"/myfile_"$barcode" -b ~/Work/pipelines/data/"$cutsite".bed -d | # find the closest cutsite
-	    awk '$10==0' |  awk '{if (($6=="-" && $9-$3==0) || ($6=="+" && $8-$2==1)) print}' > $aux/loc-tag-qscore-strand-cutsite-dist.bed # group reads at cutsites and filter only those s.t. the cutsite is included inside the mapped region
-	    mv "$aux"/myfile_"$barcode" "$out"/myfile_"$barcode"
-	    mv $aux/loc-tag-qscore-strand-cutsite-dist.bed $aux/oldloc-tag-qscore-strand-cutsite-dist.bed
-	    cat $aux/oldloc-tag-qscore-strand-cutsite-dist.bed | awk '{OFS="\t";$1="chr"$1;$2=$8;$3=$9;print $0 }' > $aux/loc-tag-qscore-strand-cutsite-dist.bed
+	# bedtools bamtobed -i "$aux"/deduplicated.bam | sort --parallel=8 --temporary-directory=$HOME/tmp -k1,1 -k2,2n > "$aux"/myfile_"$barcode" # convert bam2bed sorted wrt to chr and start
+	bam2bed < "$aux"/deduplicated.bam | cut -f-17 > "$out"/myfile_"$barcode" # convert bam2bed sorted wrt to chr and start
+	if [ -s "$out"/myfile_"$barcode" ]; then # check if file is not empty
+	    bedtools closest -a "$out"/myfile_"$barcode" -b ~/Work/pipelines/data/"$cutsite".bed -d | # find the closest cutsite
+	    awk '$NF==0' |  awk '{if (($6=="-" && $(NF-1)-$3==0) || ($6=="+" && $(NF-2)-$2==1)) print}' |
+	    cut -f-17 | awk '{OFS="\t";$1="chr"$1;print $0 }' |
+	    LC_ALL=C sort -k4,4 > $out/cutsites_hits.bed # group reads at cutsites and filter only those s.t. the cutsite is included inside the mapped region
 
-	    bedtools bedtobam -i $aux/loc-tag-qscore-strand-cutsite-dist.bed -g $HOME/Work/genomes/"$genome".bedtools.genome > $aux/temporary.bam # create bam file from bed at cutsites
+	    bedtools bedtobam -i $out/cutsites_hits.bed -g $HOME/Work/genomes/"$genome".bedtools.genome > $aux/temporary.bam # create bam file from bed at cutsites
 	    samtools sort "$aux"/temporary.bam -o "$aux"/temporary.bam
 	    samtools index "$aux"/temporary.bam # index bam file
 
 	    umi_tools dedup -I "$aux"/temporary.bam -S "$out"/"$barcode".deduplicated.bam --edit-distance-threshold 2 -L "$out"/group.log # deduplicate the bam file with reads grouped at cutsites
-	    samtools view "$out"/"$barcode".deduplicated.bam | cut -f1 | LC_ALL=C sort -u > $aux/tag2keep # list of tags of reads to keep
-	    LC_ALL=C sort -k4,4 -o $aux/loc-tag-qscore-strand-cutsite-dist.bed $aux/loc-tag-qscore-strand-cutsite-dist.bed # sort WRT tags
-	    LC_ALL=C join -1 1 -2 4 $aux/tag2keep $aux/loc-tag-qscore-strand-cutsite-dist.bed | tr ' ' '\t' | cut -f-6 | LC_ALL=C sort -u > $out/tag-loc-qscore-strand__"$barcode".bed 
-	    # IN THE LAST FILE THE SAME TAG COULD HAVE DIFFERENT LOCATIONS BECAUSE THE ALIGNMENT IS NOT UNIQUE
+	    samtools view "$out"/"$barcode".deduplicated.bam | LC_ALL=C sort -k1,1 | LC_ALL=C join -1 1 -2 4 - "$out"/cutsites_hits.bed | tr ' ' '\t' | cut -f-9,22- > "$out"/"$barcode".deduplicated.sam
+	    # # IN THE LAST FILE THE SAME TAG COULD HAVE DIFFERENT LOCATIONS BECAUSE THE ALIGNMENT IS NOT UNIQUE
     	fi
     fi
 done
 rm -f barcode_*
-
-##############################################################
-# # rm -fr "$in"/barcode_* "$out"/*.{sam,bam} "$aux"/* 	# !!!clean outdata and auxdata directories!!!!
-
-# # samfile="$out"/"$barcode".sam
-# # uniqueReads="$out"/read_strand_UMI_PCRcount__"$barcode".bed
-# # uniqueLocations="$out"/read_strand_CELLcount__"$barcode".bed
-# # bash ./module/make_summary.sh $datadir $experiment $barcode $samfile $uniqueReads $uniqueLocations 
- 

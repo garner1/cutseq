@@ -12,7 +12,6 @@ r2=$6
 echo "Process the fastq file ..."
 
 ################################################################################
-
 echo "Unzip the raw data file ..."
 
 if [ ! -f "$in"/processed.fastq.gz ]; then
@@ -23,9 +22,7 @@ if [ ! -f "$in"/processed.fastq.gz ]; then
     wait $pid1
     wait $pid2
 fi
-
 ################################################################################
-
 echo "Generate patfiles for each barcode ..."
 len=`echo $cutsite|awk '{print length}'`
 olddir=`echo $PWD`
@@ -33,7 +30,6 @@ cd $in
 cat $barcode_file | awk -v len="$len" '{print "^ ",substr($1,1,8)"[1,0,0]",substr($1,9,len)"[1,0,0]","1...1000","$" > "barcode_"substr($1,1,8)}' # IT IS BETTER TO WRITE FINAL BC IN DATA DIR
 cd $olddir
 ################################################################################
-
 echo "Split FA files to satisfy scan_for_match 100M lines limit ..."
 olddir=`echo $PWD`
 cd $in
@@ -43,7 +39,7 @@ cd $olddir
 echo "Scan for barcodes ..."
 rm -f $in/barcode_*.fa
 for file in $(ls $in/xa?); do
-    parallel "cat $file |tr '\t' '\n' | LC_ALL=C scan_for_matches {} - >> $in/{}.fa" ::: $(ls $in/barcode_????????) # note that the parallel writing is wrt barcodes, one chunck at the time, so no problem in overwriting
+    parallel "cat $file |tr '\t' '\n' | LC_ALL=C scan_for_matches {} - >> {}.fa" ::: `ls "$in"/barcode_????????`
 done
 rm -f $in/xa?
 

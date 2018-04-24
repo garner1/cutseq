@@ -10,13 +10,12 @@ barcode_file=$4	     # ~/Work/pipelines/restseq/pattern/barcode-cutsite_18
 cutsite=$5	     # the restriction cutsite
 r1=$6		     # full path to r1 fastq.gz file
 r2=$7	             # full path to r2 fastq.gz file
-numbproc=32
+numbproc=24
 quality=30	     # filter out read with mapping quality less than this
 ################################################################################
 
 # PREPARE DIRECTORY STRUCTURE
-# datadir=$HOME/Work/dataset/reduced_sequencing && mkdir -p $datadir/$experiment 
-datadir=/media/garner1/hdd
+datadir=$HOME/Work/dataset/reduced_sequencing && mkdir -p $datadir/$experiment 
 in=$datadir/$experiment/indata && mkdir -p $in
 out=$datadir/$experiment/outdata && mkdir -p $out
 aux=$datadir/$experiment/auxdata && mkdir -p $aux
@@ -24,15 +23,10 @@ refgen=~/Work/genomes/Homo_sapiens.GRCh37.dna.primary_assembly.fa/GRCh37.fa # fu
 
 echo
 echo Processing $experiment
-rm -f barcode_*
 ################################################################################
-
 # bash ./module/quality_control.sh $r1 $numbproc $out
-
 ################################################################################
-
 bash ./module/parallel_scan.sh $cutsite $in $mode $barcode_file $r1 $r2 
-
 rm -fr "$out"/* "$aux"/* 	# !!!clean outdata and auxdata directories!!!!
 
 i=0
@@ -52,33 +46,32 @@ do
 
     count=$(samtools view -S "$aux"/"$barcode".sam | head -1 | wc -l)
     if [ $count -ne 0 ]; then 
-	if [ "$mode" == "SE" ]
-	then
+	if [ "$mode" == "SE" ];	then
 	    samtools view -h -Sb -q $quality "$aux"/"$barcode".sam > "$aux"/"$barcode".bam # only keep first mate in pair and filter wrt quality
 	    samtools sort "$aux"/"$barcode".bam -o "$aux"/"$barcode".sorted.bam
 	    samtools index "$aux"/"$barcode".sorted.bam
 	fi
 
 	umi_tools dedup -I "$aux"/"$barcode".sorted.bam -S "$aux"/deduplicated.bam --edit-distance-threshold 2 -L "$aux"/group.log # first dedup of reads not at cutsite
-	mv "$aux"/"$barcode".sorted.bam "$out"/"$barcode".sorted.bam
 
     	echo "Filter UMIs ..."
-	bam2bed < "$aux"/deduplicated.bam | cut -f-17 > "$out"/myfile_"$barcode" # convert using bedops bam2bed
-	if [ -s "$out"/myfile_"$barcode" ]; then # check if file is not empty
-	    bedtools closest -a "$out"/myfile_"$barcode" -b ~/Work/pipelines/data/"$cutsite".bed -d | # find the closest cutsite
+	bam2bed < "$aux"/deduplicated.bam | cut -f-17 > "$aux"/myfile_"$barcode" # convert using bedops bam2bed
+	if [ -s "$aux"/myfile_"$barcode" ]; then # check if file is not empty
+	    bedtools closest -a "$aux"/myfile_"$barcode" -b ~/Work/pipelines/data/"$cutsite".bed -d | # find the closest cutsite
 	    awk '$NF==0' |  awk '{if (($6=="-" && $(NF-1)-$3==0) || ($6=="+" && $(NF-2)-$2==1)) print}' | # select only reads with cutsite at border
 	    cut -f-17 | awk '{OFS="\t";$1="chr"$1;print $0 }' | # limit to 17 fields and add chr to chromosome number
-	    LC_ALL=C sort -k4,4 > $out/cutsites_hits.bed 
+	    LC_ALL=C sort -k4,4 > $aux/cutsites_hits.bed 
 
-	    bedtools bedtobam -i $out/cutsites_hits.bed -g $HOME/Work/genomes/"$genome".bedtools.genome > $aux/temporary.bam # create bam file from bed at cutsites for umi_tools to dedup
+	    bedtools bedtobam -i $aux/cutsites_hits.bed -g $HOME/Work/genomes/"$genome".bedtools.genome > $aux/temporary.bam # create bam file from bed at cutsites for umi_tools to dedup
 	    samtools sort "$aux"/temporary.bam -o "$aux"/temporary.bam
 	    samtools index "$aux"/temporary.bam
 
 	    # the bam file can be used for copy number calling
 	    umi_tools dedup -I "$aux"/temporary.bam -S "$out"/"$barcode".deduplicated.bam --edit-distance-threshold 2 -L "$out"/group.log # deduplicate the bam file with reads grouped at cutsites
 	    # join bam file and bed file to add the sequence information to the location of the read:
-	    samtools view "$out"/"$barcode".deduplicated.bam | LC_ALL=C sort -k1,1 | LC_ALL=C join -1 1 -2 4 - "$out"/cutsites_hits.bed | tr ' ' '\t' | cut -f-9,22- > "$out"/"$barcode".deduplicated.sam
+	    samtools view "$out"/"$barcode".deduplicated.bam | LC_ALL=C sort -k1,1 | LC_ALL=C join -1 1 -2 4 - $aux/cutsites_hits.bed | tr ' ' '\t' | cut -f-9,22- > "$out"/"$barcode".deduplicated.sam
     	fi
     fi
 done
-# mv $datadir/$experiment /media/garner1/hdd
+rm -rf /media/garner1/hdd/$experiment
+mv -f $datadir/$experiment /media/garner1/hdd

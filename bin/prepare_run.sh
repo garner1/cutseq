@@ -17,7 +17,7 @@ while read -r line; do
     mode=SE
     cutsite=CATG
     fastq=$dir/$lib.fastq.gz
-    echo bash main.sh $lib human $mode ../pattern/barcode-cutsite_$lib $cutsite $fastq >> run_pipeline.sh
+    echo bash main.sh $lib human $mode /home/garner1/Dropbox/pipelines/reduced_sequencing/pattern/barcode-cutsite_$lib $cutsite $fastq >> run_pipeline.sh
     echo >> run_pipeline.sh
 done < $inputfile
 

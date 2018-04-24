@@ -17,20 +17,21 @@ echo "Unzip the raw data file ..."
 
 if [ ! -f "$in"/processed.fastq.gz ]; then
     umi_tools extract --stdin="$r1" --bc-pattern=NNNNNNNNXXXXXXXX --log=processed.log --stdout "$in"/processed.fastq.gz # Ns represent the random part of the barcode and Xs the fixed part
+    gunzip -c "$in"/processed.fastq.gz > "$in"/r1.fq
+    cat $in/r1.fq | paste - - - - | LC_ALL=C sort --parallel=8 --temporary-directory=$HOME/tmp -k1,1 > $in/r1oneline.fq & pid1=$!
+    cat $in/r1.fq | paste - - - - | cut -f 1,2 | sed 's/^@/>/' | tr "\t" "\n" > $in/r1.fa & pid2=$!
+    wait $pid1
+    wait $pid2
 fi
-gunzip -c "$in"/processed.fastq.gz > "$in"/r1.fq
-cat $in/r1.fq | paste - - - - | LC_ALL=C sort --parallel=8 --temporary-directory=$HOME/tmp -k1,1 > $in/r1oneline.fq & pid1=$!
-cat $in/r1.fq | paste - - - - | cut -f 1,2 | sed 's/^@/>/' | tr "\t" "\n" > $in/r1.fa & pid2=$!
-wait $pid1
-wait $pid2
 
 ################################################################################
 
 echo "Generate patfiles for each barcode ..."
-
 len=`echo $cutsite|awk '{print length}'`
+olddir=`echo $PWD`
+cd $in
 cat $barcode_file | awk -v len="$len" '{print "^ ",substr($1,1,8)"[1,0,0]",substr($1,9,len)"[1,0,0]","1...1000","$" > "barcode_"substr($1,1,8)}' # IT IS BETTER TO WRITE FINAL BC IN DATA DIR
-
+cd $olddir
 ################################################################################
 
 echo "Split FA files to satisfy scan_for_match 100M lines limit ..."
@@ -42,7 +43,7 @@ cd $olddir
 echo "Scan for barcodes ..."
 rm -f $in/barcode_*.fa
 for file in $(ls $in/xa?); do
-    parallel "cat $file |tr '\t' '\n' | LC_ALL=C scan_for_matches {} - >> $in/{}.fa" ::: $(ls barcode_*) # note that the parallel writing is wrt barcodes, one chunck at the time, so no problem in overwriting
+    parallel "cat $file |tr '\t' '\n' | LC_ALL=C scan_for_matches {} - >> $in/{}.fa" ::: $(ls $in/barcode_????????) # note that the parallel writing is wrt barcodes, one chunck at the time, so no problem in overwriting
 done
 rm -f $in/xa?
 

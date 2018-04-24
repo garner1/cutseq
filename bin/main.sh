@@ -15,10 +15,11 @@ quality=30	     # filter out read with mapping quality less than this
 ################################################################################
 
 # PREPARE DIRECTORY STRUCTURE
-datadir=$HOME/Work/dataset/reduced_sequencing && mkdir -p $datadir/$experiment 
-in="$datadir"/"$experiment"/indata && mkdir -p $in
-out="$datadir"/"$experiment"/outdata && mkdir -p $out
-aux="$datadir"/"$experiment"/auxdata && mkdir -p $aux
+# datadir=$HOME/Work/dataset/reduced_sequencing && mkdir -p $datadir/$experiment 
+datadir=/media/garner1/hdd
+in=$datadir/$experiment/indata && mkdir -p $in
+out=$datadir/$experiment/outdata && mkdir -p $out
+aux=$datadir/$experiment/auxdata && mkdir -p $aux
 refgen=~/Work/genomes/Homo_sapiens.GRCh37.dna.primary_assembly.fa/GRCh37.fa # full path to reference genome
 
 echo
@@ -62,21 +63,22 @@ do
 	mv "$aux"/"$barcode".sorted.bam "$out"/"$barcode".sorted.bam
 
     	echo "Filter UMIs ..."
-	bam2bed < "$aux"/deduplicated.bam | cut -f-17 > "$out"/myfile_"$barcode" # convert bam2bed sorted wrt to chr and start
+	bam2bed < "$aux"/deduplicated.bam | cut -f-17 > "$out"/myfile_"$barcode" # convert using bedops bam2bed
 	if [ -s "$out"/myfile_"$barcode" ]; then # check if file is not empty
 	    bedtools closest -a "$out"/myfile_"$barcode" -b ~/Work/pipelines/data/"$cutsite".bed -d | # find the closest cutsite
-	    awk '$NF==0' |  awk '{if (($6=="-" && $(NF-1)-$3==0) || ($6=="+" && $(NF-2)-$2==1)) print}' |
-	    cut -f-17 | awk '{OFS="\t";$1="chr"$1;print $0 }' |
-	    LC_ALL=C sort -k4,4 > $out/cutsites_hits.bed # group reads at cutsites and filter only those s.t. the cutsite is included inside the mapped region
+	    awk '$NF==0' |  awk '{if (($6=="-" && $(NF-1)-$3==0) || ($6=="+" && $(NF-2)-$2==1)) print}' | # select only reads with cutsite at border
+	    cut -f-17 | awk '{OFS="\t";$1="chr"$1;print $0 }' | # limit to 17 fields and add chr to chromosome number
+	    LC_ALL=C sort -k4,4 > $out/cutsites_hits.bed 
 
-	    bedtools bedtobam -i $out/cutsites_hits.bed -g $HOME/Work/genomes/"$genome".bedtools.genome > $aux/temporary.bam # create bam file from bed at cutsites
+	    bedtools bedtobam -i $out/cutsites_hits.bed -g $HOME/Work/genomes/"$genome".bedtools.genome > $aux/temporary.bam # create bam file from bed at cutsites for umi_tools to dedup
 	    samtools sort "$aux"/temporary.bam -o "$aux"/temporary.bam
-	    samtools index "$aux"/temporary.bam # index bam file
+	    samtools index "$aux"/temporary.bam
 
+	    # the bam file can be used for copy number calling
 	    umi_tools dedup -I "$aux"/temporary.bam -S "$out"/"$barcode".deduplicated.bam --edit-distance-threshold 2 -L "$out"/group.log # deduplicate the bam file with reads grouped at cutsites
+	    # join bam file and bed file to add the sequence information to the location of the read:
 	    samtools view "$out"/"$barcode".deduplicated.bam | LC_ALL=C sort -k1,1 | LC_ALL=C join -1 1 -2 4 - "$out"/cutsites_hits.bed | tr ' ' '\t' | cut -f-9,22- > "$out"/"$barcode".deduplicated.sam
-	    # # IN THE LAST FILE THE SAME TAG COULD HAVE DIFFERENT LOCATIONS BECAUSE THE ALIGNMENT IS NOT UNIQUE
     	fi
     fi
 done
-rm -f barcode_*
+# mv $datadir/$experiment /media/garner1/hdd

@@ -52,26 +52,8 @@ do
 	    samtools index "$aux"/"$barcode".sorted.bam
 	fi
 
-	umi_tools dedup -I "$aux"/"$barcode".sorted.bam -S "$aux"/deduplicated.bam --edit-distance-threshold 2 -L "$aux"/group.log # first dedup of reads not at cutsite
-
     	echo "Filter UMIs ..."
-	bam2bed < "$aux"/deduplicated.bam | cut -f-17 > "$aux"/myfile_"$barcode" # convert using bedops bam2bed
-	if [ -s "$aux"/myfile_"$barcode" ]; then # check if file is not empty
-	    bedtools closest -a "$aux"/myfile_"$barcode" -b ~/Work/pipelines/data/"$cutsite".bed -d | # find the closest cutsite
-	    awk '$NF==0' |  awk '{if (($6=="-" && $(NF-1)-$3==0) || ($6=="+" && $(NF-2)-$2==1)) print}' | # select only reads with cutsite at border
-	    cut -f-17 | awk '{OFS="\t";$1="chr"$1;print $0 }' | # limit to 17 fields and add chr to chromosome number
-	    LC_ALL=C sort -k4,4 > $aux/cutsites_hits.bed 
-
-	    bedtools bedtobam -i $aux/cutsites_hits.bed -g $HOME/Work/genomes/"$genome".bedtools.genome > $aux/temporary.bam # create bam file from bed at cutsites for umi_tools to dedup
-	    samtools sort "$aux"/temporary.bam -o "$aux"/temporary.bam
-	    samtools index "$aux"/temporary.bam
-
-	    # the bam file can be used for copy number calling
-	    umi_tools dedup -I "$aux"/temporary.bam -S "$out"/"$barcode".deduplicated.bam --edit-distance-threshold 2 -L "$out"/group.log # deduplicate the bam file with reads grouped at cutsites
-	    # join bam file and bed file to add the sequence information to the location of the read:
-	    samtools view "$out"/"$barcode".deduplicated.bam | LC_ALL=C sort -k1,1 | LC_ALL=C join -1 1 -2 4 - $aux/cutsites_hits.bed | tr ' ' '\t' | cut -f-9,22- > "$out"/"$barcode".deduplicated.sam
-    	fi
+	umi_tools dedup -I "$aux"/"$barcode".sorted.bam -S "$out"/"$barcode".deduplicated.bam --edit-distance-threshold 2 -L "$out"/"$barcode".group.log # first dedup of reads not at cutsite
+	bam2bed < "$out"/"$barcode".deduplicated.bam | cut -f-17 > "$out"/"$barcode".deduplicated.bed # convert using bedops bam2bed
     fi
 done
-# rm -rf /media/garner1/hdd/$experiment
-# mv -f $datadir/$experiment /media/garner1/hdd

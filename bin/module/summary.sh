@@ -14,4 +14,3 @@ for barcode in `ls outdata/*.bam | rev | cut -d'.' -f3 | cut -d'/' -f1 | rev`; d
     echo '#################################'
 done
 cd $oldir
-

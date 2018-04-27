@@ -73,5 +73,5 @@ do
     	fi
     fi
 done
-rm -rf /media/garner1/hdd/$experiment
-mv -f $datadir/$experiment /media/garner1/hdd
+# rm -rf /media/garner1/hdd/$experiment
+# mv -f $datadir/$experiment /media/garner1/hdd

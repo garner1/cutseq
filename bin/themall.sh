@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
 
-bash run_pipeline_BICRO50.sh
+# bash run_pipeline_BICRO50.sh
 bash run_pipeline_BICRO56.sh
-bash run_pipeline_BICRO57.sh
+# bash run_pipeline_BICRO57.sh
 bash run_pipeline_BICRO65.sh
-bash run_pipeline_BICRO75.sh
-bash run_pipeline_BICRO76.sh
+# bash run_pipeline_BICRO75.sh
+# bash run_pipeline_BICRO76.sh
 bash run_pipeline_BICRO77.sh
 bash run_pipeline_BICRO84.sh
 

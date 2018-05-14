@@ -18,9 +18,9 @@ while read -r line; do
     cutsite=`echo $line|cut -d',' -f3`
     mode=SE
     cutsite=$cutsite
-    echo $barcode$cutsite > ../pattern/barcode-cutsite_$lib
+    echo $barcode$cutsite > ../pattern/barcode-cutsite_$lib$run
     fastq=$dir/$lib.fastq.gz
-    echo bash main.sh $lib human $mode /home/garner1/Dropbox/pipelines/reduced_sequencing/pattern/barcode-cutsite_$lib $cutsite $fastq >> run_pipeline_"$run".sh
+    echo bash main.sh $lib$run human $mode /home/garner1/Dropbox/pipelines/reduced_sequencing/pattern/barcode-cutsite_$lib$run $cutsite $fastq >> run_pipeline_"$run".sh
     echo >> run_pipeline_"$run".sh
 done < $inputfile
 

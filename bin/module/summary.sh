@@ -8,8 +8,7 @@ for barcode in `ls outdata/*.bam | rev | cut -d'.' -f3 | cut -d'/' -f1 | rev`; d
     echo '#################################'
     echo 'with barcode:' $barcode
     echo '#reads mapped:' `samtools view -c -F 260 auxdata/$barcode.sorted.bam` # no secondary alignment or unmapped
-    echo '#UMI on genome:' `samtools view -c -F 260 auxdata/deduplicated.bam`
-    echo '#UMI with a ref-cutsite:' `samtools view -c -F 260 outdata/$barcode.deduplicated.bam`
+    echo '#UMI' `samtools view -c -F 260 outdata/$barcode.deduplicated.bam`
     echo '#unique sites:' `samtools view outdata/$barcode.deduplicated.bam | cut -f3,4 | LC_ALL=C sort -u | wc -l`
     echo '#################################'
 done

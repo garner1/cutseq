@@ -1,12 +1,14 @@
 #!/usr/bin/env bash
 
 
-EXP=test
-genome=human
-mode=SE
-cutsite=CATG
-fastq=/home/garner1/Work/dataset/reduced_sequencing/test.fastq.gz
-bash main.sh $EXP $genome $mode ../pattern/barcode-cutsite_XZ114 $cutsite $fastq
+# bash run_pipeline_BICRO50.sh
+bash run_pipeline_BICRO56.sh
+# bash run_pipeline_BICRO57.sh
+bash run_pipeline_BICRO65.sh
+# bash run_pipeline_BICRO75.sh
+# bash run_pipeline_BICRO76.sh
+bash run_pipeline_BICRO77.sh
+bash run_pipeline_BICRO84.sh
 
 ###################################################
 # EXP=XZ68

@@ -13,6 +13,7 @@
 # bash run_pipeline_BICRO52.sh
 bash run_pipeline_BICRO48.sh
 
+<<<<<<< HEAD
 # bash run_pipeline_BICRO50.sh
 # bash run_pipeline_BICRO56.sh
 # bash run_pipeline_BICRO57.sh
@@ -21,6 +22,16 @@ bash run_pipeline_BICRO48.sh
 # bash run_pipeline_BICRO76.sh
 # bash run_pipeline_BICRO77.sh
 # bash run_pipeline_BICRO84.sh
+=======
+bash run_pipeline_BICRO50.sh
+bash run_pipeline_BICRO56.sh
+bash run_pipeline_BICRO57.sh
+bash run_pipeline_BICRO65.sh
+bash run_pipeline_BICRO75.sh
+bash run_pipeline_BICRO76.sh
+bash run_pipeline_BICRO77.sh
+bash run_pipeline_BICRO84.sh
+>>>>>>> 6fecea372733a986606404ee2aa3ba6c80575d01
 
 ###################################################
 # EXP=XZ68

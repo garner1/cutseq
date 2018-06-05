@@ -3,9 +3,9 @@
 # RUN AS: bash prepare_run.sh samplesheet.csv /media/bicroserver_2-seq/BICRO67/FASTQ
 # head -1 samplesheet.csv as: XZ82,CATCACGC,CATG
 
-inputfile=$1
+inputfile=$1		      # samplesheet_BICRO67
 dir=$2	     # /media/bicroserver_2-seq/BICRO67/FASTQ
-run=$3
+run=$3	     # BICRO67
 
 rm -f run_pipeline_"$run".sh
 

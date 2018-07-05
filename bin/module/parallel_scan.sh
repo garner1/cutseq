@@ -26,7 +26,7 @@ if [ "$mode" == "SE" ];then
 fi
 if [ "$mode" == "PE" ];then
     if [ ! -f "$in"/processed.2.fastq.gz ]; then
-	umi_tools extract --stdin="$r1" --read2-in="$r2" --bc-pattern=NNNNNNNNXXXXXXXX --log=processed.log --stdout "$in"/processed.1.fastq.gz --read2-out="$in"/processed.2.fastq.gz # Ns represent the random part of the barcode and Xs the fixed part
+	umi_tools extract --stdin="$r1" --read2-in="$r2" --bc-pattern=NNNNNNNNXXXXXXXX --log=processed.log --stdout "$in"/processed.1.fastq.gz --read2-out="$in"/processed.2.fastq.gz
 	gunzip -c "$in"/processed.1.fastq.gz > "$in"/r1.fq & pid1=$!
 	gunzip -c "$in"/processed.2.fastq.gz > "$in"/r2.fq & pid2=$!
 	wait $pid1

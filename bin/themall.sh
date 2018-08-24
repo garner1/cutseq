@@ -1,37 +1,25 @@
 #!/usr/bin/env bash
 
-# bash run_pipeline_BICRO28.sh
-# bash run_pipeline_BICRO68.sh
-# bash run_pipeline_BICRO36.sh
-# bash run_pipeline_BICRO69.sh
-# bash run_pipeline_BICRO21.sh
-# bash run_pipeline_BICRO67.sh
-# bash run_pipeline_BICRO50.sh
-# bash run_pipeline_BICRO70.sh
-# bash run_pipeline_BICRO43.sh
-# bash run_pipeline_BICRO44.sh
-# bash run_pipeline_BICRO52.sh
+bash run_pipeline_BICRO28.sh
+bash run_pipeline_BICRO68.sh
+bash run_pipeline_BICRO36.sh
+bash run_pipeline_BICRO69.sh
+bash run_pipeline_BICRO21.sh
+bash run_pipeline_BICRO67.sh
+bash run_pipeline_BICRO50.sh
+bash run_pipeline_BICRO70.sh
+bash run_pipeline_BICRO43.sh
+bash run_pipeline_BICRO44.sh
+bash run_pipeline_BICRO52.sh
 bash run_pipeline_BICRO48.sh
-
-<<<<<<< HEAD
-# bash run_pipeline_BICRO50.sh
-# bash run_pipeline_BICRO56.sh
-# bash run_pipeline_BICRO57.sh
-# bash run_pipeline_BICRO65.sh
+bash run_pipeline_BICRO97.sh
+####################################
+# bash run_pipeline_BICRO100.sh
 # bash run_pipeline_BICRO75.sh
 # bash run_pipeline_BICRO76.sh
 # bash run_pipeline_BICRO77.sh
 # bash run_pipeline_BICRO84.sh
-=======
-bash run_pipeline_BICRO50.sh
-bash run_pipeline_BICRO56.sh
-bash run_pipeline_BICRO57.sh
-bash run_pipeline_BICRO65.sh
-bash run_pipeline_BICRO75.sh
-bash run_pipeline_BICRO76.sh
-bash run_pipeline_BICRO77.sh
-bash run_pipeline_BICRO84.sh
->>>>>>> 6fecea372733a986606404ee2aa3ba6c80575d01
+# bash run_pipeline_BICRO97.sh
 
 ###################################################
 # EXP=XZ68

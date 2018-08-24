@@ -9,5 +9,5 @@ samtools merge $newdir/merged.bam $bam1 $bam2
 cd $newdir
 samtools sort merged.bam -o merged.sorted.bam
 samtools index merged.sorted.bam
-umi_tools dedup -I merged.sorted.bam -S merged.deduplicated.bam --edit-distance-threshold 2 -L merged.group.log
-bedtools bamtobed -i merged.deduplicated.bam > merged.deduplicated.bed
+umi_tools dedup -I merged.sorted.bam --paired -S merged.deduplicated.bam --edit-distance-threshold 2 -L merged.group.log
+bam2bed < merged.deduplicated.bam | cut -f-17 > merged.deduplicated.bed

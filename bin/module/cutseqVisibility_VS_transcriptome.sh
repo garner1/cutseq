@@ -18,18 +18,18 @@ bedfile=$2
 # parallel "LC_ALL=C grep -nwf ${bedfile}.top25RC.genelist {} | cut -d':' -f1 | datamash mean 1" ::: /home/garner1/Work/dataset/bioinf.iasi.cnr.it/bed/brca/rnaseqv2/gene.quantification/bedfiles/*.sorted |
 #     datamash mean 1 > ${bedfile}.top25RC.genelist.mean.txt # take the mean of the mean ranks of the selected genes in each TCGA case
 
-# n=`cat ${bedfile}.top25RC.genelist|wc -l`
-# rm ${bedfile}.random.genelist-RC.mean.txt
-# for loop in `seq 1 100`;
-# do
-#     tfile=$(mktemp /tmp/foo.XXXXXXXXX)
-#     cut -f5 $annotations | shuf -n $n > $tfile
-#     parallel "LC_ALL=C grep -nwf $tfile {}|cut -d':' -f1|datamash mean 1" ::: /home/garner1/Work/dataset/bioinf.iasi.cnr.it/bed/brca/rnaseqv2/gene.quantification/bedfiles/*.sorted |
-# 	datamash mean 1 >> ${bedfile}.random.genelist-RC.mean.txt
-# done
+n=`cat ${bedfile}.top25RC.genelist|wc -l`
+rm ${bedfile}.random.genelist-RC.mean.txt
+for loop in `seq 1 1000`;
+do
+    tfile=$(mktemp /tmp/foo.XXXXXXXXX)
+    cut -f5 $annotations | shuf -n $n > $tfile
+    parallel "LC_ALL=C grep -nwf $tfile {}|cut -d':' -f1|datamash mean 1" ::: /home/garner1/Work/dataset/bioinf.iasi.cnr.it/bed/brca/rnaseqv2/gene.quantification/bedfiles/*.sorted |
+	datamash mean 1 >> ${bedfile}.random.genelist-RC.mean.txt
+done
 
 mymean=`cat ${bedfile}.top25RC.genelist.mean.txt | datamash round 1`
 samplemean=`cat ${bedfile}.random.genelist-RC.mean.txt | datamash mean 1 | datamash round 1`
 samplestd=`cat ${bedfile}.random.genelist-RC.mean.txt | datamash sstdev 1 | datamash round 1`
 significance=$(( ($mymean-$samplemean)/$samplestd ))
-echo $bedfile $mymean $samplemean $significance
+echo "file: "$bedfile "number of random instances: " $n "top cutseq genes mean rank: "$mymean "top transcribed genes mean rank: "$samplemean "significance: "$significance

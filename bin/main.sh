@@ -62,7 +62,7 @@ do
 	    umi_tools dedup -I "$aux"/"$barcode".sorted.bam --paired -S "$out"/"$barcode".deduplicated.bam --edit-distance-threshold 2 -L "$out"/"$barcode".group.log 
     	fi
 
-    	echo "Filter UMIs ..."
-    	bam2bed < "$out"/"$barcode".deduplicated.bam | cut -f-17 > "$out"/"$barcode".deduplicated.bed # convert using bedops bam2bed
+    	# echo "Conversion to bed file ..."
+    	# bam2bed < "$out"/"$barcode".deduplicated.bam | cut -f-17 > "$out"/"$barcode".deduplicated.bed # convert using bedops bam2bed
     fi
 done

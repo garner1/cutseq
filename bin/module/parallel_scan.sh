@@ -18,8 +18,8 @@ if [ "$mode" == "SE" ];then
     if [ ! -f "$in"/processed.fastq.gz ]; then
 	umi_tools extract --stdin="$r1" --bc-pattern=NNNNNNNNXXXXXXXX --log=processed.log --stdout "$in"/processed.fastq.gz # Ns represent the random part of the barcode and Xs the fixed part
 	gunzip -c "$in"/processed.fastq.gz > "$in"/r1.fq
-	cat $in/r1.fq | paste - - - - | LC_ALL=C sort --parallel=8 --temporary-directory=$HOME/tmp -k1,1 > $in/r1oneline.fq & pid1=$!
-	cat $in/r1.fq | paste - - - - | cut -f 1,2 | sed 's/^@/>/' | tr "\t" "\n" > $in/r1.fa & pid2=$!
+	cat $in/r1.fq | cut -d':' -f-7 | paste - - - - | LC_ALL=C sort --parallel=8 --temporary-directory=$HOME/tmp -k1,1 > $in/r1oneline.fq & pid1=$!
+	cat $in/r1.fq | cut -d':' -f-7 | paste - - - - | cut -f 1,2 | sed 's/^@/>/' | tr "\t" "\n" > $in/r1.fa & pid2=$!
 	wait $pid1
 	wait $pid2
     fi
@@ -31,9 +31,9 @@ if [ "$mode" == "PE" ];then
 	gunzip -c "$in"/processed.2.fastq.gz > "$in"/r2.fq & pid2=$!
 	wait $pid1
 	wait $pid2
-	cat $in/r1.fq | paste - - - - | LC_ALL=C sort --parallel=8 --temporary-directory=$HOME/tmp -k1,1 > $in/r1oneline.fq & pid1=$!
-	cat $in/r1.fq | paste - - - - | cut -f 1,2 | sed 's/^@/>/' | tr "\t" "\n" > $in/r1.fa & pid2=$!
-	cat $in/r2.fq | paste - - - - | LC_ALL=C sort --parallel=8 --temporary-directory=$HOME/tmp -k1,1 > $in/r2oneline.fq & pid3=$!
+	cat $in/r1.fq | cut -d':' -f-7 | paste - - - - | LC_ALL=C sort --parallel=8 --temporary-directory=$HOME/tmp -k1,1 > $in/r1oneline.fq & pid1=$!
+	cat $in/r1.fq | cut -d':' -f-7 | paste - - - - | cut -f 1,2 | sed 's/^@/>/' | tr "\t" "\n" > $in/r1.fa & pid2=$!
+	cat $in/r2.fq | cut -d':' -f-7 | paste - - - - | LC_ALL=C sort --parallel=8 --temporary-directory=$HOME/tmp -k1,1 > $in/r2oneline.fq & pid3=$!
 	wait $pid1
 	wait $pid2
 	wait $pid3

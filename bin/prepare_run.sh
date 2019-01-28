@@ -6,6 +6,7 @@
 inputfile=$1		      # samplesheet_BICRO67
 dir=$2	     # /media/bicroserver_2-seq/BICRO67/FASTQ
 run=$3	     # BICRO67
+mode=$4	     # PE or SE
 
 rm -f run_pipeline_"$run".sh
 
@@ -16,11 +17,11 @@ while read -r line; do
     lib=`echo $line|cut -d',' -f1`
     barcode=`echo $line|cut -d',' -f2`
     cutsite=`echo $line|cut -d',' -f3`
-    mode=SE
+    # mode=SE
     cutsite=$cutsite
-    echo $barcode$cutsite > ../pattern/barcode-cutsite_$lib$run
+    echo $barcode$cutsite > /home/garner1/Dropbox/pipelines/cutseq/pattern/barcode-cutsite_$lib$run
     fastq=$dir/$lib.fastq.gz
-    echo bash main.sh $lib$run human $mode /home/garner1/Dropbox/pipelines/reduced_sequencing/pattern/barcode-cutsite_$lib$run $cutsite $fastq >> run_pipeline_"$run".sh
+    echo bash main.sh $lib$run human $mode /home/garner1/Dropbox/pipelines/cutseq/pattern/barcode-cutsite_$lib$run $cutsite $fastq >> run_pipeline_"$run".sh
     echo >> run_pipeline_"$run".sh
 done < $inputfile
 

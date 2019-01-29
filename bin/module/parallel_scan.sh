@@ -16,7 +16,7 @@ echo "Unzip the raw data file ..."
 
 if [ "$mode" == "SE" ];then
     if [ ! -f "$in"/processed.fastq.gz ]; then
-	umi_tools extract --stdin="$r1" --bc-pattern=NNNNNNNNXXXXXXXX --log=processed.log --stdout "$in"/processed.fastq.gz # Ns represent the random part of the barcode and Xs the fixed part
+	umi_tools extract --stdin="$r1" --bc-pattern=NNNNNNNNXXXXXXXX --log=processed.log --stdout "$in"/processed.fastq.gz
 	gunzip -c "$in"/processed.fastq.gz > "$in"/r1.fq
 	cat $in/r1.fq | cut -d':' -f-7 | paste - - - - | LC_ALL=C sort --parallel=8 --temporary-directory=$HOME/tmp -k1,1 > $in/r1oneline.fq & pid1=$!
 	cat $in/r1.fq | cut -d':' -f-7 | paste - - - - | cut -f 1,2 | sed 's/^@/>/' | tr "\t" "\n" > $in/r1.fa & pid2=$!

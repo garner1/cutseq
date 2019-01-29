@@ -15,7 +15,7 @@ quality=30	     # filter out read with mapping quality less than this
 ################################################################################
 
 # PREPARE DIRECTORY STRUCTURE
-datadir=$HOME/Work/dataset/reduced_sequencing && mkdir -p $datadir/$experiment 
+datadir=$HOME/Work/dataset/cutseq && mkdir -p $datadir/$experiment 
 in=$datadir/$experiment/indata && mkdir -p $in
 out=$datadir/$experiment/outdata && mkdir -p $out
 aux=$datadir/$experiment/auxdata && mkdir -p $aux
@@ -61,7 +61,7 @@ do
     	    samtools index "$aux"/"$barcode".sorted.bam
 	    umi_tools dedup -I "$aux"/"$barcode".sorted.bam --paired -S "$out"/"$barcode".deduplicated.bam --edit-distance-threshold 2 -L "$out"/"$barcode".group.log 
     	fi
-
+	samtools sort "$out"/"$barcode".deduplicated.bam -o "$out"/"$barcode".deduplicated.sorted.bam
     	# echo "Conversion to bed file ..."
     	# bam2bed < "$out"/"$barcode".deduplicated.bam | cut -f-17 > "$out"/"$barcode".deduplicated.bed # convert using bedops bam2bed
     fi

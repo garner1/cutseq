@@ -49,37 +49,29 @@ len=`echo $cutsite|awk '{print length}'`
 olddir=`echo $PWD`
 cd $in
 cat $barcode_file |
-    awk -v len="$len" '{print "^ ",substr($1,1,8)"[1,0,0]",substr($1,9,len)"[1,0,0]","1...1000","$" > "barcode_"substr($1,1,8)}'
+    awk -v len="$len" '{print "^ ",substr($1,1,8)"[1,1,1]",substr($1,9,len)"[1,1,1]","1...1000","$" > "barcode_"substr($1,1,8)}'
 cd $olddir
 ################################################################################
 echo "Split FA files to satisfy scan_for_match 100M lines limit ..."
 olddir=`echo $PWD`
 cd $in
-if [ ! -f "$in"/barcode_????????.fa ]; then
-    cat r1.fa | paste - - |LC_ALL=C split -l 90000000
-    echo "Scan for barcodes ..."
-    rm -f $in/barcode_*.fa
-    for file in $(ls $in/xa?); do
-	parallel "cat $file |tr '\t' '\n' | LC_ALL=C scan_for_matches {} - >> {}.fa" ::: `ls "$in"/barcode_????????`
-    done
-    rm -f $in/xa?
-fi
+# if [ ! -f "$in"/barcode_????????.fa ]; then
+cat r1.fa | paste - - |LC_ALL=C split -l 90000000
+echo "Scan for barcodes ..."
+rm -f $in/barcode_*.fa
+for file in $(ls $in/xa?); do
+    parallel "cat $file |tr '\t' '\n' | LC_ALL=C scan_for_matches {} - >> {}.fa" ::: `ls "$in"/barcode_????????`
+done
+rm -f $in/xa?
+# fi
 cd $olddir
 
 
 echo "Generate the barcoded FQ files ..."
-if [ ! -f "$in"/barcode_????????.fa-1line ]; then
-    parallel -k "cat {}|paste - -|awk '{print \$1\$(NF-1)\$NF}'|tr ']>' '\n@'|cut -d':' -f-7|paste - - | LC_ALL=C sort --parallel=8 --temporary-directory=$HOME/tmp -k1,1 > {.}.fa-1line" ::: $(ls $in/barcode_*.fa)
-fi
-if [ ! -f "$in"/barcode_????????.fq ]; then
-    parallel -k "LC_ALL=C join {} $in/r1oneline.fq|awk '{print \$1,\$2,\"+\",substr(\$NF,length(\$NF)-length(\$2),length(\$2))}'|tr ' ' '\n' > {.}.fq" ::: $(ls $in/barcode_*.fa-1line)
-fi
+parallel -k "cat {}|paste - -|awk '{print \$1\$(NF-1)\$NF}'|tr ']>' '\n@'|cut -d':' -f-7|paste - - | LC_ALL=C sort --parallel=8 --temporary-directory=$HOME/tmp -k1,1 > {.}.fa-1line" ::: $(ls $in/barcode_*.fa)
+parallel -k "LC_ALL=C join {} $in/r1oneline.fq|awk '{print \$1,\$2,\"+\",substr(\$NF,length(\$NF)-length(\$2),length(\$2))}'|tr ' ' '\n' > {.}.fq" ::: $(ls $in/barcode_*.fa-1line)
 
 if [ "$mode" == "PE" ];then
-    if [ ! -f "$in"/barcode_????????.fq.sort ]; then
-	parallel -k "cat {} | paste - - - -|LC_ALL=C sort --parallel=8 --temporary-directory=$HOME/tmp -k1,1 -o {}.sort" ::: `ls "$in"/barcode_*[A-Z].fq`
-    fi
-    if [ ! -f "$in"/barcode_????????-r2.fq ]; then
-	parallel -k "LC_ALL=C join {}.sort ${in}/r2oneline.fq | cut -d' ' -f1,5- | tr ' ' '\n' > {.}-r2.fq" ::: `ls "$in"/barcode_*[A-Z].fq`
-    fi
+    parallel -k "cat {} | paste - - - -|LC_ALL=C sort --parallel=8 --temporary-directory=$HOME/tmp -k1,1 -o {}.sort" ::: `ls "$in"/barcode_*[A-Z].fq`
+    parallel -k "LC_ALL=C join {}.sort ${in}/r2oneline.fq | cut -d' ' -f1,5- | tr ' ' '\n' > {.}-r2.fq" ::: `ls "$in"/barcode_*[A-Z].fq`
 fi

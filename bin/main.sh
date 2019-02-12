@@ -19,8 +19,8 @@ datadir=$HOME/Work/dataset/cutseq && mkdir -p $datadir/$experiment
 in=$datadir/$experiment/indata && mkdir -p $in
 out=$datadir/$experiment/outdata && mkdir -p $out
 aux=$datadir/$experiment/auxdata && mkdir -p $aux
-#refgen=~/Work/genomes/Homo_sapiens.GRCh37.dna.primary_assembly.fa/GRCh37.fa # full path to reference genome
-refgen=/home/garner1/Work/dataset/agilent/S07604715_Padded.woChr.fa
+refgen=~/Work/genomes/Homo_sapiens.GRCh37.dna.primary_assembly.fa/GRCh37.fa # full path to reference genome
+# refgen=/home/garner1/Work/dataset/agilent/S07604715_Padded.woChr.fa
 
 echo
 echo Processing $experiment
@@ -30,7 +30,6 @@ echo Processing $experiment
 ################################################################################
 
 bash ./module/parallel_scan.sh $cutsite $in $mode $barcode_file $r1 $r2 
-rm -fr "$out"/* "$aux"/* 	# !!!clean outdata and auxdata directories!!!!
 
 i=0
 for barcode in $( cat $barcode_file | awk '{print substr($1,1,8)}' ) # !!!!KEEP ALL BARCODES!!!!

@@ -20,7 +20,7 @@ while read -r line; do
     # mode=SE
     # cutsite=$cutsite
     echo $barcode$cutsite > /home/garner1/Dropbox/pipelines/cutseq/pattern/${barcode}-${cutsite}_${lib}${run}
-    fastq=$dir/${lib}*.fastq.gz
+    fastq=$dir/${lib}*fast*.gz
     echo bash main.sh $lib$run human $mode /home/garner1/Dropbox/pipelines/cutseq/pattern/${barcode}-${cutsite}_${lib}${run} $cutsite $fastq >> run_pipeline_"$run".sh
     echo >> run_pipeline_"$run".sh
 done < $inputfile

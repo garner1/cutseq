@@ -29,7 +29,7 @@ echo Processing $experiment
 # bash ./module/quality_control.sh $r1 $numbproc $out
 ################################################################################
 
-bash ./module/parallel_scan.sh $cutsite $in $mode $barcode_file $r1 $r2 
+bash ./module/parallel_scan.sh $cutsite $in $mode $barcode_file $r1 $r2 # in parallel_scan.h you need to hard-code the edit distance from barcode
 
 i=0
 for barcode in $( cat $barcode_file | awk '{print substr($1,1,8)}' ) # !!!!KEEP ALL BARCODES!!!!

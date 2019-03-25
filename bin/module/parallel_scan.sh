@@ -49,7 +49,7 @@ len=`echo $cutsite|awk '{print length}'`
 olddir=`echo $PWD`
 cd $in
 cat $barcode_file |
-    awk -v len="$len" '{print "^ ",substr($1,1,8)"[2,1,1]",substr($1,9,len)"[2,1,1]","1...1000","$" > "barcode_"substr($1,1,8)}'
+    awk -v len="$len" '{print "^ ",substr($1,1,8)"[0,0,0]",substr($1,9,len)"[2,1,1]","1...1000","$" > "barcode_"substr($1,1,8)}'
 cd $olddir
 ################################################################################
 echo "Split FA files to satisfy scan_for_match 100M lines limit ..."

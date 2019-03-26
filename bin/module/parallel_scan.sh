@@ -15,8 +15,10 @@ echo "Process the fastq file ..."
 echo "Unzip the raw data file ..."
 
 if [ "$mode" == "SE" ];then
-    if [ ! -f "$in"/processed.fastq.gz ]; then
+    if [ ! -f "$in"/r1_0.fq.gz ]; then
 	zcat "$r1" | cut -d':' -f-7 | gzip - > $in/r1_0.fq.gz
+    fi
+    if [ ! -f "$in"/processed.fastq.gz ]; then
 	umi_tools extract --stdin="$in/r1_0.fq.gz" --bc-pattern=NNNNNNNNXXXXXXXX --log=processed.log --stdout "$in"/processed.fastq.gz
 	gunzip -c "$in"/processed.fastq.gz > "$in"/r1.fq
 	cat $in/r1.fq | paste - - - - | LC_ALL=C sort --parallel=8 --temporary-directory=$HOME/tmp -k1,1 > $in/r1oneline.fq & pid1=$!

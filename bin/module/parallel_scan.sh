@@ -28,9 +28,13 @@ if [ "$mode" == "SE" ];then
     fi
 fi
 if [ "$mode" == "PE" ];then
-    if [ ! -f "$in"/processed.2.fastq.gz ]; then
+    if [ ! -f "$in"/r1_0.fq.gz ]; then
 	zcat "$r1" | cut -d':' -f-7 | gzip > $in/r1_0.fq.gz
+    fi
+    if [ ! -f "$in"/r2_0.fq.gz ]; then
 	zcat "$r2" | cut -d':' -f-7 | gzip > $in/r2_0.fq.gz
+    fi
+    if [ ! -f "$in"/processed.2.fastq.gz ]; then
 	umi_tools extract --stdin="$in/r1_0.fq.gz" --read2-in="$in/r2_0.fq.gz" --bc-pattern=NNNNNNNNXXXXXXXX --log=processed.log --stdout "$in"/processed.1.fastq.gz --read2-out="$in"/processed.2.fastq.gz
 	gunzip -c "$in"/processed.1.fastq.gz > "$in"/r1.fq & pid1=$!
 	gunzip -c "$in"/processed.2.fastq.gz > "$in"/r2.fq & pid2=$!

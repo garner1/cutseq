@@ -51,13 +51,13 @@ do
     	    samtools view -h -Sb -q $quality "$aux"/"$barcode".sam > "$aux"/"$barcode".bam # only keep first mate in pair and filter wrt quality
     	    samtools sort "$aux"/"$barcode".bam -o "$aux"/"$barcode".sorted.bam
     	    samtools index "$aux"/"$barcode".sorted.bam
-    	    umi_tools dedup -I "$aux"/"$barcode".sorted.bam -S "$out"/"$barcode".deduplicated.bam --edit-distance-threshold 2 -L "$out"/"$barcode".group.log # first dedup of reads not at cutsite
+    	    ~/anaconda2/bin/umi_tools dedup -I "$aux"/"$barcode".sorted.bam -S "$out"/"$barcode".deduplicated.bam --edit-distance-threshold 2 -L "$out"/"$barcode".group.log # first dedup of reads not at cutsite
     	fi
     	if [ "$mode" == "PE" ];	then
     	    samtools view -h -Sb -q $quality "$aux"/"$barcode".sam > "$aux"/"$barcode".bam # only keep first mate in pair and filter wrt quality
     	    samtools sort "$aux"/"$barcode".bam -o "$aux"/"$barcode".sorted.bam
     	    samtools index "$aux"/"$barcode".sorted.bam
-	    umi_tools dedup -I "$aux"/"$barcode".sorted.bam --paired -S "$out"/"$barcode".deduplicated.bam --edit-distance-threshold 2 -L "$out"/"$barcode".group.log 
+	    ~/anaconda2/bin/umi_tools dedup -I "$aux"/"$barcode".sorted.bam --paired -S "$out"/"$barcode".deduplicated.bam --edit-distance-threshold 2 -L "$out"/"$barcode".group.log 
     	fi
 	samtools sort "$out"/"$barcode".deduplicated.bam -o "$out"/"$barcode".deduplicated.sorted.bam
     	# echo "Conversion to bed file ..."

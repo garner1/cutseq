@@ -20,8 +20,6 @@ in=$datadir/$experiment/indata && mkdir -p $in
 out=$datadir/$experiment/outdata && mkdir -p $out
 aux=$datadir/$experiment/auxdata && mkdir -p $aux
 refgen=~/Work/genomes/Homo_sapiens.GRCh37.dna.primary_assembly.fa/GRCh37.fa # full path to reference genome
-# refgen=/home/garner1/Work/dataset/agilent/S07604715_Padded.woChr.fa
-
 echo
 echo Processing $experiment
 

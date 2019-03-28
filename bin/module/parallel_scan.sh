@@ -10,10 +10,8 @@ r1=$5
 r2=$6
 
 echo "Process the fastq file ..."
-
 ################################################################################
 echo "Unzip the raw data file ..."
-
 if [ "$mode" == "SE" ];then
     if [ ! -f "$in"/r1_0.fq.gz ]; then
 	zcat "$r1" | cut -d':' -f-7 | gzip - > $in/r1_0.fq.gz
@@ -48,7 +46,6 @@ if [ "$mode" == "PE" ];then
 	wait $pid3
     fi
 fi
-
 ################################################################################
 echo "Generate patfiles for each barcode ..."
 len=`echo $cutsite|awk '{print length}'`

@@ -13,6 +13,7 @@ rm -f run_pipeline_"$run".sh
 echo "#!/bin/usr/env bash" >> run_pipeline_"$run".sh # first line
 echo >> run_pipeline_"$run".sh			   # empty space
 
+rm -f /home/garner1/Dropbox/pipelines/cutseq/pattern/*${run}
 while read -r line; do
     lib=`echo $line|cut -d',' -f1`
     barcode=`echo $line|cut -d',' -f2`

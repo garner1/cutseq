@@ -1,21 +1,21 @@
 #!/usr/bin/env bash
 
-bash prepare_run.sh samplesheet/XZ162BC152.csv ~/Work/dataset/fastq BICRO152 SE
-bash run_pipeline_BICRO152.sh
-bash prepare_run.sh samplesheet/XZ163BC155.csv ~/Work/dataset/fastq BICRO155 SE
-bash run_pipeline_BICRO155.sh
-bash prepare_run.sh samplesheet/XZ151BC158.csv ~/Work/dataset/fastq BICRO158 SE
-bash run_pipeline_BICRO158.sh
-bash prepare_run.sh samplesheet/XZ152BC157.csv ~/Work/dataset/fastq BICRO157 SE
-bash run_pipeline_BICRO157.sh
-bash prepare_run.sh samplesheet/XZ164BC152.csv ~/Work/dataset/fastq BICRO152 SE
-bash run_pipeline_BICRO152.sh
-bash prepare_run.sh samplesheet/XZ165BC155.csv ~/Work/dataset/fastq BICRO155 SE
-bash run_pipeline_BICRO155.sh
-bash prepare_run.sh samplesheet/XZ159BC158.csv ~/Work/dataset/fastq BICRO158 SE
-bash run_pipeline_BICRO158.sh
-bash prepare_run.sh samplesheet/XZ160BC138.csv ~/Work/dataset/fastq BICRO138 SE
-bash run_pipeline_BICRO138.sh
+# bash prepare_run.sh samplesheet/XZ162BC152.csv ~/Work/dataset/fastq BICRO152 SE
+# bash run_pipeline_BICRO152.sh
+# bash prepare_run.sh samplesheet/XZ163BC155.csv ~/Work/dataset/fastq BICRO155 SE
+# bash run_pipeline_BICRO155.sh
+# bash prepare_run.sh samplesheet/XZ151BC158.csv ~/Work/dataset/fastq BICRO158 SE
+# bash run_pipeline_BICRO158.sh
+# bash prepare_run.sh samplesheet/XZ152BC157.csv ~/Work/dataset/fastq BICRO157 SE
+# bash run_pipeline_BICRO157.sh
+# bash prepare_run.sh samplesheet/XZ164BC152.csv ~/Work/dataset/fastq BICRO152 SE
+# bash run_pipeline_BICRO152.sh
+# bash prepare_run.sh samplesheet/XZ165BC155.csv ~/Work/dataset/fastq BICRO155 SE
+# bash run_pipeline_BICRO155.sh
+# bash prepare_run.sh samplesheet/XZ159BC158.csv ~/Work/dataset/fastq BICRO158 SE
+# bash run_pipeline_BICRO158.sh
+bash prepare_run.sh samplesheet/XZ138BC147.csv ~/Work/dataset/fastq BICRO147 SE
+bash run_pipeline_BICRO147.sh
 
 # bash prepare_run.sh samplesheet/XZ176BC157.csv ~/Work/dataset/fastq BICRO157 SE
 # bash run_pipeline_BICRO157.sh

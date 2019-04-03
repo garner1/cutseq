@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-bash prepare_run.sh samplesheet/NC24AVO.csv ~/Work/dataset/fastq AVO SE
+bash prepare_run.sh samplesheet/NC101.csv ~/Work/dataset/fastq AVO SE
 bash run_pipeline_AVO.sh
 
 # bash prepare_run.sh samplesheet/XZ162BC152.csv ~/Work/dataset/fastq BICRO152 SE

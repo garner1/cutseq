@@ -1,7 +1,26 @@
 #!/usr/bin/env bash
 
-bash prepare_run.sh samplesheet/NC101.csv ~/Work/dataset/fastq AVO SE
-bash run_pipeline_AVO.sh
+# bash prepare_run.sh samplesheet/NC101AVO73 ~/Work/dataset/fastq AVO73 SE
+# bash run_pipeline_AVO73.sh
+bash prepare_run.sh samplesheet/NC105AVO73 ~/Work/dataset/fastq AVO73 SE
+bash run_pipeline_AVO73.sh
+bash prepare_run.sh samplesheet/NC88AVO50 ~/Work/dataset/fastq AVO50 SE
+bash run_pipeline_AVO50.sh
+bash prepare_run.sh samplesheet/NC89AVO50 ~/Work/dataset/fastq AVO50 SE
+bash run_pipeline_AVO50.sh
+bash prepare_run.sh samplesheet/NC421AVO33 ~/Work/dataset/fastq AVO33 SE
+bash run_pipeline_AVO33.sh
+bash prepare_run.sh samplesheet/NC432AVO33 ~/Work/dataset/fastq AVO33 SE
+bash run_pipeline_AVO33.sh
+bash prepare_run.sh samplesheet/NC87AVO51 ~/Work/dataset/fastq AVO51 SE
+bash run_pipeline_AVO51.sh
+bash prepare_run.sh samplesheet/NC24AVO29 ~/Work/dataset/fastq AVO29 SE
+bash run_pipeline_AVO29.sh
+bash prepare_run.sh samplesheet/NC25AVO29 ~/Work/dataset/fastq AVO29 SE
+bash run_pipeline_AVO29.sh
+bash prepare_run.sh samplesheet/NC26AVO29 ~/Work/dataset/fastq AVO29 SE
+bash run_pipeline_AVO29.sh
+
 
 # bash prepare_run.sh samplesheet/XZ162BC152.csv ~/Work/dataset/fastq BICRO152 SE
 # bash run_pipeline_BICRO152.sh

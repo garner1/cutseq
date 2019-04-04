@@ -18,12 +18,10 @@ while read -r line; do
     lib=`echo $line|cut -d',' -f1`
     barcode=`echo $line|cut -d',' -f2`
     cutsite=`echo $line|cut -d',' -f3`
-    # mode=SE
-    # cutsite=$cutsite
     echo $barcode$cutsite >> /home/garner1/Dropbox/pipelines/cutseq/pattern/${lib}${run}
+    fastq=${dir}/${lib}.fastq.gz
 done < $inputfile
-fastq=$dir/${lib}*fast*.gz
+echo "if [ -f ${fastq} ]; then" >> run_pipeline_"$run".sh
 echo bash main.sh $lib$run human $mode /home/garner1/Dropbox/pipelines/cutseq/pattern/${lib}${run} $cutsite $fastq >> run_pipeline_"$run".sh
-echo >> run_pipeline_"$run".sh
-
+echo fi >> run_pipeline_"$run".sh
 chmod +x run_pipeline_"$run".sh

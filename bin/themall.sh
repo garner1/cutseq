@@ -2,12 +2,14 @@
 
 # bash prepare_run.sh samplesheet/NC101AVO73 ~/Work/dataset/fastq AVO73 SE
 # bash run_pipeline_AVO73.sh
-bash prepare_run.sh samplesheet/NC105AVO73 ~/Work/dataset/fastq AVO73 SE
-bash run_pipeline_AVO73.sh
-bash prepare_run.sh samplesheet/NC88AVO50 ~/Work/dataset/fastq AVO50 SE
-bash run_pipeline_AVO50.sh
-bash prepare_run.sh samplesheet/NC89AVO50 ~/Work/dataset/fastq AVO50 SE
-bash run_pipeline_AVO50.sh
+# bash prepare_run.sh samplesheet/NC105AVO73 ~/Work/dataset/fastq AVO73 SE
+# bash run_pipeline_AVO73.sh
+# bash prepare_run.sh samplesheet/NC88AVO50 ~/Work/dataset/fastq AVO50 SE
+# bash run_pipeline_AVO50.sh
+
+# bash prepare_run.sh samplesheet/NC89AVO50 ~/Work/dataset/fastq AVO50 SE
+# bash run_pipeline_AVO50.sh
+
 bash prepare_run.sh samplesheet/NC421AVO33 ~/Work/dataset/fastq AVO33 SE
 bash run_pipeline_AVO33.sh
 bash prepare_run.sh samplesheet/NC432AVO33 ~/Work/dataset/fastq AVO33 SE

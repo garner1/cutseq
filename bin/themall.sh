@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
-bash prepare_run.sh samplesheet/XZ176BC157.csv ~/Work/dataset/fastq/BC157XZ176 BICRO157 SE
-bash run_pipeline_BICRO157.sh
-bash prepare_run.sh samplesheet/XZ177BC157.csv ~/Work/dataset/fastq/BC157XZ177 BICRO157 SE
-bash run_pipeline_BICRO157.sh
-bash prepare_run.sh samplesheet/XZ177BC157.csv ~/Work/dataset/fastq/BC158XZ177 BICRO158 SE
+# bash prepare_run.sh samplesheet/XZ176BC157.csv ~/Work/dataset/fastq/BC157XZ176 BICRO157 SE
+# bash run_pipeline_BICRO157.sh
+# bash prepare_run.sh samplesheet/XZ177BC157.csv ~/Work/dataset/fastq/BC157XZ177 BICRO157 SE
+# bash run_pipeline_BICRO157.sh
+bash prepare_run.sh samplesheet/XZ177BC158.csv ~/Work/dataset/fastq/BC158XZ177 BICRO158 SE
 bash run_pipeline_BICRO158.sh
-bash prepare_run.sh samplesheet/XZ178BC157.csv ~/Work/dataset/fastq/BC157XZ178 BICRO157 SE
-bash run_pipeline_BICRO157.sh
+# bash prepare_run.sh samplesheet/XZ178BC157.csv ~/Work/dataset/fastq/BC157XZ178 BICRO157 SE
+# bash run_pipeline_BICRO157.sh
 bash prepare_run.sh samplesheet/XZ179BC158.csv ~/Work/dataset/fastq/BC158XZ179 BICRO158 SE
 bash run_pipeline_BICRO158.sh
 

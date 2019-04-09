@@ -27,41 +27,42 @@ echo Processing $experiment
 # bash ./module/quality_control.sh $r1 $numbproc $out
 ################################################################################
 
-bash ./module/parallel_scan.sh $cutsite $in $mode $barcode_file $r1 $r2 # in parallel_scan.h you need to hard-code the edit distance from barcode
+# In parallel_scan.h you need to hard-code the edit distance from barcode
+bash ./module/parallel_scan.sh $cutsite $in $mode $barcode_file $r1 $r2 
 
-i=0
-for barcode in $( cat $barcode_file | awk '{print substr($1,1,8)}' ) # !!!!KEEP ALL BARCODES!!!!
-do
-    echo `expr $i + 1` $barcode
-    i=`expr $i + 1`
+# i=0
+# for barcode in $( cat $barcode_file | awk '{print substr($1,1,8)}' ) # !!!!KEEP ALL BARCODES!!!!
+# do
+#     echo `expr $i + 1` $barcode
+#     i=`expr $i + 1`
 
-    if [ "$mode" == "PE" ]
-    then
-    	bwa mem -v 1 -t $numbproc $refgen "$in"/barcode_"$barcode".fq "$in"/barcode_"$barcode"-r2.fq > "$aux"/"$barcode".sam
-    fi
+#     if [ "$mode" == "PE" ]
+#     then
+#     	bwa mem -v 1 -t $numbproc $refgen "$in"/barcode_"$barcode".fq "$in"/barcode_"$barcode"-r2.fq > "$aux"/"$barcode".sam
+#     fi
     
-    if [ "$mode" == "SE" ]
-    then
-    	bwa mem -v 1 -t $numbproc $refgen "$in"/barcode_"$barcode".fq > "$aux"/"$barcode".sam
-    fi
+#     if [ "$mode" == "SE" ]
+#     then
+#     	bwa mem -v 1 -t $numbproc $refgen "$in"/barcode_"$barcode".fq > "$aux"/"$barcode".sam
+#     fi
 
-    count=$(samtools view -S "$aux"/"$barcode".sam | head -1 | wc -l)
-    if [ $count -ne 0 ]; then 
-    	if [ "$mode" == "SE" ];	then
-    	    samtools view -h -Sb -q $quality "$aux"/"$barcode".sam > "$aux"/"$barcode".bam # only keep first mate in pair and filter wrt quality
-    	    samtools sort "$aux"/"$barcode".bam -o "$aux"/"$barcode".sorted.bam
-    	    samtools index "$aux"/"$barcode".sorted.bam
-    	    ~/anaconda2/bin/umi_tools dedup -I "$aux"/"$barcode".sorted.bam -S "$out"/"$barcode".deduplicated.bam --edit-distance-threshold 2 -L "$out"/"$barcode".group.log # first dedup of reads not at cutsite
-    	fi
-    	if [ "$mode" == "PE" ];	then
-    	    samtools view -h -Sb -q $quality "$aux"/"$barcode".sam > "$aux"/"$barcode".bam # only keep first mate in pair and filter wrt quality
-    	    samtools sort "$aux"/"$barcode".bam -o "$aux"/"$barcode".sorted.bam
-    	    samtools index "$aux"/"$barcode".sorted.bam
-	    ~/anaconda2/bin/umi_tools dedup -I "$aux"/"$barcode".sorted.bam --paired -S "$out"/"$barcode".deduplicated.bam --edit-distance-threshold 2 -L "$out"/"$barcode".group.log 
-    	fi
-	samtools sort "$out"/"$barcode".deduplicated.bam -o "$out"/"$barcode".deduplicated.sorted.bam
-	rm -f "$out"/"$barcode".deduplicated.bam
-    	# echo "Conversion to bed file ..."
-    	# bam2bed < "$out"/"$barcode".deduplicated.bam | cut -f-17 > "$out"/"$barcode".deduplicated.bed # convert using bedops bam2bed
-    fi
-done
+#     count=$(samtools view -S "$aux"/"$barcode".sam | head -1 | wc -l)
+#     if [ $count -ne 0 ]; then 
+#     	if [ "$mode" == "SE" ];	then
+#     	    samtools view -h -Sb -q $quality "$aux"/"$barcode".sam > "$aux"/"$barcode".bam # only keep first mate in pair and filter wrt quality
+#     	    samtools sort "$aux"/"$barcode".bam -o "$aux"/"$barcode".sorted.bam
+#     	    samtools index "$aux"/"$barcode".sorted.bam
+#     	    ~/anaconda2/bin/umi_tools dedup -I "$aux"/"$barcode".sorted.bam -S "$out"/"$barcode".deduplicated.bam --edit-distance-threshold 2 -L "$out"/"$barcode".group.log # first dedup of reads not at cutsite
+#     	fi
+#     	if [ "$mode" == "PE" ];	then
+#     	    samtools view -h -Sb -q $quality "$aux"/"$barcode".sam > "$aux"/"$barcode".bam # only keep first mate in pair and filter wrt quality
+#     	    samtools sort "$aux"/"$barcode".bam -o "$aux"/"$barcode".sorted.bam
+#     	    samtools index "$aux"/"$barcode".sorted.bam
+# 	    ~/anaconda2/bin/umi_tools dedup -I "$aux"/"$barcode".sorted.bam --paired -S "$out"/"$barcode".deduplicated.bam --edit-distance-threshold 2 -L "$out"/"$barcode".group.log 
+#     	fi
+# 	samtools sort "$out"/"$barcode".deduplicated.bam -o "$out"/"$barcode".deduplicated.sorted.bam
+# 	rm -f "$out"/"$barcode".deduplicated.bam
+#     	# echo "Conversion to bed file ..."
+#     	# bam2bed < "$out"/"$barcode".deduplicated.bam | cut -f-17 > "$out"/"$barcode".deduplicated.bed # convert using bedops bam2bed
+#     fi
+# done

@@ -5,23 +5,23 @@
 
 inputfile=$1		      # samplesheet_BICRO67
 dir=$2	     # /media/bicroserver_2-seq/BICRO67/FASTQ
-run=$3	     # BICRO67
+sample=$3	     # XZ156BICRO67
 mode=$4	     # PE or SE
 
-rm -f run_pipeline_"$run".sh
+rm -f run_pipeline_"$sample".sh
 
-echo "#!/bin/usr/env bash" >> run_pipeline_"$run".sh # first line
-echo >> run_pipeline_"$run".sh			   # empty space
+echo "#!/bin/usr/env bash" >> run_pipeline_"$sample".sh # first line
+echo >> run_pipeline_"$sample".sh			   # empty space
 
-rm -f /home/garner1/Dropbox/pipelines/cutseq/pattern/*${run}
+rm -f /home/garner1/Dropbox/pipelines/cutseq/pattern/*${sample}
 while read -r line; do
     lib=`echo $line|cut -d',' -f1`
     barcode=`echo $line|cut -d',' -f2`
     cutsite=`echo $line|cut -d',' -f3`
-    echo $barcode$cutsite >> /home/garner1/Dropbox/pipelines/cutseq/pattern/${lib}${run}
+    echo $barcode$cutsite >> /home/garner1/Dropbox/pipelines/cutseq/pattern/${sample}
     fastq=${dir}/${lib}.fastq.gz
 done < $inputfile
-echo "if [ -f ${fastq} ]; then" >> run_pipeline_"$run".sh
-echo bash main.sh $lib$run human $mode /home/garner1/Dropbox/pipelines/cutseq/pattern/${lib}${run} $cutsite $fastq >> run_pipeline_"$run".sh
-echo fi >> run_pipeline_"$run".sh
-chmod +x run_pipeline_"$run".sh
+echo "if [ -f ${fastq} ]; then" >> run_pipeline_"$sample".sh
+echo bash main.sh $sample human $mode /home/garner1/Dropbox/pipelines/cutseq/pattern/${sample} $cutsite $fastq >> run_pipeline_"$sample".sh
+echo fi >> run_pipeline_"$sample".sh
+chmod +x run_pipeline_"$sample".sh

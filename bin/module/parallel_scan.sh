@@ -17,7 +17,7 @@ if [ "$mode" == "SE" ];then
 	zcat "$r1" | cut -d':' -f-7 | gzip - > $in/r1_0.fq.gz
     fi
     if [ ! -f "$in"/processed.fastq.gz ]; then
-	~/anaconda2/bin/umi_tools extract --stdin="$in/r1_0.fq.gz" --bc-pattern=NNNNNNNNXXXXXXXX --log=processed.log --stdout "$in"/processed.fastq.gz
+	/usr/local/share/anaconda3/bin/umi_tools extract --stdin="$in/r1_0.fq.gz" --bc-pattern=NNNNNNNNXXXXXXXX --log=processed.log --stdout "$in"/processed.fastq.gz
     fi
     if [ ! -f "$in"/r1.fq ]; then
 	gunzip -c "$in"/processed.fastq.gz > "$in"/r1.fq
@@ -35,7 +35,7 @@ if [ "$mode" == "PE" ];then
 	zcat "$r2" | cut -d':' -f-7 | gzip > $in/r2_0.fq.gz
     fi
     if [ ! -f "$in"/processed.2.fastq.gz ]; then
-	~/anaconda2/bin/umi_tools extract --stdin="$in/r1_0.fq.gz" --read2-in="$in/r2_0.fq.gz" --bc-pattern=NNNNNNNNXXXXXXXX --log=processed.log --stdout "$in"/processed.1.fastq.gz --read2-out="$in"/processed.2.fastq.gz
+	/usr/local/share/anaconda3/bin/umi_tools extract --stdin="$in/r1_0.fq.gz" --read2-in="$in/r2_0.fq.gz" --bc-pattern=NNNNNNNNXXXXXXXX --log=processed.log --stdout "$in"/processed.1.fastq.gz --read2-out="$in"/processed.2.fastq.gz
     fi
     if [ ! -f "$in"/r1.fq ]; then
 	gunzip -c "$in"/processed.1.fastq.gz > "$in"/r1.fq & pid1=$!
@@ -56,7 +56,7 @@ len=`echo $cutsite|awk '{print length}'`
 olddir=`echo $PWD`
 cd $in
 cat $barcode_file |
-    awk -v len="$len" '{print "^ ",substr($1,1,8)"[2,0,0]",substr($1,9,len)"[1,0,0]","1...1000","$" > "barcode_"substr($1,1,8)}'
+    awk -v len="$len" '{print "^ ",substr($1,1,8)"[1,0,0]",substr($1,9,len)"[1,0,0]","1...1000","$" > "barcode_"substr($1,1,8)}'
 cd $olddir
 ################################################################################
 echo "Split FA files to satisfy scan_for_match 100M lines limit ..."

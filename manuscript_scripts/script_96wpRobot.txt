@@ -1,0 +1,19 @@
+# reads with prefix
+parallel -k "cat indata/barcode_{}.fa-1line |wc -l" ::: $(cat barcodes) 
+
+# Reads q>29
+parallel -k "samtools view -c auxdata/{}.bam" ::: $(cat barcodes)
+
+# Mappability
+parallel -k "samtools stats auxdata/{}.sam|grep ^SN | cut -f 2-|grep 'raw\|reads mapped:'|cut -f2|paste - -|awk '{print 100*\$2/\$1}'" ::: $(cat barcodes)
+
+# Reads after UMI filtering
+parallel -k "samtools view -c outdata/{}.deduplicated.sorted.bam" ::: $(cat barcodes)
+
+# Restriction sites sequenced
+parallel -k "bedtools intersect -a /home/garner1/Work/pipelines/data/AAGCTT.bed -b outdata/{}.deduplicated.sorted.bam -u|wc -l"
+
+# Error rate
+parallel -k "samtools stats auxdata/{}.sam|grep 'error rate'|cut -f3" ::: $(cat barcodes)
+
+

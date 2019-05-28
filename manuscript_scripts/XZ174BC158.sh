@@ -1,27 +1,28 @@
 #!/usr/env/bin bash
 
 cd /home/garner1/Work/dataset/XZ174BC158
-parallel "samtools view -s {1}.{2} -b XZ174BICRO158.GAATCCGA.deduplicated.sorted.bam | samtools view -bS - > {2}/bamfiles/perc-{1}.{2}.bam" ::: $(seq 210519001 210519200) ::: 005
-parallel "samtools view -s {1}.{2} -b XZ174BICRO158.GAATCCGA.deduplicated.sorted.bam | samtools view -bS - > {2}/bamfiles/perc-{1}.{2}.bam" ::: $(seq 210519001 210519200) ::: 01
-parallel "samtools view -s {1}.{2} -b XZ174BICRO158.GAATCCGA.deduplicated.sorted.bam | samtools view -bS - > {2}/bamfiles/perc-{1}.{2}.bam" ::: $(seq 210519001 210519200) ::: 05
-parallel "samtools view -s {1}.{2} -b XZ174BICRO158.GAATCCGA.deduplicated.sorted.bam | samtools view -bS - > {2}/bamfiles/perc-{1}.{2}.bam" ::: $(seq 210519001 210519200) ::: 10
-parallel "samtools view -s {1}.{2} -b XZ174BICRO158.GAATCCGA.deduplicated.sorted.bam | samtools view -bS - > {2}/bamfiles/perc-{1}.{2}.bam" ::: $(seq 210519001 210519200) ::: 25
-parallel "samtools view -s {1}.{2} -b XZ174BICRO158.GAATCCGA.deduplicated.sorted.bam | samtools view -bS - > {2}/bamfiles/perc-{1}.{2}.bam" ::: $(seq 210519001 210519200) ::: 50
+
+# parallel "samtools view -s {1}.{2} -b XZ174BICRO158.GAATCCGA.deduplicated.sorted.bam | samtools view -bS - > {2}/bamfiles/perc-{1}.{2}.bam" ::: $(seq 210519001 210519200) ::: 005
+# parallel "samtools view -s {1}.{2} -b XZ174BICRO158.GAATCCGA.deduplicated.sorted.bam | samtools view -bS - > {2}/bamfiles/perc-{1}.{2}.bam" ::: $(seq 210519001 210519200) ::: 01
+# parallel "samtools view -s {1}.{2} -b XZ174BICRO158.GAATCCGA.deduplicated.sorted.bam | samtools view -bS - > {2}/bamfiles/perc-{1}.{2}.bam" ::: $(seq 210519001 210519200) ::: 05
+# parallel "samtools view -s {1}.{2} -b XZ174BICRO158.GAATCCGA.deduplicated.sorted.bam | samtools view -bS - > {2}/bamfiles/perc-{1}.{2}.bam" ::: $(seq 210519001 210519200) ::: 10
+# parallel "samtools view -s {1}.{2} -b XZ174BICRO158.GAATCCGA.deduplicated.sorted.bam | samtools view -bS - > {2}/bamfiles/perc-{1}.{2}.bam" ::: $(seq 210519001 210519200) ::: 25
+# parallel "samtools view -s {1}.{2} -b XZ174BICRO158.GAATCCGA.deduplicated.sorted.bam | samtools view -bS - > {2}/bamfiles/perc-{1}.{2}.bam" ::: $(seq 210519001 210519200) ::: 50
 
 # for perc in 005 01 05 10 25 50; do
 #     for bin in 1000 100 10 500 50; do
 # 	parallel /opt/R/3.5.3/bin/Rscript /home/garner1/Work/pipelines/CNV/prepare_cnv_profile.parallel.R {} ${bin} ::: \
 # 		 /home/garner1/Work/dataset/XZ174BC158/${perc}/bamfiles/*.bam \
-# 	    && mv /home/garner1/Work/dataset/XZ174BC158/${perc}/bamfiles/*.{pdf,tsv} /home/garner1/Work/dataset/XZ174BC158/${perc}/${bin};
+# 	    && mv /home/garner1/Work/dataset/XZ174BC158/${perc}/bamfiles/*.{pdf,tsv,bed} /home/garner1/Work/dataset/XZ174BC158/${perc}/${bin};
 #     done;
 # done
 
 #THIS NEED TO BE RUN ONLY ONCE
-# for bin in 1000 100 10 500 50; do
-#     parallel /opt/R/3.5.3/bin/Rscript /home/garner1/Work/pipelines/CNV/prepare_cnv_profile.parallel.R {} ${bin} ::: \
-# 	     /home/garner1/Work/dataset/XZ174BC158/100/bamfiles/*.bam \
-# 	&& mv /home/garner1/Work/dataset/XZ174BC158/100/bamfiles/*.{pdf,tsv} /home/garner1/Work/dataset/XZ174BC158/100/${bin};
-# done
+for bin in 1000 100 10 500 50; do
+    parallel /opt/R/3.5.3/bin/Rscript /home/garner1/Work/pipelines/CNV/prepare_cnv_profile.parallel.R {} ${bin} ::: \
+	     /home/garner1/Work/dataset/XZ174BC158/100/bamfiles/*.bam \
+	&& mv /home/garner1/Work/dataset/XZ174BC158/100/bamfiles/*.{pdf,tsv,bed} /home/garner1/Work/dataset/XZ174BC158/100/${bin};
+done
 
 # for kbp in 1000 500 100 50 10; do
 #     for perc in 50 25 10 05 01 005; do

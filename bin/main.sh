@@ -50,7 +50,11 @@ do
     if [ $count -ne 0 ]; then 
 	samtools view -u "$aux"/"$barcode".sam | samtools sort -@ 4 - -T "$aux"/"$barcode" -o "$aux"/"$barcode".all.bam
     	samtools index "$aux"/"$barcode".all.bam
-    	samtools view -h -Sb -q $quality "$aux"/"$barcode".sam | samtools sort -@ 4 - -T "$aux"/"$barcode" -o "$aux"/"$barcode".sorted.bam # only keep first mate in pair and filter wrt quality
+    	/usr/local/share/anaconda3/bin/alfred qc -r /home/garner1/Work/genomes/Homo_sapiens.GRCh37.dna.primary_assembly.fa/GRCh37.fa \
+					      -j "$aux"/"$barcode".all.json.gz -o "$aux"/"$barcode".all.tsv.gz "$aux"/"$barcode".all.bam
+	samtools view -h -Sb -q $quality "$aux"/"$barcode".sam | samtools sort -@ 4 - -T "$aux"/"$barcode" -o "$aux"/"$barcode".sorted.bam # only keep first mate in pair and filter wrt quality
+    	/usr/local/share/anaconda3/bin/alfred qc -r /home/garner1/Work/genomes/Homo_sapiens.GRCh37.dna.primary_assembly.fa/GRCh37.fa \
+					      -j "$aux"/"$barcode".q"$quality".json.gz -o "$aux"/"$barcode".q"$quality".tsv.gz "$aux"/"$barcode".sorted.bam
     	samtools index "$aux"/"$barcode".sorted.bam
     	if [ "$mode" == "SE" ];	then
     	    /usr/local/share/anaconda3/bin/umi_tools dedup -I "$aux"/"$barcode".sorted.bam -S "$out"/"$barcode".deduplicated.bam --edit-distance-threshold 2 -L "$out"/"$barcode".group.log # first dedup of reads not at cutsite

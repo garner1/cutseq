@@ -48,17 +48,15 @@ do
 
     count=$(samtools view -S "$aux"/"$barcode".sam | head -1 | wc -l)
     if [ $count -ne 0 ]; then 
+	samtools view -u "$aux"/"$barcode".sam | samtools sort -@ 4 - -T "$aux"/"$barcode" -o "$aux"/"$barcode".all.bam
+    	samtools index "$aux"/"$barcode".all.bam
+    	samtools view -h -Sb -q $quality "$aux"/"$barcode".sam | samtools sort -@ 4 - -T "$aux"/"$barcode" -o "$aux"/"$barcode".sorted.bam # only keep first mate in pair and filter wrt quality
+    	samtools index "$aux"/"$barcode".sorted.bam
     	if [ "$mode" == "SE" ];	then
-    	    samtools view -h -Sb -q $quality "$aux"/"$barcode".sam > "$aux"/"$barcode".bam # only keep first mate in pair and filter wrt quality
-    	    samtools sort "$aux"/"$barcode".bam -o "$aux"/"$barcode".sorted.bam
-    	    samtools index "$aux"/"$barcode".sorted.bam
     	    /usr/local/share/anaconda3/bin/umi_tools dedup -I "$aux"/"$barcode".sorted.bam -S "$out"/"$barcode".deduplicated.bam --edit-distance-threshold 2 -L "$out"/"$barcode".group.log # first dedup of reads not at cutsite
     	fi
     	if [ "$mode" == "PE" ];	then
-    	    samtools view -h -Sb -q $quality "$aux"/"$barcode".sam > "$aux"/"$barcode".bam # only keep first mate in pair and filter wrt quality
-    	    samtools sort "$aux"/"$barcode".bam -o "$aux"/"$barcode".sorted.bam
-    	    samtools index "$aux"/"$barcode".sorted.bam
-	    /usr/local/share/anaconda3/bin/umi_tools dedup -I "$aux"/"$barcode".sorted.bam --paired -S "$out"/"$barcode".deduplicated.bam --edit-distance-threshold 2 -L "$out"/"$barcode".group.log 
+    	    /usr/local/share/anaconda3/bin/umi_tools dedup -I "$aux"/"$barcode".sorted.bam --paired -S "$out"/"$barcode".deduplicated.bam --edit-distance-threshold 2 -L "$out"/"$barcode".group.log 
     	fi
 	samtools sort "$out"/"$barcode".deduplicated.bam -o "$out"/"$barcode".deduplicated.sorted.bam
 	rm -f "$out"/"$barcode".deduplicated.bam

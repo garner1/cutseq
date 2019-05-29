@@ -1,5 +1,6 @@
 # CUTseq
 Pipeline for CUTseq 
+Some of the tools needed are: umi_tools, gnu parallel, alfred tool
 
 cd ./bin
 

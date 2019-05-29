@@ -27,7 +27,8 @@ echo Processing $experiment
 # bash ./module/quality_control.sh $r1 $numbproc $out
 ################################################################################
 
-bash ./module/parallel_scan.sh $cutsite $in $mode $barcode_file $r1 $r2 # in parallel_scan.h you need to hard-code the edit distance from barcode
+# In parallel_scan.h you need to hard-code the edit distance from barcode
+bash ./module/parallel_scan.sh $cutsite $in $mode $barcode_file $r1 $r2 
 
 i=0
 for barcode in $( cat $barcode_file | awk '{print substr($1,1,8)}' ) # !!!!KEEP ALL BARCODES!!!!
@@ -47,19 +48,26 @@ do
 
     count=$(samtools view -S "$aux"/"$barcode".sam | head -1 | wc -l)
     if [ $count -ne 0 ]; then 
+    	samtools view -u "$aux"/"$barcode".sam | samtools sort -@ 4 - -T "$aux"/"$barcode" -o "$aux"/"$barcode".all.bam
+    	samtools index "$aux"/"$barcode".all.bam
+    	/usr/local/share/anaconda3/bin/alfred qc -r /home/garner1/Work/genomes/Homo_sapiens.GRCh37.dna.primary_assembly.fa/GRCh37.fa \
+    					      -j "$aux"/"$barcode".all.json.gz -o "$aux"/"$barcode".all.tsv.gz "$aux"/"$barcode".all.bam
+    	samtools view -h -Sb -q $quality "$aux"/"$barcode".sam | samtools sort -@ 4 - -T "$aux"/"$barcode" -o "$aux"/"$barcode".q"$quality".bam # only keep first mate in pair and filter wrt quality
+    	/usr/local/share/anaconda3/bin/alfred qc -r /home/garner1/Work/genomes/Homo_sapiens.GRCh37.dna.primary_assembly.fa/GRCh37.fa \
+    					      -j "$aux"/"$barcode".q"$quality".json.gz -o "$aux"/"$barcode".q"$quality".tsv.gz "$aux"/"$barcode".q"$quality".bam
+    	samtools index "$aux"/"$barcode".q"$quality".bam
     	if [ "$mode" == "SE" ];	then
-    	    samtools view -h -Sb -q $quality "$aux"/"$barcode".sam > "$aux"/"$barcode".bam # only keep first mate in pair and filter wrt quality
-    	    samtools sort "$aux"/"$barcode".bam -o "$aux"/"$barcode".sorted.bam
-    	    samtools index "$aux"/"$barcode".sorted.bam
-    	    ~/anaconda2/bin/umi_tools dedup -I "$aux"/"$barcode".sorted.bam -S "$out"/"$barcode".deduplicated.bam --edit-distance-threshold 2 -L "$out"/"$barcode".group.log # first dedup of reads not at cutsite
+    	    /usr/local/share/anaconda3/bin/umi_tools dedup -I "$aux"/"$barcode".q"$quality".bam -S "$out"/"$barcode".deduplicated.bam --edit-distance-threshold 2 -L "$out"/"$barcode".group.log # first dedup of reads not at cutsite
     	fi
     	if [ "$mode" == "PE" ];	then
-    	    samtools view -h -Sb -q $quality "$aux"/"$barcode".sam > "$aux"/"$barcode".bam # only keep first mate in pair and filter wrt quality
-    	    samtools sort "$aux"/"$barcode".bam -o "$aux"/"$barcode".sorted.bam
-    	    samtools index "$aux"/"$barcode".sorted.bam
-	    ~/anaconda2/bin/umi_tools dedup -I "$aux"/"$barcode".sorted.bam --paired -S "$out"/"$barcode".deduplicated.bam --edit-distance-threshold 2 -L "$out"/"$barcode".group.log 
+    	    /usr/local/share/anaconda3/bin/umi_tools dedup -I "$aux"/"$barcode".q"$quality".bam --paired -S "$out"/"$barcode".deduplicated.bam --edit-distance-threshold 2 -L "$out"/"$barcode".group.log 
     	fi
-	samtools sort "$out"/"$barcode".deduplicated.bam -o "$out"/"$barcode".deduplicated.sorted.bam
+    	samtools sort -@ 4 "$out"/"$barcode".deduplicated.bam -o "$out"/"$barcode".deduplicated.q"$quality".bam
+    	rm -f "$out"/"$barcode".deduplicated.bam
+    	/usr/local/share/anaconda3/bin/alfred qc -r /home/garner1/Work/genomes/Homo_sapiens.GRCh37.dna.primary_assembly.fa/GRCh37.fa \
+					      -j "$out"/"$barcode".deduplicated.q"$quality".json.gz \
+					      -o "$out"/"$barcode".deduplicated.q"$quality".tsv.gz \
+					      "$out"/"$barcode".deduplicated.q"$quality".bam
     	# echo "Conversion to bed file ..."
     	# bam2bed < "$out"/"$barcode".deduplicated.bam | cut -f-17 > "$out"/"$barcode".deduplicated.bed # convert using bedops bam2bed
     fi

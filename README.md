@@ -1,5 +1,5 @@
-# RESTSEQ
-Pipeline for restseq 
+# CUTseq
+Pipeline for CUTseq 
 
 cd ./bin
 

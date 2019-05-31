@@ -1,0 +1,7 @@
+binsize=500Kbp # or 100Kbp or 1000Kbp
+
+parallel "/opt/R/3.5.3/bin/Rscript prepare_cnv_profile.parallel.R {} 500" ::: ~/Work/dataset/cutseq/*PCRc/outdata/*.deduplicated.q30.bam
+
+parallel -k "echo {1} {2};paste {1} {2} | tail -n+2 | tr '.' ',' | /usr/local/share/anaconda3/bin/datamash ppearson 5:10" ::: *PCRc/outdata/*ng*500Kbp*tsv ::: *PCRc/outdata/*ng*500Kbp*tsv | paste - - | sed 's/\/outdata\//-/g' | sed 's/.deduplicated.q30.500Kbp.bam.tsv//g' | awk '{print $1"\t"$2"\t"$3}' | sort -k1,1r -k2,2r | tr ',' '.' > pearson.PCR+serialDilution.500Kbp.tsv
+
+cat pearson.PCR+serialDilution.500Kbp.tsv | cut -f3 | paste - - - - - - - - - - - - - - - - - - | xclip -selection clipboard

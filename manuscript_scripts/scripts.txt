@@ -1,0 +1,73 @@
+# count reads with prefix
+#parallel -k "cat indata/barcode_{}.fa-1line |wc -l" ::: $(cat barcodes) 
+
+# count Reads q>29
+#parallel -k "samtools view -c auxdata/{}.bam" ::: $(cat barcodes)
+
+# evaluate Mappability
+#parallel -k "samtools stats auxdata/{}.sam|grep ^SN | cut -f 2-|grep 'raw\|reads mapped:'|cut -f2|paste - -|awk '{print 100*\$2/\$1}'" ::: $(cat barcodes)
+
+# count Reads after UMI filtering
+#parallel -k "samtools view -c outdata/{}.deduplicated.sorted.bam" ::: $(cat barcodes)
+
+# count Restriction sites sequenced
+#parallel -k "bedtools intersect -a /home/garner1/Work/pipelines/data/AAGCTT.bed -b outdata/{}.deduplicated.sorted.bam -u|wc -l"
+
+# evaluate Error rate
+#parallel -k "samtools stats auxdata/{}.sam|grep 'error rate'|cut -f3" ::: $(cat barcodes)
+#####################################################
+# GENERATE COPY NUMBER PROFILES
+#binsize=500Kbp # or 100Kbp or 1000Kbp
+#parallel "/opt/R/3.5.3/bin/Rscript prepare_cnv_profile.parallel.R {} 500" ::: ~/Work/dataset/cutseq/*PCRc/outdata/*.deduplicated.q30.bam
+
+# CALCULATE PEARSON CORRELATION
+#parallel -k "echo {1} {2};paste {1} {2} | tail -n+2 | tr '.' ',' | /usr/local/share/anaconda3/bin/datamash ppearson 5:10" ::: *PCRc/outdata/*ng*500Kbp*tsv ::: *PCRc/outdata/*ng*500Kbp*tsv | paste - - | sed 's/\/outdata\//-/g' | sed 's/.deduplicated.q30.500Kbp.bam.tsv//g' | awk '{print $1"\t"$2"\t"$3}' | sort -k1,1r -k2,2r | tr ',' '.' > pearson.PCR+serialDilution.500Kbp.tsv
+
+# PARSE THE COEFFICIENT TO INCLUDE THEM IN A SAMPLE X SAMPLE MATRIX
+#cat pearson.PCR+serialDilution.500Kbp.tsv | cut -f3 | paste - - - - - - - - - - - - - - - - - - | xclip -selection clipboard
+##############################################################
+# DOWNSAMPLE BAMFILES WITH DIFFEENT SEED AND SAMPLE SIZES
+# cd /home/garner1/Work/dataset/XZ174BC158
+# parallel "samtools view -s {1}.{2} -b XZ174BICRO158.GAATCCGA.deduplicated.sorted.bam | samtools view -bS - > {2}/bamfiles/perc-{1}.{2}.bam" ::: $(seq 210519001 210519200) ::: 005
+# parallel "samtools view -s {1}.{2} -b XZ174BICRO158.GAATCCGA.deduplicated.sorted.bam | samtools view -bS - > {2}/bamfiles/perc-{1}.{2}.bam" ::: $(seq 210519001 210519200) ::: 01
+# parallel "samtools view -s {1}.{2} -b XZ174BICRO158.GAATCCGA.deduplicated.sorted.bam | samtools view -bS - > {2}/bamfiles/perc-{1}.{2}.bam" ::: $(seq 210519001 210519200) ::: 05
+# parallel "samtools view -s {1}.{2} -b XZ174BICRO158.GAATCCGA.deduplicated.sorted.bam | samtools view -bS - > {2}/bamfiles/perc-{1}.{2}.bam" ::: $(seq 210519001 210519200) ::: 10
+# parallel "samtools view -s {1}.{2} -b XZ174BICRO158.GAATCCGA.deduplicated.sorted.bam | samtools view -bS - > {2}/bamfiles/perc-{1}.{2}.bam" ::: $(seq 210519001 210519200) ::: 25
+# parallel "samtools view -s {1}.{2} -b XZ174BICRO158.GAATCCGA.deduplicated.sorted.bam | samtools view -bS - > {2}/bamfiles/perc-{1}.{2}.bam" ::: $(seq 210519001 210519200) ::: 50
+###################################################
+# PROFILE CNV AT DIFFERENT PERC AND BIN SIZE
+# for perc in 005 01 05 10 25 50; do
+#     for bin in 1000 100 10 500 50; do
+# 	parallel /opt/R/3.5.3/bin/Rscript /home/garner1/Work/pipelines/CNV/prepare_cnv_profile.parallel.R {} ${bin} ::: \
+# 		 /home/garner1/Work/dataset/XZ174BC158/${perc}/bamfiles/*.bam \
+# 	    && mv /home/garner1/Work/dataset/XZ174BC158/${perc}/bamfiles/*.{pdf,tsv,bed} /home/garner1/Work/dataset/XZ174BC158/${perc}/${bin};
+#     done;
+# done
+
+#THIS NEED TO BE RUN ONLY ONCE
+#for bin in 1000 100 10 500 50; do
+#    parallel /opt/R/3.5.3/bin/Rscript /home/garner1/Work/pipelines/CNV/prepare_cnv_profile.parallel.R {} ${bin} ::: \
+#	     /home/garner1/Work/dataset/XZ174BC158/100/bamfiles/*.bam \
+#	&& mv /home/garner1/Work/dataset/XZ174BC158/100/bamfiles/*.{pdf,tsv,bed} /home/garner1/Work/dataset/XZ174BC158/100/${bin};
+#done
+
+# EVALUATE PERARSON
+# for kbp in 1000 500 100 50 10; do
+#     for perc in 50 25 10 05 01 005; do
+# 	echo ${kbp} ${perc};
+# 	parallel "echo {1} {2};paste {1} {2} | tail -n+2 | tr '.' ',' | /usr/local/share/anaconda3/bin/datamash ppearson 5:10" ::: \
+# 		 100/${kbp}/XZ174BICRO158.GAATCCGA.deduplicated.sorted.bam.tsv ::: \
+# 		 ${perc}/${kbp}/perc-210519*tsv | \
+# 	    paste - - | \
+# 	    /usr/local/share/anaconda3/bin/datamash min 2 q1 2 median 2 q3 2 max 2;
+#     done;
+# done | paste - - | tr ',' '.'
+
+# EVALUATE MANHATTAN DISTANCE
+# for kbp in 1000 500 100 50 10; do
+#     for perc in 50 25 10 05 01 005;
+#     do parallel "echo ${kbp} ${perc}; paste {1} {2} | tail -n+2 | tr '.' ',' | awk '{print sqrt((\$5-\$10)*(\$5-\$10))}'|/usr/local/share/anaconda3/bin/datamash mean 1" \
+# 		::: 100/${kbp}/*.tsv ::: ${perc}/${kbp}/perc-*.tsv \
+# 	    | paste - -;
+#     done;
+# done | tr ',' '.' 

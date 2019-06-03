@@ -71,3 +71,11 @@
 # 	    | paste - -;
 #     done;
 # done | tr ',' '.' 
+###########################################
+# JACCARD SIMILARITY BETWEEN SAMPLES
+#parallel "echo {1} {2} && bedtools jaccard -a {1} -b {2}" ::: *PCRc/outdata/*ng.deduplicated.q30.100Kbp.bam.tsv.amp.bed ::: *PCRc/outdata/*ng.deduplicated.q30.100Kbp.bam.tsv.amp.bed|sed "s/\/outdata\///g"|sed "s/.deduplicated.q30.100Kbp.bam.tsv.amp.bed//g"|paste - - -|cut -f1,8|sort -k1,1r -k2,2r| cut -f2 | paste - - - - - - - - - - - - - - - - - - | xclip -selection clipboard
+
+#parallel "echo {1} {2} && bedtools jaccard -a {1} -b {2}" ::: *PCRc/outdata/*ng.deduplicated.q30.100Kbp.bam.tsv.del.bed ::: *PCRc/outdata/*ng.deduplicated.q30.100Kbp.bam.tsv.del.bed|sed "s/\/outdata\///g"|sed "s/.deduplicated.q30.100Kbp.bam.tsv.del.bed//g"|paste - - -|cut -f1,8|sort -k1,1r -k2,2r| cut -f2 | paste - - - - - - - - - - - - - - - - - - | xclip -selection clipboard
+
+#parallel "echo {1} {2} && bedtools jaccard -a {1} -b {2}" ::: *PCRc/outdata/*ng.deduplicated.q30.100Kbp.bam.tsv.null.bed ::: *PCRc/outdata/*ng.deduplicated.q30.100Kbp.bam.tsv.null.bed|sed "s/\/outdata\///g"|sed "s/.deduplicated.q30.100Kbp.bam.tsv.null.bed//g"|paste - - -|cut -f1,8|sort -k1,1r -k2,2r| cut -f2 | paste - - - - - - - - - - - - - - - - - - | xclip -selection clipboard
+###########################################

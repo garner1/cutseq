@@ -72,10 +72,14 @@
 #     done;
 # done | tr ',' '.' 
 ###########################################
-# JACCARD SIMILARITY BETWEEN SAMPLES
+# JACCARD SIMILARITY BETWEEN SAMPLES in pcr+input amount
 #parallel "echo {1} {2} && bedtools jaccard -a {1} -b {2}" ::: *PCRc/outdata/*ng.deduplicated.q30.100Kbp.bam.tsv.amp.bed ::: *PCRc/outdata/*ng.deduplicated.q30.100Kbp.bam.tsv.amp.bed|sed "s/\/outdata\///g"|sed "s/.deduplicated.q30.100Kbp.bam.tsv.amp.bed//g"|paste - - -|cut -f1,8|sort -k1,1r -k2,2r| cut -f2 | paste - - - - - - - - - - - - - - - - - - | xclip -selection clipboard
 
 #parallel "echo {1} {2} && bedtools jaccard -a {1} -b {2}" ::: *PCRc/outdata/*ng.deduplicated.q30.100Kbp.bam.tsv.del.bed ::: *PCRc/outdata/*ng.deduplicated.q30.100Kbp.bam.tsv.del.bed|sed "s/\/outdata\///g"|sed "s/.deduplicated.q30.100Kbp.bam.tsv.del.bed//g"|paste - - -|cut -f1,8|sort -k1,1r -k2,2r| cut -f2 | paste - - - - - - - - - - - - - - - - - - | xclip -selection clipboard
 
 #parallel "echo {1} {2} && bedtools jaccard -a {1} -b {2}" ::: *PCRc/outdata/*ng.deduplicated.q30.100Kbp.bam.tsv.null.bed ::: *PCRc/outdata/*ng.deduplicated.q30.100Kbp.bam.tsv.null.bed|sed "s/\/outdata\///g"|sed "s/.deduplicated.q30.100Kbp.bam.tsv.null.bed//g"|paste - - -|cut -f1,8|sort -k1,1r -k2,2r| cut -f2 | paste - - - - - - - - - - - - - - - - - - | xclip -selection clipboard
 ###########################################
+#JACCARD SIMILARITY BETWEEN SKBR3 DEEP REFERENCE AND DOWN-SAMPLES
+for binsize in 1000 500 100 50 10;do for perc in 50 25 10 05 01 005;do echo ${binsize} ${perc}; parallel "bedtools jaccard -a 100/${binsize}/XZ174BICRO158.GAATCCGA.deduplicated.sorted.bam.tsv.amp.bed -b {}" ::: ${perc}/${binsize}/*.${perc}.bam.tsv.amp.bed | paste - -|cut -f7|tr '.' ','|/usr/local/share/anaconda3/bin/datamash min 1 q1 1 median 1 q3 1 max 1;done;done|paste - -|tr ',' '.'|xclip -selection clipboard
+for binsize in 1000 500 100 50 10;do for perc in 50 25 10 05 01 005;do echo ${binsize} ${perc}; parallel "bedtools jaccard -a 100/${binsize}/XZ174BICRO158.GAATCCGA.deduplicated.sorted.bam.tsv.del.bed -b {}" ::: ${perc}/${binsize}/*.${perc}.bam.tsv.del.bed | paste - -|cut -f7|tr '.' ','|/usr/local/share/anaconda3/bin/datamash min 1 q1 1 median 1 q3 1 max 1;done;done|paste - -|tr ',' '.'|xclip -selection clipboard
+for binsize in 1000 500 100 50 10;do for perc in 50 25 10 05 01 005;do echo ${binsize} ${perc}; parallel "bedtools jaccard -a 100/${binsize}/XZ174BICRO158.GAATCCGA.deduplicated.sorted.bam.tsv.null.bed -b {}" ::: ${perc}/${binsize}/*.${perc}.bam.tsv.null.bed | paste - -|cut -f7|tr '.' ','|/usr/local/share/anaconda3/bin/datamash min 1 q1 1 median 1 q3 1 max 1;done;done|paste - -|tr ',' '.'|xclip -selection clipboard

@@ -38,20 +38,21 @@ do
 
     if [ "$mode" == "PE" ]
     then
-    	bwa mem -v 1 -t $numbproc $refgen "$in"/barcode_"$barcode".fq "$in"/barcode_"$barcode"-r2.fq | samtools sort -@ 6 -T $(exp) > "$aux"/"$barcode".all.bam
+    	bwa mem -v 1 -t $numbproc $refgen "$in"/barcode_"$barcode".fq "$in"/barcode_"$barcode"-r2.fq > "$aux"/"$barcode".sam
     fi
     
     if [ "$mode" == "SE" ]
     then
-    	bwa mem -v 1 -t $numbproc $refgen "$in"/barcode_"$barcode".fq | samtools sort -@ 6 -T $(exp) > "$aux"/"$barcode".all.bam
+    	bwa mem -v 1 -t $numbproc $refgen "$in"/barcode_"$barcode".fq > "$aux"/"$barcode".sam
     fi
 
-    count=$(samtools view -c "$aux"/"$barcode".all.bam)
+    count=$(samtools view -S "$aux"/"$barcode".sam | head -1 | wc -l)
     if [ $count -ne 0 ]; then 
+    	samtools view -u "$aux"/"$barcode".sam | samtools sort -@ 4 - -T "$aux"/"$barcode" -o "$aux"/"$barcode".all.bam
     	samtools index "$aux"/"$barcode".all.bam
     	/usr/local/share/anaconda3/bin/alfred qc -r /home/garner1/Work/genomes/Homo_sapiens.GRCh37.dna.primary_assembly.fa/GRCh37.fa \
     					      -j "$aux"/"$barcode".all.json.gz -o "$aux"/"$barcode".all.tsv.gz "$aux"/"$barcode".all.bam
-    	samtools view -h -q $quality "$aux"/"$barcode".all.bam | samtools sort -@ 4 - -T "$aux"/"$barcode" -o "$aux"/"$barcode".q"$quality".bam # only keep first mate in pair and filter wrt quality
+    	samtools view -h -Sb -q $quality "$aux"/"$barcode".sam | samtools sort -@ 4 - -T "$aux"/"$barcode" -o "$aux"/"$barcode".q"$quality".bam # only keep first mate in pair and filter wrt quality
     	/usr/local/share/anaconda3/bin/alfred qc -r /home/garner1/Work/genomes/Homo_sapiens.GRCh37.dna.primary_assembly.fa/GRCh37.fa \
     					      -j "$aux"/"$barcode".q"$quality".json.gz -o "$aux"/"$barcode".q"$quality".tsv.gz "$aux"/"$barcode".q"$quality".bam
     	samtools index "$aux"/"$barcode".q"$quality".bam

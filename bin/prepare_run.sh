@@ -16,12 +16,13 @@ echo >> run_pipeline_"$sample".sh			   # empty space
 rm -f /home/garner1/Dropbox/pipelines/cutseq/pattern/*${sample}
 while read -r line; do
     lib=`echo $line|cut -d',' -f1`
+    run=`echo $line|cut -d',' -f4`
     barcode=`echo $line|cut -d',' -f2`
     cutsite=`echo $line|cut -d',' -f3`
     echo $barcode$cutsite >> /home/garner1/Dropbox/pipelines/cutseq/pattern/${sample}
-    fastq=${dir}/${lib}.fastq.gz
+    fastq=${dir}/${sample}.fastq.gz
 done < $inputfile
-echo "if [ -f ${fastq} ]; then" >> run_pipeline_"$sample".sh
+echo "if [ -f ${dir}/${sample}.fastq.gz ]; then" >> run_pipeline_"$sample".sh
 echo bash main.sh $sample human $mode /home/garner1/Dropbox/pipelines/cutseq/pattern/${sample} $cutsite $fastq >> run_pipeline_"$sample".sh
 echo fi >> run_pipeline_"$sample".sh
 chmod +x run_pipeline_"$sample".sh

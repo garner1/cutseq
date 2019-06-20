@@ -28,7 +28,7 @@ echo Processing $experiment
 ################################################################################
 
 # In parallel_scan.h you need to hard-code the edit distance from barcode
-bash ./module/parallel_scan.sh $cutsite $in $mode $barcode_file $r1 $r2 
+# bash ./module/parallel_scan.sh $cutsite $in $mode $barcode_file $r1 $r2 
 
 i=0
 for barcode in $( cat $barcode_file | awk '{print substr($1,1,8)}' ) # !!!!KEEP ALL BARCODES!!!!
@@ -36,18 +36,18 @@ do
     echo `expr $i + 1` $barcode
     i=`expr $i + 1`
 
-    if [ "$mode" == "PE" ]
-    then
-    	bwa mem -v 1 -t $numbproc $refgen "$in"/barcode_"$barcode".fq "$in"/barcode_"$barcode"-r2.fq > "$aux"/"$barcode".sam
-    fi
+    # if [ "$mode" == "PE" ]
+    # then
+    # 	bwa mem -v 1 -t $numbproc $refgen "$in"/barcode_"$barcode".fq "$in"/barcode_"$barcode"-r2.fq > "$aux"/"$barcode".sam
+    # fi
     
-    if [ "$mode" == "SE" ]
-    then
-    	bwa mem -v 1 -t $numbproc $refgen "$in"/barcode_"$barcode".fq > "$aux"/"$barcode".sam
-    fi
+    # if [ "$mode" == "SE" ]
+    # then
+    # 	bwa mem -v 1 -t $numbproc $refgen "$in"/barcode_"$barcode".fq > "$aux"/"$barcode".sam
+    # fi
 
-    count=$(samtools view -S "$aux"/"$barcode".sam | head -1 | wc -l)
-    if [ $count -ne 0 ]; then 
+    # count=$(samtools view -S "$aux"/"$barcode".sam | head -1 | wc -l)
+    # if [ $count -ne 0 ]; then 
     	samtools view -u "$aux"/"$barcode".sam | samtools sort -@ 4 - -T "$aux"/"$barcode" -o "$aux"/"$barcode".all.bam
     	samtools index "$aux"/"$barcode".all.bam
     	/usr/local/share/anaconda3/bin/alfred qc -r /home/garner1/Work/genomes/Homo_sapiens.GRCh37.dna.primary_assembly.fa/GRCh37.fa \
@@ -70,5 +70,5 @@ do
 					      "$out"/"$barcode".deduplicated.q"$quality".bam
     	# echo "Conversion to bed file ..."
     	# bam2bed < "$out"/"$barcode".deduplicated.bam | cut -f-17 > "$out"/"$barcode".deduplicated.bed # convert using bedops bam2bed
-    fi
+    # fi
 done

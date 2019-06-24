@@ -1,0 +1,2 @@
+bedtools intersect -a /home/garner1/Work/pipelines/data/AAGCTT.bed -b {bamfile} -u |wc -l
+bedtools intersect -a /home/garner1/Work/pipelines/data/CATG.bed -b {bamfile} -u |wc -l

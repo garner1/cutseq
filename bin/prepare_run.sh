@@ -21,8 +21,17 @@ while read -r line; do
     cutsite=`echo $line|cut -d',' -f3`
     echo $barcode$cutsite >> /home/garner1/Dropbox/pipelines/cutseq/pattern/${sample}
     fastq=${dir}/${sample}.fastq.gz
+    fastq_R1=${dir}/${sample}_R1.fastq.gz
+    fastq_R2=${dir}/${sample}_R2.fastq.gz
 done < $inputfile
-echo "if [ -f ${dir}/${sample}.fastq.gz ]; then" >> run_pipeline_"$sample".sh
-echo bash main.sh $sample human $mode /home/garner1/Dropbox/pipelines/cutseq/pattern/${sample} $cutsite $fastq >> run_pipeline_"$sample".sh
+if [ "$mode" == "SE" ]; then
+    echo "if [ -f ${fastq} ]; then" >> run_pipeline_"$sample".sh
+    echo bash main.sh $sample human $mode /home/garner1/Dropbox/pipelines/cutseq/pattern/${sample} $cutsite $fastq >> run_pipeline_"$sample".sh
+fi
+if [ "$mode" == "PE" ]; then
+    echo "if [ -f ${fastq_R1} ]; then" >> run_pipeline_"$sample".sh
+    echo bash main.sh $sample human $mode /home/garner1/Dropbox/pipelines/cutseq/pattern/${sample} $cutsite $fastq_R1 $fastq_R2 >> run_pipeline_"$sample".sh
+fi
 echo fi >> run_pipeline_"$sample".sh
 chmod +x run_pipeline_"$sample".sh
+ls -lh /home/garner1/Dropbox/pipelines/cutseq/pattern/${sample} $fastq_R1 $fastq_R2

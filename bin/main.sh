@@ -73,4 +73,4 @@ experiment=$1	     # XZ82
 #     	# bam2bed < "$out"/"$barcode".deduplicated.bam | cut -f-17 > "$out"/"$barcode".deduplicated.bed # convert using bedops bam2bed
 #     fi
 # done
-git add -A && git commit -m "git repo updated after processing " -m "`echo $experiment`" && git push origin development
+git add -A && git commit -m "git repo updated after processing " -m "$(echo $experiment)" && git push origin development

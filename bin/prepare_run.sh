@@ -26,12 +26,19 @@ while read -r line; do
 done < $inputfile
 if [ "$mode" == "SE" ]; then
     echo "if [ -f ${fastq} ]; then" >> run_pipeline_"$sample".sh
+    echo "if [ -f /home/garner1/Dropbox/pipelines/cutseq/pattern/${sample} ]; then" >> run_pipeline_"$sample".sh
     echo bash main.sh $sample human $mode /home/garner1/Dropbox/pipelines/cutseq/pattern/${sample} $cutsite $fastq >> run_pipeline_"$sample".sh
+    echo fi >> run_pipeline_"$sample".sh
+    echo fi >> run_pipeline_"$sample".sh
 fi
 if [ "$mode" == "PE" ]; then
     echo "if [ -f ${fastq_R1} ]; then" >> run_pipeline_"$sample".sh
+    echo "if [ -f ${fastq_R2} ]; then" >> run_pipeline_"$sample".sh
+    echo "if [ -f /home/garner1/Dropbox/pipelines/cutseq/pattern/${sample} ]; then" >> run_pipeline_"$sample".sh
     echo bash main.sh $sample human $mode /home/garner1/Dropbox/pipelines/cutseq/pattern/${sample} $cutsite $fastq_R1 $fastq_R2 >> run_pipeline_"$sample".sh
+    echo fi >> run_pipeline_"$sample".sh
+    echo fi >> run_pipeline_"$sample".sh
+    echo fi >> run_pipeline_"$sample".sh
 fi
-echo fi >> run_pipeline_"$sample".sh
 chmod +x run_pipeline_"$sample".sh
 ls -lh /home/garner1/Dropbox/pipelines/cutseq/pattern/${sample} $fastq_R1 $fastq_R2

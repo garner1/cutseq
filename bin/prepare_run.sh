@@ -25,6 +25,7 @@ while read -r line; do
     fastq_R2=${dir}/${sample}_R2.fastq.gz
 done < $inputfile
 if [ "$mode" == "SE" ]; then
+    ls -lh /home/garner1/Work/pipelines/cutseq/pattern/${sample} $fastq
     echo "if [ -f ${fastq} ]; then" >> run_pipeline_"$sample".sh
     echo "if [ -f /home/garner1/Work/pipelines/cutseq/pattern/${sample} ]; then" >> run_pipeline_"$sample".sh
     echo bash main.sh $sample human $mode /home/garner1/Work/pipelines/cutseq/pattern/${sample} $cutsite $fastq >> run_pipeline_"$sample".sh
@@ -32,6 +33,7 @@ if [ "$mode" == "SE" ]; then
     echo fi >> run_pipeline_"$sample".sh
 fi
 if [ "$mode" == "PE" ]; then
+    ls -lh /home/garner1/Work/pipelines/cutseq/pattern/${sample} $fastq_R1 $fastq_R2
     echo "if [ -f ${fastq_R1} ]; then" >> run_pipeline_"$sample".sh
     echo "if [ -f ${fastq_R2} ]; then" >> run_pipeline_"$sample".sh
     echo "if [ -f /home/garner1/Work/pipelines/cutseq/pattern/${sample} ]; then" >> run_pipeline_"$sample".sh
@@ -41,4 +43,3 @@ if [ "$mode" == "PE" ]; then
     echo fi >> run_pipeline_"$sample".sh
 fi
 chmod +x run_pipeline_"$sample".sh
-ls -lh /home/garner1/Work/pipelines/cutseq/pattern/${sample} $fastq_R1 $fastq_R2

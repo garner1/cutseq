@@ -10,7 +10,7 @@ barcode_file=$4	     # ~/Work/pipelines/restseq/pattern/barcode-cutsite_18
 cutsite=$5	     # the restriction cutsite
 r1=$6		     # full path to r1 fastq.gz file
 r2=$7	             # full path to r2 fastq.gz file
-numbproc=24
+numbproc=8
 quality=30	     # filter out read with mapping quality less than this
 ################################################################################
 git add -A && git commit -m "$(echo Start processing $experiment)" && git push origin development

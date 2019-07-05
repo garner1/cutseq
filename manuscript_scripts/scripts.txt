@@ -86,3 +86,6 @@ for binsize in 1000 500 100 50 10;do for perc in 50 25 10 05 01 005;do echo ${bi
 ############################################
 # Count numb of unique cutsites
 parallel "echo {};bedtools intersect -a /home/garner1/Work/pipelines/data/CATG.bed -b {} -g ~/Work/genomes/Homo_sapiens.GRCh37.dna.primary_assembly.fa/GRCh37.fa.fai -sorted -u|wc -l" ::: XZ12?BC143/outdata/*.deduplicated.q30.sorted.bam
+##############################
+# Evaluate fluctuations around segmented profiles
+parallel --link "paste {1} {2}|tail -n+2|awk '\$5>-5'|awk '\$5<5'|ifne echo {1} {2};paste {1} {2}|tail -n+2|awk '\$5>-5'|awk '\$5<5'|awk '{print sqrt((\$5-\$11)*(\$5-\$11))}'|tr '.' ','|/usr/local/share/anaconda2/bin/datamash mean 1 sstdev 1" ::: $(ls bedfiles/XZ31*+*) ::: $(ls tsvfiles/XZ31*+*)|paste - - > ~/XZ31.mean-sd.tsv

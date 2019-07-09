@@ -45,7 +45,7 @@ do
 
     count=$(samtools view -c ${aux}/${barcode}.all.bam)
     if [ $count -ne 0 ]; then 
-    	samtools view -h -q $quality ${aux}/${barcode}.all.bam > ${aux}/${barcode}.q${quality}.bam 
+    	samtools view -h -q $quality ${aux}/${barcode}.all.bam | samtools sort -@ 8 -T ${aux}/${barcode} > ${aux}/${barcode}.q${quality}.bam 
     	parallel "samtools index -@ 8 {}" ::: ${aux}/${barcode}.all.bam ${aux}/${barcode}.q${quality}.bam
     	# /usr/local/share/anaconda3/bin/alfred qc -r /home/garner1/Work/genomes/Homo_sapiens.GRCh37.dna.primary_assembly.fa/GRCh37.fa \
 	# 				      -b /home/garner1/Work/dataset/agilent/S07604715_Covered.woChr.bed \

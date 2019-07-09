@@ -47,14 +47,8 @@ do
     if [ $count -ne 0 ]; then 
     	samtools view -h -q $quality ${aux}/${barcode}.all.bam | samtools sort -@ 8 -T ${aux}/${barcode} > ${aux}/${barcode}.q${quality}.bam 
     	parallel "samtools index -@ 8 {}" ::: ${aux}/${barcode}.all.bam ${aux}/${barcode}.q${quality}.bam
-    	# /usr/local/share/anaconda3/bin/alfred qc -r /home/garner1/Work/genomes/Homo_sapiens.GRCh37.dna.primary_assembly.fa/GRCh37.fa \
-	# 				      -b /home/garner1/Work/dataset/agilent/S07604715_Covered.woChr.bed \
-    	# 				      -j ${aux}/${barcode}.all.json.gz -o ${aux}/${barcode}.all.tsv.gz ${aux}/${barcode}.all.bam
-    	# /usr/local/share/anaconda3/bin/alfred qc -r /home/garner1/Work/genomes/Homo_sapiens.GRCh37.dna.primary_assembly.fa/GRCh37.fa \
-    	# 				      -b /home/garner1/Work/dataset/agilent/S07604715_Covered.woChr.bed \
-	# 				      -j ${aux}/${barcode}.q${quality}.json.gz -o ${aux}/${barcode}.q${quality}.tsv.gz ${aux}/${barcode}.q${quality}.bam 
     	if [ ${mode} == "SE" ];	then
-    	    /usr/local/share/anaconda3/bin/umi_tools dedup -I ${aux}/${barcode}.q${quality}.bam -S ${out}/${barcode}.deduplicated.bam --edit-distance-threshold 2 -L ${out}/${barcode}.group.log # first dedup of reads not at cutsite
+    	    /usr/local/share/anaconda3/bin/umi_tools dedup -I ${aux}/${barcode}.q${quality}.bam -S ${out}/${barcode}.deduplicated.bam --edit-distance-threshold 2 -L ${out}/${barcode}.group.log 
     	fi
     	if [ ${mode} == "PE" ];	then
     	    /usr/local/share/anaconda3/bin/umi_tools dedup -I ${aux}/${barcode}.q${quality}.bam --paired -S ${out}/${barcode}.deduplicated.bam --edit-distance-threshold 2 -L ${out}/${barcode}.group.log 

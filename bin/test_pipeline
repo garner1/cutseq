@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-rm -rf ~/Work/dataset/cutseq/XZ133BC182
-bash prepare_run.sh test/samplesheet/XZ133BC182.csv test/fastq XZ133BC182 SE
-bash run_pipeline_XZ133BC182.sh
+rm -rf ~/Work/dataset/cutseq/test
+bash prepare_run.sh test/samplesheet/test.csv test/fastq test SE
+bash run_pipeline_test.sh

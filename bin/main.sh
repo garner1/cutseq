@@ -49,11 +49,11 @@ do
     	parallel "samtools index -@ 8 {}" ::: ${aux}/${barcode}.all.bam ${aux}/${barcode}.q${quality}.bam
     	if [ ${mode} == "SE" ];	then
 	    /usr/local/share/anaconda3/bin/umi_tools group -I ${aux}/${barcode}.q${quality}.bam --group-out=${aux}/${barcode}.q${quality}.grouped.tsv --log=${aux}/${barcode}.grouped.log 
-    	    /usr/local/share/anaconda3/bin/umi_tools dedup -I ${aux}/${barcode}.q${quality}.bam -S ${out}/${barcode}.deduplicated.bam --edit-distance-threshold 2 -L ${out}/${barcode}.group.log 
+    	    /usr/local/share/anaconda3/bin/umi_tools dedup -I ${aux}/${barcode}.q${quality}.bam -S ${out}/${barcode}.deduplicated.bam -L ${out}/${barcode}.group.log 
     	fi
     	if [ ${mode} == "PE" ];	then
 	    /usr/local/share/anaconda3/bin/umi_tools group -I ${aux}/${barcode}.q${quality}.bam --group-out=${aux}/${barcode}.q${quality}.grouped.tsv --log=${aux}/${barcode}.grouped.log --paired
-    	    /usr/local/share/anaconda3/bin/umi_tools dedup -I ${aux}/${barcode}.q${quality}.bam --paired -S ${out}/${barcode}.deduplicated.bam --edit-distance-threshold 2 -L ${out}/${barcode}.group.log 
+    	    /usr/local/share/anaconda3/bin/umi_tools dedup -I ${aux}/${barcode}.q${quality}.bam --paired -S ${out}/${barcode}.deduplicated.bam -L ${out}/${barcode}.group.log 
     	fi
     	samtools sort -@ 8 ${out}/${barcode}.deduplicated.bam -o ${out}/${barcode}.deduplicated.q${quality}.bam && rm -f ${out}/${barcode}.deduplicated.bam
     	# parallel "/usr/local/share/anaconda3/bin/alfred qc -r /home/garner1/Work/genomes/Homo_sapiens.GRCh37.dna.primary_assembly.fa/GRCh37.fa \

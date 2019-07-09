@@ -25,8 +25,6 @@ refgen=~/Work/genomes/Homo_sapiens.GRCh37.dna.primary_assembly.fa/GRCh37.fa # fu
 echo
 echo Processing $experiment
 ###########################################################################
-# In parallel_scan.h you need to hard-code the edit distance from barcode #
-###########################################################################
 bash ./module/parallel_scan.sh $cutsite $indir $mode $barcode_file $mm $r1 $r2 
 i=0
 for barcode in $( cat $barcode_file | awk '{print substr($1,1,8)}' ) # !!!!KEEP ALL BARCODES!!!!
@@ -58,10 +56,10 @@ do
 						     -I ${aux}/${barcode}.all.bam --paired -S ${out}/${barcode}.deduplicated.bam -L ${out}/${barcode}.group.log --mapping-quality=${quality}
     	fi
     	samtools sort -@ 8 ${out}/${barcode}.deduplicated.bam -o ${out}/${barcode}.deduplicated.q${quality}.bam && rm -f ${out}/${barcode}.deduplicated.bam
-    	parallel "/usr/local/share/anaconda3/bin/alfred qc -r /home/garner1/Work/genomes/Homo_sapiens.GRCh37.dna.primary_assembly.fa/GRCh37.fa \
-					      -b /home/garner1/Work/dataset/agilent/S07604715_Covered.woChr.bed \
-					      -j {.}.json.gz {}" \
-					      ::: ${out}/${barcode}.deduplicated.q${quality}.bam ${aux}/${barcode}.all.bam 
+    	# parallel "/usr/local/share/anaconda3/bin/alfred qc -r /home/garner1/Work/genomes/Homo_sapiens.GRCh37.dna.primary_assembly.fa/GRCh37.fa \
+	# 				      -b /home/garner1/Work/dataset/agilent/S07604715_Covered.woChr.bed \
+	# 				      -j {.}.json.gz {}" \
+	# 				      ::: ${out}/${barcode}.deduplicated.q${quality}.bam ${aux}/${barcode}.all.bam 
 	rm -f processed.log
     fi
 done

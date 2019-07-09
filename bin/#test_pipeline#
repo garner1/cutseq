@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 
-bash prepare_run.sh 
+bash prepare_run.sh test/samplesheet/XZ133BC182.csv test/fastq XZ133BC182 SE
+bash run_pipeline_XZ133BC182.sh

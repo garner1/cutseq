@@ -10,7 +10,8 @@ barcode_file=$4	     # ~/Work/pipelines/restseq/pattern/barcode-cutsite_18
 cutsite=$5	     # the restriction cutsite
 r1=$6		     # full path to r1 fastq.gz file
 r2=$7	             # full path to r2 fastq.gz file
-numbproc=8
+numbproc=24
+mm=2		 # number of mismatches allowd in scan_for_matches
 quality=30	     # filter out read with mapping quality less than this
 ################################################################################
 # git add -A && git commit -m "$(echo Start processing $experiment)" && git push origin development
@@ -23,21 +24,19 @@ aux=$datadir/$experiment/auxdata && mkdir -p $aux
 refgen=~/Work/genomes/Homo_sapiens.GRCh37.dna.primary_assembly.fa/GRCh37.fa # full path to reference genome
 echo
 echo Processing $experiment
-
-# In parallel_scan.h you need to hard-code the edit distance from barcode
-bash ./module/parallel_scan.sh $cutsite $indir $mode $barcode_file $r1 $r2 
-
+###########################################################################
+# In parallel_scan.h you need to hard-code the edit distance from barcode #
+###########################################################################
+bash ./module/parallel_scan.sh $cutsite $indir $mode $barcode_file $mm $r1 $r2 
 i=0
 for barcode in $( cat $barcode_file | awk '{print substr($1,1,8)}' ) # !!!!KEEP ALL BARCODES!!!!
 do
     echo `expr $i + 1` $barcode
     i=`expr $i + 1`
-
     if [ ${mode} == "PE" ]
     then
     	bwa mem -v 1 -t $numbproc $refgen ${indir}/barcode_${barcode}.fq ${indir}/barcode_${barcode}-r2.fq | samtools sort -@ 8 -T ${aux}/${experiment} > ${aux}/${barcode}.all.bam
     fi
-    
     if [ ${mode} == "SE" ]
     then
     	bwa mem -v 1 -t $numbproc $refgen ${indir}/barcode_${barcode}.fq | samtools sort -@ 8 -T ${aux}/${experiment} > ${aux}/${barcode}.all.bam
@@ -47,12 +46,16 @@ do
     if [ $count -ne 0 ]; then 
     	samtools index -@ 8 ${aux}/${barcode}.all.bam
     	if [ ${mode} == "SE" ];	then
-	    /usr/local/share/anaconda3/bin/umi_tools group -I ${aux}/${barcode}.all.bam --group-out=${aux}/${barcode}.q${quality}.grouped.tsv --log=${aux}/${barcode}.grouped.log --mapping-quality=${quality}
-    	    /usr/local/share/anaconda3/bin/umi_tools dedup -I ${aux}/${barcode}.all.bam -S ${out}/${barcode}.deduplicated.bam -L ${out}/${barcode}.group.log --mapping-quality=${quality}
+	    /usr/local/share/anaconda3/bin/umi_tools group \
+						     -I ${aux}/${barcode}.all.bam --group-out=${aux}/${barcode}.q${quality}.grouped.tsv --log=${aux}/${barcode}.grouped.log --mapping-quality=${quality}
+    	    /usr/local/share/anaconda3/bin/umi_tools dedup \
+						     -I ${aux}/${barcode}.all.bam -S ${out}/${barcode}.deduplicated.bam -L ${out}/${barcode}.group.log --mapping-quality=${quality}
     	fi
     	if [ ${mode} == "PE" ];	then
-	    /usr/local/share/anaconda3/bin/umi_tools group -I ${aux}/${barcode}.all.bam --group-out=${aux}/${barcode}.q${quality}.grouped.tsv --log=${aux}/${barcode}.grouped.log --paired --mapping-quality=${quality}
-    	    /usr/local/share/anaconda3/bin/umi_tools dedup -I ${aux}/${barcode}.all.bam --paired -S ${out}/${barcode}.deduplicated.bam -L ${out}/${barcode}.group.log --mapping-quality=${quality}
+	    /usr/local/share/anaconda3/bin/umi_tools group \
+						     -I ${aux}/${barcode}.all.bam --paired --group-out=${aux}/${barcode}.q${quality}.grouped.tsv --log=${aux}/${barcode}.grouped.log --mapping-quality=${quality}
+    	    /usr/local/share/anaconda3/bin/umi_tools dedup \
+						     -I ${aux}/${barcode}.all.bam --paired -S ${out}/${barcode}.deduplicated.bam -L ${out}/${barcode}.group.log --mapping-quality=${quality}
     	fi
     	samtools sort -@ 8 ${out}/${barcode}.deduplicated.bam -o ${out}/${barcode}.deduplicated.q${quality}.bam && rm -f ${out}/${barcode}.deduplicated.bam
     	parallel "/usr/local/share/anaconda3/bin/alfred qc -r /home/garner1/Work/genomes/Homo_sapiens.GRCh37.dna.primary_assembly.fa/GRCh37.fa \
@@ -60,8 +63,6 @@ do
 					      -j {.}.json.gz {}" \
 					      ::: ${out}/${barcode}.deduplicated.q${quality}.bam ${aux}/${barcode}.all.bam 
 	rm -f processed.log
-    	# echo "Conversion to bed file ..."
-    	# bam2bed < ${out}/${barcode}.deduplicated.bam | cut -f-17 > ${out}/${barcode}.deduplicated.bed # convert using bedops bam2bed
     fi
 done
 git add -A && git commit -m "$(echo Done with processing ${experiment})" && git push origin development

@@ -6,8 +6,9 @@ cutsite=$1
 in=$2
 mode=$3
 barcode_file=$4
-r1=$5
-r2=$6
+mm=$5
+r1=$6
+r2=$7
 
 echo "Process the fastq file ..."
 ################################################################################
@@ -56,7 +57,7 @@ len=`echo $cutsite|awk '{print length}'`
 olddir=`echo $PWD`
 cd $in
 cat $barcode_file |
-    awk -v len="$len" '{print "^ ",substr($1,1,8)"[1,0,0]",substr($1,9,len)"[1,0,0]","1...1000","$" > "barcode_"substr($1,1,8)}'
+    awk -v len="$len" -v mm="$mm" '{print "^ ",substr($1,1,8)"["mm",0,0]",substr($1,9,len)"["mm",0,0]","1...1000","$" > "barcode_"substr($1,1,8)}'
 cd $olddir
 ################################################################################
 echo "Split FA files to satisfy scan_for_match 100M lines limit ..."

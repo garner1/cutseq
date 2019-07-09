@@ -46,7 +46,7 @@ do
     count=$(samtools view -c ${aux}/${barcode}.all.bam)
     if [ $count -ne 0 ]; then 
     	# samtools view -h -q $quality ${aux}/${barcode}.all.bam | samtools sort -@ 8 -T ${aux}/${barcode} > ${aux}/${barcode}.q${quality}.bam 
-    	# parallel "samtools index -@ 8 {}" ::: ${aux}/${barcode}.all.bam ${aux}/${barcode}.q${quality}.bam
+    	samtools index -@ 8 ${aux}/${barcode}.all.bam
     	if [ ${mode} == "SE" ];	then
 	    /usr/local/share/anaconda3/bin/umi_tools group -I ${aux}/${barcode}.all.bam --group-out=${aux}/${barcode}.q${quality}.grouped.tsv --log=${aux}/${barcode}.grouped.log --mapping-quality=${quality}
     	    /usr/local/share/anaconda3/bin/umi_tools dedup -I ${aux}/${barcode}.all.bam -S ${out}/${barcode}.deduplicated.bam -L ${out}/${barcode}.group.log --mapping-quality=${quality}

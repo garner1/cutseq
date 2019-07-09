@@ -45,15 +45,21 @@ do
     	samtools index -@ 8 ${aux}/${barcode}.all.bam
     	if [ ${mode} == "SE" ];	then
 	    /usr/local/share/anaconda3/bin/umi_tools group \
-						     -I ${aux}/${barcode}.all.bam --group-out=${aux}/${barcode}.q${quality}.grouped.tsv --log=${aux}/${barcode}.grouped.log --mapping-quality=${quality}
+						     -I ${aux}/${barcode}.all.bam --group-out=${aux}/${barcode}.q${quality}.grouped.tsv \
+						     --log=${aux}/${barcode}.grouped.log --mapping-quality=${quality} & pid1=$!
     	    /usr/local/share/anaconda3/bin/umi_tools dedup \
-						     -I ${aux}/${barcode}.all.bam -S ${out}/${barcode}.deduplicated.bam -L ${out}/${barcode}.group.log --mapping-quality=${quality}
+						     -I ${aux}/${barcode}.all.bam -S ${out}/${barcode}.deduplicated.bam -L ${out}/${barcode}.group.log --mapping-quality=${quality} & pid2=$!
+	    wait $pid1
+	    wait $pid2
     	fi
     	if [ ${mode} == "PE" ];	then
 	    /usr/local/share/anaconda3/bin/umi_tools group \
-						     -I ${aux}/${barcode}.all.bam --paired --group-out=${aux}/${barcode}.q${quality}.grouped.tsv --log=${aux}/${barcode}.grouped.log --mapping-quality=${quality}
+						     -I ${aux}/${barcode}.all.bam --paired --group-out=${aux}/${barcode}.q${quality}.grouped.tsv \
+						     --log=${aux}/${barcode}.grouped.log --mapping-quality=${quality} & pid1=$!
     	    /usr/local/share/anaconda3/bin/umi_tools dedup \
-						     -I ${aux}/${barcode}.all.bam --paired -S ${out}/${barcode}.deduplicated.bam -L ${out}/${barcode}.group.log --mapping-quality=${quality}
+						     -I ${aux}/${barcode}.all.bam --paired -S ${out}/${barcode}.deduplicated.bam -L ${out}/${barcode}.group.log --mapping-quality=${quality} & pid2=$!
+	    wait $pid1
+	    wait $pid2
     	fi
     	samtools sort -@ 8 ${out}/${barcode}.deduplicated.bam -o ${out}/${barcode}.deduplicated.q${quality}.bam && rm -f ${out}/${barcode}.deduplicated.bam
     	# parallel "/usr/local/share/anaconda3/bin/alfred qc -r /home/garner1/Work/genomes/Homo_sapiens.GRCh37.dna.primary_assembly.fa/GRCh37.fa \

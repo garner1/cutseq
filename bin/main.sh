@@ -62,10 +62,10 @@ do
 	    wait $pid2
     	fi
     	samtools sort -@ 8 ${out}/${barcode}.deduplicated.bam -o ${out}/${barcode}.deduplicated.q${quality}.bam && rm -f ${out}/${barcode}.deduplicated.bam
-    	# parallel "/usr/local/share/anaconda3/bin/alfred qc -r /home/garner1/Work/genomes/Homo_sapiens.GRCh37.dna.primary_assembly.fa/GRCh37.fa \
-	# 				      -b /home/garner1/Work/dataset/agilent/S07604715_Covered.woChr.bed \
-	# 				      -j {.}.json.gz {}" \
-	# 				      ::: ${out}/${barcode}.deduplicated.q${quality}.bam ${aux}/${barcode}.all.bam 
+    	parallel "/usr/local/share/anaconda3/bin/alfred qc -r /home/garner1/Work/genomes/Homo_sapiens.GRCh37.dna.primary_assembly.fa/GRCh37.fa \
+					      -b /home/garner1/Work/dataset/agilent/S07604715_Covered.woChr.bed \
+					      -j {.}.json.gz {}" \
+					      ::: ${out}/${barcode}.deduplicated.q${quality}.bam ${aux}/${barcode}.all.bam 
 	rm -f processed.log
     fi
 done

@@ -49,8 +49,6 @@ do
 						     --log=${aux}/${barcode}.grouped.log --mapping-quality=${quality} & pid1=$!
     	    /usr/local/share/anaconda3/bin/umi_tools dedup \
 						     -I ${aux}/${barcode}.all.bam -S ${out}/${barcode}.deduplicated.bam -L ${out}/${barcode}.group.log --mapping-quality=${quality} & pid2=$!
-	    wait $pid1
-	    wait $pid2
     	fi
     	if [ ${mode} == "PE" ];	then
 	    /usr/local/share/anaconda3/bin/umi_tools group \
@@ -58,15 +56,17 @@ do
 						     --log=${aux}/${barcode}.grouped.log --mapping-quality=${quality} & pid1=$!
     	    /usr/local/share/anaconda3/bin/umi_tools dedup \
 						     -I ${aux}/${barcode}.all.bam --paired -S ${out}/${barcode}.deduplicated.bam -L ${out}/${barcode}.group.log --mapping-quality=${quality} & pid2=$!
-	    wait $pid1
-	    wait $pid2
     	fi
-	gzip ${aux}/${barcode}.q${quality}.grouped.tsv
-    	samtools sort -@ 8 ${out}/${barcode}.deduplicated.bam -o ${out}/${barcode}.deduplicated.q${quality}.bam && rm -f ${out}/${barcode}.deduplicated.bam
+	wait $pid1
+	wait $pid2
+	gzip ${aux}/${barcode}.q${quality}.grouped.tsv & pid1=$!
+    	samtools sort -@ 8 ${out}/${barcode}.deduplicated.bam -o ${out}/${barcode}.deduplicated.q${quality}.bam && rm -f ${out}/${barcode}.deduplicated.bam & pid2=$!
+	wait $pid2
     	parallel "/usr/local/share/anaconda3/bin/alfred qc -r /home/garner1/Work/genomes/Homo_sapiens.GRCh37.dna.primary_assembly.fa/GRCh37.fa \
 					      -b /home/garner1/Work/dataset/agilent/S07604715_Covered.woChr.bed \
 					      -j {.}.json.gz {}" \
-					      ::: ${out}/${barcode}.deduplicated.q${quality}.bam ${aux}/${barcode}.all.bam 
+		 ::: ${out}/${barcode}.deduplicated.q${quality}.bam ${aux}/${barcode}.all.bam
+	wait $pid1
 	rm -f processed.log
     fi
 done

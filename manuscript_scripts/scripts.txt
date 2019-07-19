@@ -90,3 +90,7 @@ parallel "echo {};bedtools intersect -a /home/garner1/Work/pipelines/data/CATG.b
 # Evaluate fluctuations around segmented profiles
 parallel --link "paste {1} {2}|tail -n+2|awk '\$5>-5'|awk '\$5<5'|ifne echo {1} {2};paste {1} {2}|tail -n+2|awk '\$5>-5'|awk '\$5<5'|awk '{print sqrt((\$5-\$11)*(\$5-\$11))}'|tr '.' ','|/usr/local/share/anaconda2/bin/datamash mean 1 sstdev 1" ::: $(ls bedfiles/XZ31*+*) ::: $(ls tsvfiles/XZ31*+*)|paste - - > ~/XZ31.mean-sd.tsv
 ###################################
+# To count bp frequencies in UMI
+zcat XZ{228,242,245,241,244,231,236,246,243}BC188_*.q30.grouped.tsv.gz | cut -f5 | LC_ALL=C grep -v umi | LC_ALL=C sed 's/./&\t/g' > umi-list
+parallel -k "cat umi-list| LC_ALL=C /usr/local/share/anaconda2/bin/datamash -s -g {} count {}" ::: `seq 8`|paste - - - - -
+##################################

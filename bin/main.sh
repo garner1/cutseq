@@ -45,7 +45,7 @@ do
     	if [ ${mode} == "SE" ];	then
     	    /usr/local/share/anaconda3/bin/alfred qc -r /home/garner1/Work/genomes/Homo_sapiens.GRCh37.dna.primary_assembly.fa/GRCh37.fa \
 					      -b /home/garner1/Work/dataset/agilent/S07604715_Covered.woChr.bed \
-					      -j {.}.json.gz {} ${out}/${barcode}.all.bam & pid0=$!
+					      -j ${out}/${barcode}.all.json.gz ${out}/${barcode}.all.bam & pid0=$!
 	    /usr/local/share/anaconda3/bin/umi_tools group \
 						     -I ${out}/${barcode}.all.bam --group-out=${out}/${barcode}.q${quality}.grouped.tsv \
 						     --log=${out}/${barcode}.grouped.log --mapping-quality=${quality} & pid1=$!
@@ -55,7 +55,7 @@ do
     	if [ ${mode} == "PE" ];	then
     	    /usr/local/share/anaconda3/bin/alfred qc -r /home/garner1/Work/genomes/Homo_sapiens.GRCh37.dna.primary_assembly.fa/GRCh37.fa \
 					      -b /home/garner1/Work/dataset/agilent/S07604715_Covered.woChr.bed \
-					      -j {.}.json.gz {} ${out}/${barcode}.all.bam & pid0=$!
+					      -j ${out}/${barcode}.all.json.gz ${out}/${barcode}.all.bam & pid0=$!
 	    /usr/local/share/anaconda3/bin/umi_tools group \
 						     -I ${out}/${barcode}.all.bam --paired --group-out=${out}/${barcode}.q${quality}.grouped.tsv \
 						     --log=${out}/${barcode}.grouped.log --mapping-quality=${quality} & pid1=$!
@@ -65,7 +65,7 @@ do
 	wait $pid2; samtools sort -@ 8 ${out}/${barcode}.deduplicated.bam -o ${out}/${barcode}.deduplicated.q${quality}.bam && rm -f ${out}/${barcode}.deduplicated.bam
     	/usr/local/share/anaconda3/bin/alfred qc -r /home/garner1/Work/genomes/Homo_sapiens.GRCh37.dna.primary_assembly.fa/GRCh37.fa \
 					      -b /home/garner1/Work/dataset/agilent/S07604715_Covered.woChr.bed \
-					      -j {.}.json.gz {} ${out}/${barcode}.deduplicated.q${quality}.bam 
+					      -j ${out}/${barcode}.deduplicated.q${quality}.json.gz ${out}/${barcode}.deduplicated.q${quality}.bam 
 	wait $pid1; gzip ${out}/${barcode}.q${quality}.grouped.tsv 
 	rm -f processed.log
     fi

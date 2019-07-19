@@ -11,5 +11,6 @@ To test the pipeline, in the bin directory run:
 bash test_pipeline
 
 Or 
+
 bash main.sh test human SE ../pattern/test CATG test/fastq/test.fastq.gz
 

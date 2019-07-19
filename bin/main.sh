@@ -39,8 +39,8 @@ do
     then
     	bwa mem -v 1 -t $numbproc $refgen ${indir}/barcode_${barcode}.fq | samtools sort -@ 8 -T ${aux}/${experiment} > ${out}/${barcode}.all.bam
     fi
-    count=$(samtools view -c ${out}/${barcode}.all.bam)
-    if [ $count -ne 0 ]; then 
+    count=$(samtools view ${out}/${barcode}.all.bam | head | wc -l)
+    if [ $count -eq 10 ]; then 
     	samtools index -@ 8 ${out}/${barcode}.all.bam
     	if [ ${mode} == "SE" ];	then
 	    /usr/local/share/anaconda3/bin/umi_tools group \

@@ -94,3 +94,14 @@ parallel --link "paste {1} {2}|tail -n+2|awk '\$5>-5'|awk '\$5<5'|ifne echo {1} 
 zcat XZ{228,242,245,241,244,231,236,246,243}BC188_*.q30.grouped.tsv.gz | cut -f5 | LC_ALL=C grep -v umi | LC_ALL=C sed 's/./&\t/g' > umi-list
 parallel -k "cat umi-list| LC_ALL=C /usr/local/share/anaconda2/bin/datamash -s -g {} count {}" ::: `seq 8`|paste - - - - -
 ##################################
+# To quantify reproduciblity of CNA discovery at higher resoluion in TRN samples
+////////
+script.sh is:
+#!/usr/bin/env bash
+highres=$1
+lowres=$2
+bedtools subtract -A -a $highres -b $lowres > ${highres}_only.bed
+\\\\\\\
+parallel "bash script.sh CS{1}_TRN-{2}_10_{3}.csv CS{1}_TRN-{2}_100_{3}.csv" ::: 1 2 ::: `seq 2 6` ::: amp del
+parallel "bedtools intersect -a CS1_TRN-{1}_{2}_{3}.csv_only.bed -b CS2_TRN-{1}_{2}_{3}.csv_only.bed -wa -wb > CS1_intersec_CS2.S{1}.Res{2}.{3}.10VS100.bed" ::: `seq 2 6` ::: 10 ::: amp del
+####################################

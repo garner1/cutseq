@@ -1,7 +1,7 @@
 #!/bin/usr/env bash
 
-# RUN AS: bash prepare_run.sh samplesheet.csv /media/bicroserver_2-seq/BICRO67/FASTQ
-# head -1 samplesheet.csv as: XZ82,CATCACGC,CATG
+# RUN AS: bash prepare_run.sh $inputfile $dir $sample $mode
+# head -1 samplesheet.csv as: XZ82,CATCACGC,CATG,BICRO195
 
 inputfile=$1		      # samplesheet_BICRO67
 dir=$2	     # /media/bicroserver_2-seq/BICRO67/FASTQ

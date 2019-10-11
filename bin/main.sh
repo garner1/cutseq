@@ -70,4 +70,4 @@ do
 	rm -f processed.log
     fi
 done
-git add -A && git commit -m "$(echo Done with processing ${experiment})" && git push origin development
+#git add -A && git commit -m "$(echo Done with processing ${experiment})" && git push origin development

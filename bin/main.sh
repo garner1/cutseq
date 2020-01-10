@@ -11,7 +11,7 @@ cutsite=$5	     # the restriction cutsite
 r1=$6		     # full path to r1 fastq.gz file
 r2=$7	             # full path to r2 fastq.gz file
 numbproc=24
-mm=0		 # number of mismatches allowd in scan_for_matches
+mm=1		 # number of mismatches allowd in scan_for_matches
 quality=60	     # filter out read with mapping quality less than this
 ################################################################################
 # git add -A && git commit -m "$(echo Start processing $experiment)" && git push origin development

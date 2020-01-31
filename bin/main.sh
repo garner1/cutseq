@@ -25,22 +25,23 @@ refgen=~/Work/genomes/Homo_sapiens.GRCh37.dna.primary_assembly.fa/GRCh37.fa # fu
 echo
 echo Processing $experiment
 ###########################################################################
-bash ./module/parallel_scan.sh $cutsite $indir $mode $barcode_file $mm $r1 $r2 
+# bash ./module/parallel_scan.sh $cutsite $indir $mode $barcode_file $mm $r1 $r2 
 i=0
 for barcode in $( cat $barcode_file | awk '{print substr($1,1,8)}' ) # !!!!KEEP ALL BARCODES!!!!
 do
     echo `expr $i + 1` $barcode
     i=`expr $i + 1`
-    if [ ${mode} == "PE" ]
-    then
-    	bwa mem -v 1 -t $numbproc $refgen ${indir}/barcode_${barcode}.fq ${indir}/barcode_${barcode}-r2.fq | samtools sort -@ 8 -T ${aux}/${experiment} > ${out}/${barcode}.all.bam
-    fi
-    if [ ${mode} == "SE" ]
-    then
-    	bwa mem -v 1 -t $numbproc $refgen ${indir}/barcode_${barcode}.fq | samtools sort -@ 8 -T ${aux}/${experiment} > ${out}/${barcode}.all.bam
-    fi
+    # if [ ${mode} == "PE" ]
+    # then
+    # 	bwa mem -v 1 -t $numbproc $refgen ${indir}/barcode_${barcode}.fq ${indir}/barcode_${barcode}-r2.fq | samtools sort -@ 8 -T ${aux}/${experiment} > ${out}/${barcode}.all.bam
+    # fi
+    # if [ ${mode} == "SE" ]
+    # then
+    # 	bwa mem -v 1 -t $numbproc $refgen ${indir}/barcode_${barcode}.fq | samtools sort -@ 8 -T ${aux}/${experiment} > ${out}/${barcode}.all.bam
+    # fi
     samtools index -@ 8 ${out}/${barcode}.all.bam
     count=$(samtools view ${out}/${barcode}.all.bam | head | wc -l)
+    echo $count
     if [ $count -eq 10 ]; then 
     	if [ ${mode} == "SE" ];	then
     	    /usr/local/share/anaconda3/bin/alfred qc -r /home/garner1/Work/genomes/Homo_sapiens.GRCh37.dna.primary_assembly.fa/GRCh37.fa \
@@ -70,4 +71,9 @@ do
 	rm -f processed.log
     fi
 done
-#git add -A && git commit -m "$(echo Done with processing ${experiment})" && git push origin development
+
+cd ${out}
+mkdir all dedup
+mv *.all.json.gz all
+mv *.deduplicated.q${quality}.json.gz dedup
+parallel "gzip {}" ::: *.log
